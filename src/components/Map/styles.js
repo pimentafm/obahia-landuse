@@ -5,4 +5,8 @@ export const Container = styled.div`
     width: 100%;
     height: 100%;
 
+    .ol-zoom {
+        position: absolute;
+        margin-top: 80px;
+    }
 `;
