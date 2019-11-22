@@ -2,8 +2,10 @@ import React from 'react';
 
 // import { Container } from './styles';
 
+import Map from '../../components/Map';
+
 export default function Region() {
   return (
-    <h1>Region</h1>
+    <Map />
   );
 }

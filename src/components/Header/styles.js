@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.header`
-    background: #444;
+    background: #999/* #1f5582*/;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 80px;
     img {
-        width: 100px;
+        width: 80px;
     }
 `;
