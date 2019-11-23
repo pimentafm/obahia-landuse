@@ -7,22 +7,35 @@ import "antd/dist/antd.css";
 
 const { Option } = Select;
 
-function handleChange(value) {
-    console.log(`selected ${value}`);
-}
-  
-export default function Card() {
-  return (
-    <Container>
-      <Select id="select" defaultValue="Region" onChange={handleChange} >
-        <Option value="Region">Region</Option>
-        <Option value="Watersheds">Watersheds</Option>
-      </Select>
-      <Select id="select" defaultValue="Year" onChange={handleChange} >
-        <Option value="2018">2018</Option>
-        <Option value="1990">1990</Option>
-      </Select>
+class Card extends React.Component {
+  state = {
+    defaultYear: 2018,
+    defaultCategory: 'Região',
+    categories: ['Região', 'Bacia hidrográfica'],
+    years: Array.from(new Array(29),(val,index) => index+1990)
+  }
 
-    </Container>
-  );
+  handleYears = e => {
+    console.log('Ano: ' + e);
+  }
+
+  handleCategories = e => {
+    console.log(this.state.defaultCategory);
+  }
+
+  render () {
+    return (
+      <Container>
+        <Select id="select" defaultValue={this.state.defaultCategory} onChange={this.handleCategories}>
+          {this.state.categories.map(c => <Option key={c} value={c}>{c}</Option>)}
+        </Select>
+        <Select id="select" defaultValue={this.state.defaultYear} onChange={this.handleYears} >
+          {this.state.years.map(y => <Option key={y} value={y}>{y}</Option>)}
+        </Select>
+        
+      </Container>
+    );
+  }
 }
+
+export default Card;
