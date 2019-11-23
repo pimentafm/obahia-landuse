@@ -10,28 +10,6 @@ import 'ol/ol.css';
 
 import { Container } from './styles';
 
-const landuse = new TileLayer({
-    visible: false,
-    source: new TileWMS({
-        url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/landuseRegion.map',
-        params: {
-            'year': 2018,
-            'LAYERS': 'Landuse',
-        },
-        serverType: 'mapserver'
-    })
-});
-
-const landsat = new TileLayer({
-    source: new TileWMS({
-        url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/landsatRegion.map',
-        params: {
-            'year': 2011,
-            'LAYERS': 'Landsat',
-        },
-        serverType: 'mapserver'
-    })
-});
 
 class Map extends Component {
     state = {
@@ -39,6 +17,29 @@ class Map extends Component {
         zoom: 8,
         layers: []
     };
+
+    landsat = new TileLayer({
+      source: new TileWMS({
+          url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/landsatRegion.map',
+          params: {
+              'year': this.props.year,
+              'LAYERS': 'Landsat',
+          },
+          serverType: 'mapserver'
+      })
+  });
+
+    landuse = new TileLayer({
+      visible: false,
+      source: new TileWMS({
+          url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/landuseRegion.map',
+          params: {
+              'year': this.props.year,
+              'LAYERS': 'Landuse',
+          },
+          serverType: 'mapserver'
+      })
+  });
 
     view = new View({
         projection: 'EPSG:4326',
@@ -50,34 +51,9 @@ class Map extends Component {
 
     map = new OlMap({
         target: null,
-        layers: [this.osm, landsat, landuse],
+        layers: [this.osm, this.landsat, this.landuse],
         view: this.view
     });
-
-
-
-    /*
-  constructor(props) {
-    super(props);
-
-    this.state = { center: [-45.25811, -12.652125], zoom: 8 };
-
-    this.map = new map({
-      target: null,
-      layers: [
-        new TileLayer({
-          source: new OSM()
-        }),
-        landuse
-      ],
-      view: new View({
-        projection: 'EPSG:4326',
-        center: this.state.center,
-        zoom: this.state.zoom
-      })
-    });
-  }
-  */
 
   updateMap() {
     this.map.getView().setCenter(this.state.center);
