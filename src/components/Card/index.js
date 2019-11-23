@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select, Icon} from 'antd';
 
-import { Container } from './styles';
+import { CardContainer } from './styles';
 
 import "antd/dist/antd.css";
 
@@ -15,20 +15,20 @@ class Card extends React.Component {
     years: Array.from(new Array(29),(val,index) => index+1990)
   }
 
-  handleYears = e => {
-    this.setState({defaultYear: e});
-  }
-
   handleCategories = e => {
     this.setState({defaultCategory: e});
   }
 
   render () {
     return (
-      <Container>
+      <CardContainer>
         <div id="div-title">
           <label id="label-title">Sistema de Inteligência Territorial Estratégica</label>
-          <a id="help-button" type="button" href="http://obahia.dea.ufv.br/help/" target="_Blank">
+          <a id="help-button" 
+             type="button" 
+             rel="noopener noreferrer" 
+             href="http://obahia.dea.ufv.br/help/" 
+             target="_Blank">
             <Icon id="icon" type="bulb" theme="twoTone" style={{fontSize: "20px"}}/>
           </a>
         </div>
@@ -37,10 +37,10 @@ class Card extends React.Component {
           {this.state.categories.map(c => <Option key={c} value={c}>{c}</Option>)}
         </Select>
         <label>Ano</label>
-        <Select id="select" defaultValue={this.state.defaultYear} onChange={this.handleYears} >
+        <Select id="select" defaultValue={this.state.defaultYear} onChange={this.props.handleYears} >
           {this.state.years.map(y => <Option key={y} value={y}>{y}</Option>)}
         </Select>
-      </Container>
+      </CardContainer>
     );
   }
 }

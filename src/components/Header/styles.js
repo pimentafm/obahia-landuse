@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.header`
+export const HeaderContainer = styled.header`
     background: #999/* #1f5582*/;
     position: fixed;
     z-index: 1;
