@@ -11,6 +11,7 @@ import 'ol/ol.css';
 
 import { MapContainer } from './styles';
 import Card from '../../components/Card';
+import Footer from '../../components/Footer';
 
 class Map extends Component {
   state = {
@@ -94,6 +95,10 @@ class Map extends Component {
     console.log('state: ' + this.state.defaultYear);
   }
 
+  scaleUnitChange = (unit) => {
+    this.scaleline.setUnits(unit);
+  }
+
   updateMap() {
     this.map.getView().setCenter(this.state.center);
     this.map.getView().setZoom(this.state.zoom);
@@ -126,6 +131,7 @@ class Map extends Component {
     return (
         <MapContainer id="map">
           <Card key="card" defaultYear={2018} handleYears={this.handleYears} defaultCategory="Region"/>
+          <Footer key="footer" defaultUnit="degrees" scaleUnitChange={this.scaleUnitChange} />
         </MapContainer>
     );
   }
