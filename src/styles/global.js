@@ -11,6 +11,8 @@ export default createGlobalStyle`
 
     body {
         -webkit-font-smoothing: antialiased;
+        display: flex;
+        flex-direction: column;
     }
 
     body, input, button {

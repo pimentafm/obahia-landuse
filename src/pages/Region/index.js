@@ -7,7 +7,7 @@ import Map from '../../components/Map';
 export default function Region() {
   return (
     <>
-    <Map defaultYear={2018} defaultCategory="Região"/>
+    <Map id="map" defaultYear={2018} defaultCategory="Região"/>
     </>
   );
 }

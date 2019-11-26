@@ -5,6 +5,7 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import TileWMS from 'ol/source/TileWMS';
 import OSM from "ol/source/OSM";
+import {defaults as defaultControls, ScaleLine} from 'ol/control';
 
 import 'ol/ol.css';
 
@@ -51,11 +52,24 @@ class Map extends Component {
 
   osm = new TileLayer({ source: new OSM() });
 
+  scaleline = new ScaleLine({
+    units: 'degrees',
+    bar: true,
+    steps: 4,
+    text: true,
+    minWidth: 140
+  });
+
   map = new OlMap({
+    controls: defaultControls().extend([
+      this.scaleline,
+    ]),
     target: null,
     layers: [this.osm, this.landsat, this.landuse],
     view: this.view
   });
+
+
 
   handleYears = year => {
     /*
