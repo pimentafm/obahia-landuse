@@ -13,9 +13,20 @@ export default createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         display: flex;
         flex-direction: column;
+        font-family: 12px Roboto, sans-serif;
     }
 
-    body, input, button {
-        font: 12px Roboto, sans-serif;
+    .custom-mouse-position {
+        position: fixed;
+        right: 10px;
+        margin-top: 10px;
+        text-align: center;
+        padding: 10px;
+        padding: 10px;
+        display: flex;
+        flex: 1;
+        font-size: 20px;
+        color: #000;
+        text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
     }
 `;

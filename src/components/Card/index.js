@@ -2,6 +2,7 @@ import React from 'react';
 import { Select, Icon} from 'antd';
 
 import { CardContainer } from './styles';
+import LayerSwitcher from '../../components/LayerSwitcher';
 
 import "antd/dist/antd.css";
 
@@ -40,6 +41,7 @@ class Card extends React.Component {
         <Select id="select" defaultValue={this.state.defaultYear} onChange={this.props.handleYears} >
           {this.state.years.map(y => <Option key={y} value={y}>{y}</Option>)}
         </Select>
+        <LayerSwitcher  onOffLandsat={this.props.onOffLandsat} onOffLanduse={this.props.onOffLanduse} />
       </CardContainer>
     );
   }

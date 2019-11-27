@@ -6,6 +6,8 @@ import TileLayer from "ol/layer/Tile";
 import TileWMS from 'ol/source/TileWMS';
 import OSM from "ol/source/OSM";
 import {defaults as defaultControls, ScaleLine} from 'ol/control';
+import MousePosition from 'ol/control/MousePosition';
+import {createStringXY} from 'ol/coordinate';
 
 import 'ol/ol.css';
 
@@ -23,6 +25,7 @@ class Map extends Component {
   };
 
   landsat = new TileLayer({
+    visible: false,
     source: new TileWMS({
       url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/landsatRegion.map',
       params: {
@@ -34,7 +37,7 @@ class Map extends Component {
   });
 
   landuse = new TileLayer({
-    visible: false,
+    visible: true,
     source: new TileWMS({
       url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/landuseRegion.map',
       params: {
@@ -61,16 +64,32 @@ class Map extends Component {
     minWidth: 140
   });
 
+  mousePosition = new MousePosition({
+    coordinateFormat: createStringXY(5),
+    projection: 'EPSG:4326',
+    className: 'custom-mouse-position',
+    target: document.getElementById('mouse-position'),
+    undefinedHTML: '&nbsp;'
+  });
+
   map = new OlMap({
     controls: defaultControls().extend([
       this.scaleline,
+      this.mousePosition
     ]),
     target: null,
     layers: [this.osm, this.landsat, this.landuse],
     view: this.view
   });
 
+  onOffLandsat = (evt) => {
+    this.landsat.setVisible(evt);
+  }
 
+  onOffLanduse = (evt) => {
+    this.landuse.setVisible(evt);
+    console.log(this.landuse);
+  }
 
   handleYears = year => {
     /*
@@ -78,7 +97,7 @@ class Map extends Component {
     */
     this.setState({defaultYear: year});
 
-    const new_source = new TileWMS({
+    const new_landsat = new TileWMS({
       url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/landsatRegion.map',
       params: {
         'year': year,
@@ -87,12 +106,26 @@ class Map extends Component {
       serverType: 'mapserver'
     })
 
-    this.landsat.setSource(new_source);
+    const new_landuse = new TileWMS({
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/landuseRegion.map',
+      params: {
+        'year': year,
+        'LAYERS': 'Landuse',
+      },
+      serverType: 'mapserver'
+    })
+
+    this.landuse.setSource(new_landuse);
+    this.landuse.getSource().updateParams({ "time": Date.now() });
+    this.landuse.changed();
+
+    this.landsat.setSource(new_landsat);
     this.landsat.getSource().updateParams({ "time": Date.now() });
     this.landsat.changed();
-    
-    console.log('Chamando o ano selecionado do card: ' + year);
-    console.log('state: ' + this.state.defaultYear);
+  }
+
+  projectionChange = (datum) => {
+    this.mousePosition.setProjection(datum);
   }
 
   scaleUnitChange = (unit) => {
@@ -130,8 +163,16 @@ class Map extends Component {
     this.updateMap(); // Update map on render?
     return (
         <MapContainer id="map">
-          <Card key="card" defaultYear={2018} handleYears={this.handleYears} defaultCategory="Region"/>
-          <Footer key="footer" defaultUnit="degrees" scaleUnitChange={this.scaleUnitChange} />
+          <Card 
+            key="card" 
+            defaultYear={2018} 
+            handleYears={this.handleYears} 
+            defaultCategory="Region" 
+            onOffLandsat={this.onOffLandsat} 
+            onOffLanduse={this.onOffLanduse}
+          />
+
+          <Footer key="footer" defaultUnit="degrees" scaleUnitChange={this.scaleUnitChange} projection='EPSG:4326' projectionChange={this.projectionChange} />
         </MapContainer>
     );
   }
