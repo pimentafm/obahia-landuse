@@ -1,6 +1,7 @@
 {
   "name": "webmap",
   "version": "0.1.0",
+  "proxy": "http://localhost",
   "private": true,
   "dependencies": {
     "antd": "^3.25.2",
