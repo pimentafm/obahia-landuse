@@ -5,14 +5,15 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import TileWMS from 'ol/source/TileWMS';
 import OSM from "ol/source/OSM";
-import {defaults as defaultControls, ScaleLine} from 'ol/control';
+import { ScaleLine } from 'ol/control';
 import MousePosition from 'ol/control/MousePosition';
-import {createStringXY} from 'ol/coordinate';
+import { createStringXY } from 'ol/coordinate';
+import Zoom from 'ol/control/Zoom';
 
 import 'ol/ol.css';
 
 import { MapContainer } from './styles';
-import Card from '../../components/Card';
+import Menu from '../../components/Menu';
 import Footer from '../../components/Footer';
 
 class Map extends Component {
@@ -56,6 +57,11 @@ class Map extends Component {
 
   osm = new TileLayer({ source: new OSM() });
 
+  zoom = new Zoom({
+    className: 'zoom-controls',
+    target:  document.getElementById('#nav')
+  });
+
   scaleline = new ScaleLine({
     units: 'degrees',
     bar: true,
@@ -68,15 +74,16 @@ class Map extends Component {
     coordinateFormat: createStringXY(5),
     projection: 'EPSG:4326',
     className: 'custom-mouse-position',
-    target: document.getElementById('mouse-position'),
+    target: document.getElementById('#mouse-position'),
     undefinedHTML: '&nbsp;'
   });
 
   map = new OlMap({
-    controls: defaultControls().extend([
+    controls: [
+      this.zoom,
       this.scaleline,
       this.mousePosition
-    ]),
+    ],
     target: null,
     layers: [this.osm, this.landsat, this.landuse],
     view: this.view
@@ -163,7 +170,7 @@ class Map extends Component {
     this.updateMap(); // Update map on render?
     return (
         <MapContainer id="map">
-          <Card 
+          <Menu 
             key="card" 
             defaultYear={2018} 
             handleYears={this.handleYears} 
