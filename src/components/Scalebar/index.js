@@ -4,8 +4,6 @@ import { ScaleLine } from 'ol/control';
 
 import { ScaleContainer } from './styles';
 
-import 'ol/ol.css';
-
 class Scalebar extends React.Component {
     scalebar = new ScaleLine({
         units: 'metric',

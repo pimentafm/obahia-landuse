@@ -7,12 +7,12 @@ import TileWMS from 'ol/source/TileWMS';
 import OSM from "ol/source/OSM";
 import MousePosition from 'ol/control/MousePosition';
 import { createStringXY } from 'ol/coordinate';
-import Zoom from 'ol/control/Zoom';
 
 import 'ol/ol.css';
 
 import { MapContainer } from './styles';
 import Menu from '../../components/Menu';
+import Zoom from '../../components/Zoom';
 import Scalebar from '../../components/Scalebar';
 import Footer from '../../components/Footer';
 
@@ -58,11 +58,6 @@ class Map extends Component {
 
   osm = new TileLayer({ source: new OSM() });
 
-  zoom = new Zoom({
-    className: 'zoom-controls',
-    target:  document.getElementById('#nav')
-  });
-
   mousePosition = new MousePosition({
     coordinateFormat: createStringXY(5),
     projection: 'EPSG:4326',
@@ -73,7 +68,6 @@ class Map extends Component {
 
   map = new OlMap({
     controls: [
-      this.zoom,
       this.mousePosition
     ],
     target: null,
@@ -163,13 +157,20 @@ class Map extends Component {
     this.updateMap(); // Update map on render?
     return (
         <MapContainer id="map">
-          <Menu isHidden={this.state.menuIsHidden}
+          <Menu 
             key="card" 
+            isHidden={this.state.menuIsHidden}
             defaultYear={2018} 
             handleYears={this.handleYears} 
             defaultCategory="Region" 
             onOffLandsat={this.onOffLandsat} 
             onOffLanduse={this.onOffLanduse}
+          />
+
+          <Zoom 
+            key="zoom"
+            isHidden={this.state.menuIsHidden}
+            map={this.map}
           />
 
           <Scalebar 
