@@ -25,7 +25,6 @@ export const MenuContainer = styled.div`
         width: 100%;
     }
 
-
     .nav {
         display: flex;
         flex-direction: column;
@@ -34,14 +33,13 @@ export const MenuContainer = styled.div`
             position: relative;
             float: right;
             transform: translateX(
-            ${({ isHidden }) => (isHidden ? 30 : 0)}px
-        );
-        transition: 0.3s;
-        background: #fff;
-        box-shadow: ${({ isHidden }) => (isHidden ? `0px 2px 3px rgba(0,0,0,.13) ,1px 2px 2px rgba(0,0,0,.1) , -1px -2px 2px rgba(0,0,0,.05)` : 0)}px
+                ${({ isHidden }) => (isHidden ? 30 : 0)}px
+            );
+            transition: 0.3s;
+            background: #fff;
+            box-shadow: ${({ isHidden }) => (isHidden ? `0px 2px 3px rgba(0,0,0,.13) ,1px 2px 2px rgba(0,0,0,.1) , -1px -2px 2px rgba(0,0,0,.05)` : 0)}px
         }
     }
-
 
     label {
         color: #888;

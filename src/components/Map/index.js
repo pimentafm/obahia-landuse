@@ -5,7 +5,6 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import TileWMS from 'ol/source/TileWMS';
 import OSM from "ol/source/OSM";
-import { ScaleLine } from 'ol/control';
 import MousePosition from 'ol/control/MousePosition';
 import { createStringXY } from 'ol/coordinate';
 import Zoom from 'ol/control/Zoom';
@@ -14,12 +13,14 @@ import 'ol/ol.css';
 
 import { MapContainer } from './styles';
 import Menu from '../../components/Menu';
+import Scalebar from '../../components/Scalebar';
 import Footer from '../../components/Footer';
 
 class Map extends Component {
   state = {
     defaultYear: this.props.defaultYear,
     defaultCategory: this.props.defaultCategory,
+    menuIsHidden: false,
     center: [-45.25811, -12.652125],
       zoom: 8,
       layers: []
@@ -62,14 +63,6 @@ class Map extends Component {
     target:  document.getElementById('#nav')
   });
 
-  scaleline = new ScaleLine({
-    units: 'degrees',
-    bar: true,
-    steps: 4,
-    text: true,
-    minWidth: 140
-  });
-
   mousePosition = new MousePosition({
     coordinateFormat: createStringXY(5),
     projection: 'EPSG:4326',
@@ -81,7 +74,6 @@ class Map extends Component {
   map = new OlMap({
     controls: [
       this.zoom,
-      this.scaleline,
       this.mousePosition
     ],
     target: null,
@@ -97,7 +89,7 @@ class Map extends Component {
     this.landuse.setVisible(evt);
     console.log(this.landuse);
   }
-
+  
   handleYears = year => {
     /*
       Change the map year and update the map layer
@@ -136,7 +128,8 @@ class Map extends Component {
   }
 
   scaleUnitChange = (unit) => {
-    this.scaleline.setUnits(unit);
+    this.setState({scaleUnit: unit})
+    console.log("MAP: ", this.state.scaleUnit);
   }
 
   updateMap() {
@@ -170,7 +163,7 @@ class Map extends Component {
     this.updateMap(); // Update map on render?
     return (
         <MapContainer id="map">
-          <Menu 
+          <Menu isHidden={this.state.menuIsHidden}
             key="card" 
             defaultYear={2018} 
             handleYears={this.handleYears} 
@@ -179,7 +172,17 @@ class Map extends Component {
             onOffLanduse={this.onOffLanduse}
           />
 
-          <Footer key="footer" defaultUnit="degrees" scaleUnitChange={this.scaleUnitChange} projection='EPSG:4326' projectionChange={this.projectionChange} />
+          <Scalebar 
+            key="scalebar"
+            map={this.map}
+            scaleUnit={this.state.scaleUnit}
+          />
+
+          <Footer 
+            key="footer" 
+            projection='EPSG:4326' 
+            projectionChange={this.projectionChange}
+          />
         </MapContainer>
     );
   }

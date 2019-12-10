@@ -15,7 +15,7 @@ class Menu extends React.Component {
     defaultCategory: this.props.defaultCategory,
     categories: ['Região', 'Bacia hidrográfica'],
     years: Array.from(new Array(29),(val,index) => index+1990),
-    isHidden: false,
+    isHidden: this.props.isHidden,
   }
 
   handleCategories = e => {
@@ -28,8 +28,6 @@ class Menu extends React.Component {
     } else {
       this.setState({isHidden: false});
     }
-
-    console.log(this.state.isHidden)
   }
 
   render () {
