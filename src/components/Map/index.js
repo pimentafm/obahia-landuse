@@ -29,7 +29,7 @@ class Map extends Component {
   landsat = new TileLayer({
     visible: false,
     source: new TileWMS({
-      url: 'http://localhost/cgi-bin/mapserv?map=/var/www/landsatRegion.map',
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
       params: {
         'year': this.state.defaultYear,
         'LAYERS': 'Landsat',
@@ -41,7 +41,7 @@ class Map extends Component {
   landuse = new TileLayer({
     visible: true,
     source: new TileWMS({
-      url: 'http://localhost/cgi-bin/mapserv?map=/var/www/landuseRegion.map',
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
       params: {
         'year': this.state.defaultYear,
         'LAYERS': 'Landuse',
@@ -91,7 +91,7 @@ class Map extends Component {
     this.setState({defaultYear: year});
 
     const new_landsat = new TileWMS({
-      url: 'http://localhost/cgi-bin/mapserv?map=/var/www/landsatRegion.map',
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
       params: {
         'year': year,
         'LAYERS': 'Landsat',
@@ -100,7 +100,7 @@ class Map extends Component {
     })
 
     const new_landuse = new TileWMS({
-      url: 'http://localhost/cgi-bin/mapserv?map=/var/www/landuseRegion.map',
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
       params: {
         'year': year,
         'LAYERS': 'Landuse',

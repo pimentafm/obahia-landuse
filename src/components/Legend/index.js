@@ -6,7 +6,7 @@ import { LegendContainer } from './styles';
 
 class Legend extends Component {
     state = {
-        legendURL: `http://localhost/cgi-bin/mapserv?map=/var/www/landuseRegion.map&mode=legend&year=2018`,
+        legendURL: `http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map&mode=legend&year=2018`,
         imghtml: [],
     };
 

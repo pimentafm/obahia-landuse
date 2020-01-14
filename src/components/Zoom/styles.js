@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const ZoomContainer = styled.div`
-    margin-top: 35px;
-    margin-left: 310px;
+    margin-top: 20%;
+    right: 30px;
     position: fixed;
     z-index: 1;
 
