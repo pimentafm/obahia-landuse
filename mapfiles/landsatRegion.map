@@ -1,0 +1,39 @@
+MAP
+    NAME "Landsat"
+    SIZE 450 650
+    EXTENT -46.6330735347222216 -15.4471601311111115 -43.1301829158333305 -10.1812359355555557
+ 
+    WEB
+        METADATA
+            "wms_title" "Landsat"
+            "wms_enable_request" "*"
+            "wms_feature_info_mime_type" "text/html"
+            "wms_include_items" "all"
+        END
+    END
+
+    PROJECTION
+        "proj=longlat"
+        "datum=WGS84"
+        "no_defs"
+    END
+
+    LAYER
+        STATUS DEFAULT
+        TYPE RASTER
+        DUMP TRUE
+
+        VALIDATION
+	        "year" "[0-9]+"
+        END
+  
+        PROCESSING "BANDS=1,2,3"
+        PROCESSING "SCALE_1=0,4268"
+        PROCESSING "SCALE_2=0,3861"
+        PROCESSING "SCALE_3=0,2000"
+
+        OFFSITE 0 0 0
+
+        DATA "../../geodb/landsat/19902018/landsat%year%.tif"
+    END
+END

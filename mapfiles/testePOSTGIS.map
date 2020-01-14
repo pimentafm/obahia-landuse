@@ -1,0 +1,72 @@
+MAP
+    NAME "Pivos 2018"
+    SIZE 450 650
+    EXTENT -46.6330735347222216 -15.4471601311111115 -43.1301829158333305 -10.1812359355555557
+
+    CONFIG "MS_ERRORFILE" "/var/log/mapserver.log"
+
+    DEBUG 5
+ 
+    OUTPUTFORMAT
+      NAME "png8"
+      DRIVER AGG/PNG8
+      MIMETYPE "image/png; mode=8bit"
+      IMAGEMODE RGB
+      EXTENSION "png"
+    END
+
+    WEB
+        IMAGEPATH "/tmp/"
+	IMAGEURL "/tmp/"
+        METADATA
+            "wms_title" "Landuse"
+            "wms_onlineresource" "http://corrente.dea.ufv.br/cgi-bin/mapserv?"
+            "wms_enable_request" "*"
+            "wms_feature_info_mime_type" "text/html"
+            "wms_include_items" "all"
+        END
+    END
+
+
+    PROJECTION
+        "proj=longlat"
+        "datum=WGS84"
+        "no_defs"
+    END
+
+    LEGEND
+      STATUS on
+      KEYSIZE 20 12
+      KEYSPACING 6 6 
+      LABEL
+        TYPE TRUETYPE
+        FONT 'FreeSansBold'
+        SIZE 9
+        COLOR 0 0 89
+        OUTLINECOLOR 255 255 255
+        ANTIALIAS false
+      END
+     # TEMPLATE "landuseLegend.html"
+    END
+
+    LAYER
+        NAME pivos2018_et
+        STATUS DEFAULT
+        TYPE POLYGON
+        DUMP TRUE
+        CONNECTIONTYPE postgis
+        CONNECTION "host=localhost dbname=obahia user=geonode password=uppQAOFa port=5432"
+        DATA "geom from vector.pivos2018_et using unique gid using srid=4326"
+
+        #DATA "PG:host=localhost port=5432 dbname=obahia user=postgres password=uppQAOFa schema=vector table=pivos2018_et mode=1"
+
+        PROCESSING "CLOSE_CONNECTION=DEFER"
+
+       CLASS
+           NAME 'Pivo'
+           STYLE
+               COLOR 77 158 104
+           END
+       END
+    END
+END
