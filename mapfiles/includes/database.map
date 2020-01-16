@@ -1,2 +1,0 @@
-CONNECTIONTYPE postgis
-CONNECTION "host=localhost dbname=database user=postgres password=postgres port=5432"

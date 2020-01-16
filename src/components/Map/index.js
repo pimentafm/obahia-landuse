@@ -16,6 +16,10 @@ import Zoom from '../../components/Zoom';
 import Scalebar from '../../components/Scalebar';
 import Footer from '../../components/Footer';
 
+import Plottest from '../../components/Plottest';
+
+
+
 class Map extends Component {
   state = {
     defaultYear: this.props.defaultYear,
@@ -177,6 +181,10 @@ class Map extends Component {
             key="scalebar"
             map={this.map}
             scaleUnit={this.state.scaleUnit}
+          />
+
+          <Plottest 
+            key="plottest"
           />
 
           <Footer 

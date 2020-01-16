@@ -1,27 +1,31 @@
 <?php
 	include("connection.php");
 
-	class Pols extends Connection {
-    	public function showData(){
-			$sql = "select ottocod, areaha, nome from vector.watersheds";
+	class Watersheds extends Connection {
+    	public function get_data(){
+		$sql = "
+			select ws.ottocod as A, lu.class as B, lu.classname 
+			from vector.watersheds as ws, stats.landuse_19902018_watersheds as lu 
+			where ws.ottocod = lu.code and lu.code = 76564 and lu.class = 4
+			";
 
 			$BFetch=$this->connect()->prepare($sql);
 			$BFetch->execute();
 
 			$J=[];
 			$I=0;
-		
+
+
 			while($Fetch=$BFetch->fetch(PDO::FETCH_ASSOC)){
 				$J[$I]=[
-					"ottocod"=>$Fetch['ottocod'],
-					"areaha"=>$Fetch['areaha'],
-					"nome"=>$Fetch['nome']
+					"ottocod"=>$Fetch['a'],
+					"class"=>$Fetch['b'],
 				];
 				$I++;
 			}
-			
-			#header("Access-Control-Allow-Origin:*");
-			#header("Content-type: application/json");
+
+			header("Access-Control-Allow-Origin:*");
+			header("Content-type: application/json");
 			                        
 			echo json_encode($J);
 			}

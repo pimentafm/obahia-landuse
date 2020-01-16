@@ -1,11 +1,12 @@
 # OBahia-webmap
 ## Territorial and Inteligence Analysis System
 
-## Dependencies
+## Install the following dependencies:
 
 * Mapserver
 * php-pdo
 * php-pgsql
+* nodejs 
 * yarn 
 
 Create database.ini in the `/obahia-webmap/api` folder with the following:
@@ -45,6 +46,10 @@ See below the folder structure:
 │   └── src
 │   ...
 ```
+
+Run `yarn start` to develop the application.
+
+Run `yarn build` to deploy the application.
 
 <p align="center">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/pimentafm/obahia-webmap?color=%2304D361">
