@@ -26,8 +26,7 @@ class Legend extends Component {
             this.setState({imghtml: html});
         });
     }
-
-
+    
   render() {
     return (
         <LegendContainer>

@@ -12,11 +12,10 @@ import 'ol/ol.css';
 
 import { MapContainer } from './styles';
 import Menu from '../../components/Menu';
-import Zoom from '../../components/Zoom';
 import Scalebar from '../../components/Scalebar';
 import Footer from '../../components/Footer';
 
-import Plottest from '../../components/Plottest';
+import Lineplot from '../../components/Lineplot';
 
 
 
@@ -169,11 +168,6 @@ class Map extends Component {
             defaultCategory="Region" 
             onOffLandsat={this.onOffLandsat} 
             onOffLanduse={this.onOffLanduse}
-          />
-
-          <Zoom 
-            key="zoom"
-            isHidden={this.state.menuIsHidden}
             map={this.map}
           />
 
@@ -183,7 +177,7 @@ class Map extends Component {
             scaleUnit={this.state.scaleUnit}
           />
 
-          <Plottest 
+          <Lineplot 
             key="plottest"
           />
 

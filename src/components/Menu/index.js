@@ -4,10 +4,13 @@ import { Select, Icon} from 'antd';
 
 import { MenuContainer } from './styles';
 import LayerSwitcher from '../../components/LayerSwitcher';
+import Zoom from '../Zoom';
 
 import "antd/dist/antd.css";
 
 const { Option } = Select;
+
+
 
 class Menu extends React.Component {
   state = {
@@ -42,6 +45,12 @@ class Menu extends React.Component {
                 onClick={() => this.handleMenu()} 
               />
           </div>
+          <Zoom 
+            key="zoom"
+            isHidden={this.state.menuIsHidden}
+            map={this.props.map}
+          />
+
           <label>Categoria</label>
           <Select id="select" defaultValue={this.state.defaultCategory} onChange={this.handleCategories}>
             {this.state.categories.map(c => <Option key={c} value={c}>{c}</Option>)}

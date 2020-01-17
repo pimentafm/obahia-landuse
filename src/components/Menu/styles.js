@@ -33,7 +33,7 @@ export const MenuContainer = styled.div`
             position: relative;
             float: right;
             transform: translateX(
-                ${({ isHidden }) => (isHidden ? 30 : 0)}px
+                ${({ isHidden }) => (isHidden ? 35 : 0)}px
             );
             transition: 0.3s;
             background: #fff;
