@@ -28,8 +28,8 @@
 				$I++;
 			}
 
-			header("Access-Control-Allow-Origin:*");
-			header("Content-type: application/json");
+			#header("Access-Control-Allow-Origin:*");
+			#header("Content-type: application/json");
 			                        
 			echo json_encode($J);
 			}

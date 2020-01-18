@@ -15,7 +15,7 @@ import Menu from '../../components/Menu';
 import Scalebar from '../../components/Scalebar';
 import Footer from '../../components/Footer';
 
-import Lineplot from '../../components/Lineplot';
+import Stackplot from '../../components/Stackplot';
 
 
 
@@ -32,7 +32,7 @@ class Map extends Component {
   landsat = new TileLayer({
     visible: false,
     source: new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
+      url: 'http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
       params: {
         'year': this.state.defaultYear,
         'LAYERS': 'Landsat',
@@ -44,7 +44,7 @@ class Map extends Component {
   landuse = new TileLayer({
     visible: true,
     source: new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
+      url: 'http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
       params: {
         'year': this.state.defaultYear,
         'LAYERS': 'Landuse',
@@ -84,7 +84,6 @@ class Map extends Component {
 
   onOffLanduse = (evt) => {
     this.landuse.setVisible(evt);
-    console.log(this.landuse);
   }
   
   handleYears = year => {
@@ -94,7 +93,7 @@ class Map extends Component {
     this.setState({defaultYear: year});
 
     const new_landsat = new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
+      url: 'http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
       params: {
         'year': year,
         'LAYERS': 'Landsat',
@@ -103,7 +102,7 @@ class Map extends Component {
     })
 
     const new_landuse = new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
+      url: 'http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
       params: {
         'year': year,
         'LAYERS': 'Landuse',
@@ -177,7 +176,7 @@ class Map extends Component {
             scaleUnit={this.state.scaleUnit}
           />
 
-          <Lineplot 
+          <Stackplot 
             key="plottest"
           />
 

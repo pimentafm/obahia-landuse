@@ -55,14 +55,14 @@ MAP
         TYPE POLYGON
         DUMP TRUE
         CONNECTIONTYPE postgis
-        CONNECTION "host=localhost dbname=obahia user=geonode password=uppQAOFa port=5432"
+        CONNECTION "host=localhost dbname=obahia user=geonode password=passwd port=5432"
         DATA "geom from vector.pivos2018_et using unique gid using srid=4326"
 
         VALIDATION
           "val" "."
         END
 
-        #DATA "PG:host=localhost port=5432 dbname=obahia user=postgres password=uppQAOFa schema=vector table=pivos2018_et mode=1"
+        #DATA "PG:host=localhost port=5432 dbname=obahia user=postgres password=passwd schema=vector table=pivos2018_et mode=1"
 
         PROCESSING "CLOSE_CONNECTION=DEFER"
 
