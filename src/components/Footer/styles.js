@@ -9,7 +9,7 @@ export const FooterContainer = styled.footer`
         flex-direction: row;
         text-decoration: none;
         justify-content: flex-end;
-        box-shadow: 0px 2px 3px rgba(0,0,0,.13) ,1px 2px 2px rgba(0,0,0,.1) , -1px -2px 2px rgba(0,0,0,.05) ;
+        box-shadow: 0px 2px 3px rgba(0,0,0,.13) ,1px 2px 2px rgba(0,0,0,.1) , -1px -2px 2px rgba(0,0,0,.05);
         padding: 0;
         bottom: 0;
         width: 100%;
@@ -34,5 +34,14 @@ export const FooterContainer = styled.footer`
     }
     #proj-select {
         width: 120px;
+    }
+
+    #mouse-position-coordinates {
+        width: 250px;
+        margin: 5px 5px 5px 5px;
+        vertical-align: middle;
+        background-color: #f2f2f2;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        padding: 2px;
     }
 `;

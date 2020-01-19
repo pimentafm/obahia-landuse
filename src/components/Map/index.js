@@ -5,8 +5,8 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import TileWMS from 'ol/source/TileWMS';
 import OSM from "ol/source/OSM";
-import MousePosition from 'ol/control/MousePosition';
-import { createStringXY } from 'ol/coordinate';
+//import MousePosition from 'ol/control/MousePosition';
+//import { createStringXY } from 'ol/coordinate';
 
 import 'ol/ol.css';
 
@@ -16,8 +16,6 @@ import Scalebar from '../../components/Scalebar';
 import Footer from '../../components/Footer';
 
 import Stackplot from '../../components/Stackplot';
-
-
 
 class Map extends Component {
   state = {
@@ -61,6 +59,7 @@ class Map extends Component {
 
   osm = new TileLayer({ source: new OSM() });
 
+  /*
   mousePosition = new MousePosition({
     coordinateFormat: createStringXY(5),
     projection: 'EPSG:4326',
@@ -68,11 +67,10 @@ class Map extends Component {
     target: document.getElementById('#mouse-position'),
     undefinedHTML: '&nbsp;'
   });
+*/
 
   map = new OlMap({
-    controls: [
-      this.mousePosition
-    ],
+    controls: [],
     target: null,
     layers: [this.osm, this.landsat, this.landuse],
     view: this.view
@@ -119,9 +117,7 @@ class Map extends Component {
     this.landsat.changed();
   }
 
-  projectionChange = (datum) => {
-    this.mousePosition.setProjection(datum);
-  }
+
 
   scaleUnitChange = (unit) => {
     this.setState({scaleUnit: unit})
@@ -181,9 +177,9 @@ class Map extends Component {
           />
 
           <Footer 
-            key="footer" 
-            projection='EPSG:4326' 
-            projectionChange={this.projectionChange}
+            key="footer"
+            map={this.map}
+            projection='EPSG:4326'
           />
         </MapContainer>
     );
