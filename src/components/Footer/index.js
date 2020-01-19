@@ -25,8 +25,6 @@ class Footer extends React.Component {
         this.mousePosition.setProjection(datum);
     }
 
-    
-
     componentDidMount() {
         this.mousePosition.setTarget(document.getElementById('mouse-position-coordinates'));
         this.props.map.addControl(this.mousePosition);

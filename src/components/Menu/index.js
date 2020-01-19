@@ -59,7 +59,18 @@ class Menu extends React.Component {
           <Select id="select" defaultValue={this.state.defaultYear} onChange={this.props.handleYears} >
             {this.state.years.map(y => <Option key={y} value={y}>{y}</Option>)}
           </Select>
-          <LayerSwitcher  onOffLandsat={this.props.onOffLandsat} onOffLanduse={this.props.onOffLanduse} />
+          <LayerSwitcher  
+            name="Uso do Solo" 
+            checked={true}
+            legend={true} 
+            switcher={this.props.onOffLanduse} 
+          />
+          <LayerSwitcher  
+            name="Imagens de Satélite" 
+            checked={false}
+            legend={false} 
+            switcher={this.props.onOffLandsat} 
+          />
         </MenuContainer>
     );
   }
