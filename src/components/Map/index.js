@@ -59,16 +59,6 @@ class Map extends Component {
 
   osm = new TileLayer({ source: new OSM() });
 
-  /*
-  mousePosition = new MousePosition({
-    coordinateFormat: createStringXY(5),
-    projection: 'EPSG:4326',
-    className: 'custom-mouse-position',
-    target: document.getElementById('#mouse-position'),
-    undefinedHTML: '&nbsp;'
-  });
-*/
-
   map = new OlMap({
     controls: [],
     target: null,
