@@ -19,14 +19,10 @@ class ZoomInOut extends React.Component {
         this.zoom.setTarget(document.getElementById('zoomInOut'));
         this.props.map.addControl(this.zoom);
     }
-
-    teste = () => {
-        console.log(this.state.isHidden)
-    }
     
     render() {
         return (
-            <ZoomContainer isHidden={this.state.isHidden} onClick={this.teste}>
+            <ZoomContainer isHidden={this.state.isHidden}>
                 <div id="zoomInOut" />
             </ZoomContainer>
         );
