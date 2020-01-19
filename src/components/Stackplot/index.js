@@ -155,6 +155,16 @@ class Stackplot extends React.Component {
               title: {
                 text: 'Anos'
               },
+              titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18,
+                color: '#000'
+              },
+              tickfont: {
+                family: 'Arial, sans-serif',
+                size: 16,
+                color: 'black'
+              },
               autotick: false,
               ticks: 'outside',
               tick0: 1990,
@@ -167,6 +177,17 @@ class Stackplot extends React.Component {
               title: {
                 text: 'Uso e Cobertura do solo (1000 km²)'
               },
+              titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18,
+                color: '#000'
+              },
+              tickfont: {
+                family: 'Arial, sans-serif',
+                size: 16,
+                color: 'black'
+              },
+
               autotick: false,
               ticks: 'outside',
               tick0: 0,
