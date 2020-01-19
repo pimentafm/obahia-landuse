@@ -7,7 +7,10 @@ import logo from '../../assets/images/logo.png';
 export default function Header() {
   return (
     <HeaderContainer>
-      <a href="http://obahia.dea.ufv.br"><img src={logo} alt="Obahia" /> </a>
+      <div>
+        <a href="http://obahia.dea.ufv.br"><img src={logo} alt="Obahia" /> </a>
+        <h1>Sistema de Inteligência Territorial Estratégica (Beta)</h1>
+      </div>
     </HeaderContainer>
   );
 }

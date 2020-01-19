@@ -66,7 +66,7 @@ class Menu extends React.Component {
             switcher={this.props.onOffLanduse} 
           />
           <LayerSwitcher  
-            name="Imagens de Satélite" 
+            name="Imagens de Satélite (Landsat)" 
             checked={false}
             legend={false} 
             switcher={this.props.onOffLandsat} 
