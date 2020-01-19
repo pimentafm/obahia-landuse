@@ -8,6 +8,7 @@ export const FooterContainer = styled.footer`
         display: flex;
         flex-direction: row;
         text-decoration: none;
+        justify-content: flex-end;
         box-shadow: 0px 2px 3px rgba(0,0,0,.13) ,1px 2px 2px rgba(0,0,0,.1) , -1px -2px 2px rgba(0,0,0,.05) ;
         padding: 0;
         bottom: 0;
@@ -25,6 +26,7 @@ export const FooterContainer = styled.footer`
 
     .select {
         padding: 2px;
+        margin-right: 10px;
     }
 
     #unit-select {
