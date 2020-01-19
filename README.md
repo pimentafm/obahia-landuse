@@ -11,6 +11,8 @@
   <img alt="License" src="https://img.shields.io/badge/license-MIT-blue">
 </p>
 
+![alt text](/public/app.png)
+
 ## Dependencies:
 [![made-with-Nodejs](https://img.shields.io/badge/Nodejs-green.svg)](https://nodejs.org/)
 [![made-with-Yarn](https://img.shields.io/badge/Yarn-2188b6.svg)](https://yarnpkg.com/)
