@@ -37,10 +37,12 @@ class Stackplot extends React.Component {
     };
     
     componentDidMount() {
-        axios.post('http://localhost/obahia-webmap/api/totallanduse-stats.php',{
+
+        axios.post('http://corrente.dea.ufv.br/obahiadb/', {
+            year1: 2000,
+            year2: 2018,
             headers: {
               'Content-type': 'application/json',
-              'Access-Control-Allow-Origin': '*'
             }
           })
           .then(response => {

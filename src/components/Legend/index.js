@@ -6,7 +6,7 @@ import { LegendContainer } from './styles';
 
 class Legend extends Component {
     state = {
-        legendURL: `http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map&mode=legend&year=2018`,
+        legendURL: `http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map&mode=legend&year=2018`,
         imghtml: [],
     };
 
@@ -19,9 +19,6 @@ class Legend extends Component {
             let html = res.data;
 
             html = ReactHtmlParser(html)
-            
-            //console.log(html[0].props.children[0].props.src);
-            
             
             this.setState({imghtml: html});
         });

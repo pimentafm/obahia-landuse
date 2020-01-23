@@ -1,10 +1,12 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import Map from '../../components/Map';
 
-export default function Watersheds() {
+export default function Region() {
   return (
-    <h1>Watersheds</h1>
+    <>
+    <Map id="map" defaultYear={2018} defaultCategory="Bacia hidrográfica"/>
+    </>
   );
 }
 

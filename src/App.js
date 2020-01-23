@@ -1,4 +1,5 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify'
 import { BrowserRouter } from 'react-router-dom';
 
 import GlobalStyle from './styles/global';
@@ -12,6 +13,7 @@ function App() {
     <Header />
     <Routes />
     <GlobalStyle />
+    <ToastContainer className="toast-class" />
     </BrowserRouter>
   );
 }

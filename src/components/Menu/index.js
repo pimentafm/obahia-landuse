@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 import { Select, Icon} from 'antd';
 
 import { MenuContainer } from './styles';
@@ -10,19 +11,25 @@ import "antd/dist/antd.css";
 
 const { Option } = Select;
 
-
-
 class Menu extends React.Component {
   state = {
     defaultYear: this.props.defaultYear,
     defaultCategory: this.props.defaultCategory,
-    categories: ['Região', 'Bacia hidrográfica'],
+    categories: [
+      ['Região', '/'],
+      ['Bacia hidrográfica', 'watersheds']
+    ],
     years: Array.from(new Array(29),(val,index) => index+1990),
     isHidden: this.props.isHidden,
   }
 
   handleCategories = e => {
     this.setState({defaultCategory: e});
+    toast.info('Análise por ' + e, {
+      autoClose: 3000,
+      className: 'toast',
+      position: toast.POSITION.TOP_CENTER
+    })
   }
 
   handleMenu = () => {
@@ -53,7 +60,7 @@ class Menu extends React.Component {
 
           <label>Categoria</label>
           <Select id="select" defaultValue={this.state.defaultCategory} onChange={this.handleCategories}>
-            {this.state.categories.map(c => <Option key={c} value={c}>{c}</Option>)}
+            {this.state.categories.map(c => <Option key={c[0]} value={c[0]}><Link to={c[1]}>{c[0]}</Link></Option>)}
           </Select>
           <label>Ano</label>
           <Select id="select" defaultValue={this.state.defaultYear} onChange={this.props.handleYears} >
@@ -62,7 +69,7 @@ class Menu extends React.Component {
           <LayerSwitcher  
             name="Uso do Solo" 
             checked={true}
-            legend={true} 
+            legend={true}
             switcher={this.props.onOffLanduse} 
           />
           <LayerSwitcher  

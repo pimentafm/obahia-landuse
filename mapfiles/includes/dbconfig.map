@@ -1,2 +1,2 @@
 CONNECTIONTYPE postgis
-CONNECTION "host=localhost dbname=obahia user=obahia password=passwd port=5433"
+CONNECTION "host=localhost dbname=obahia user=postgres password=postgres port=5432"

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import OlMap from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
@@ -30,7 +29,7 @@ class Map extends Component {
   landsat = new TileLayer({
     visible: false,
     source: new TileWMS({
-      url: 'http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
       params: {
         'year': this.state.defaultYear,
         'LAYERS': 'Landsat',
@@ -42,7 +41,7 @@ class Map extends Component {
   landuse = new TileLayer({
     visible: true,
     source: new TileWMS({
-      url: 'http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
       params: {
         'year': this.state.defaultYear,
         'LAYERS': 'Landuse',
@@ -81,7 +80,7 @@ class Map extends Component {
     this.setState({defaultYear: year});
 
     const new_landsat = new TileWMS({
-      url: 'http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
       params: {
         'year': year,
         'LAYERS': 'Landsat',
@@ -90,7 +89,7 @@ class Map extends Component {
     })
 
     const new_landuse = new TileWMS({
-      url: 'http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
       params: {
         'year': year,
         'LAYERS': 'Landuse',
@@ -105,13 +104,6 @@ class Map extends Component {
     this.landsat.setSource(new_landsat);
     this.landsat.getSource().updateParams({ "time": Date.now() });
     this.landsat.changed();
-  }
-
-
-
-  scaleUnitChange = (unit) => {
-    this.setState({scaleUnit: unit})
-    console.log("MAP: ", this.state.scaleUnit);
   }
 
   updateMap() {
@@ -150,7 +142,7 @@ class Map extends Component {
             isHidden={this.state.menuIsHidden}
             defaultYear={2018} 
             handleYears={this.handleYears} 
-            defaultCategory="Region" 
+            defaultCategory="Região" 
             onOffLandsat={this.onOffLandsat} 
             onOffLanduse={this.onOffLanduse}
             map={this.map}
@@ -159,7 +151,6 @@ class Map extends Component {
           <Scalebar 
             key="scalebar"
             map={this.map}
-            scaleUnit={this.state.scaleUnit}
           />
 
           <Stackplot 

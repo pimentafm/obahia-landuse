@@ -27,5 +27,8 @@ export const LayerContainer = styled.div`
         background-color: #1f5582;
     }
 
-
+    li {
+        display: ${({ legend_is_visible }) => (legend_is_visible ? 'block' : 'none') };
+    }
+    
 `;

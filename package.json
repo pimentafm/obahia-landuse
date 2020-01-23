@@ -1,8 +1,8 @@
 {
   "name": "webmap",
   "version": "0.1.0",
-  "homepage":"http://localhost",
-  "proxy": "http://localhost/",
+  "homepage": "http://corrente.dea.ufv.br",
+  "proxy": "http://corrente.dea.ufv.br",
   "private": true,
   "dependencies": {
     "antd": "^3.25.2",
@@ -15,10 +15,11 @@
     "react-plotly.js": "^2.4.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
+    "react-toastify": "^5.5.0",
     "styled-components": "^4.4.1"
   },
   "scripts": {
-    "start": "react-scripts --max_old_space_size=8192 start PORT=3000",
+    "start": "react-scripts --max_old_space_size=8192 start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

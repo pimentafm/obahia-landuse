@@ -50,7 +50,7 @@ MAP
     TYPE POLYGON
     DUMP TRUE
         
-    INCLUDE "includes/database.map"
+    INCLUDE "includes/dbconfig.map"
 
     DATA "geom from vector.watersheds using unique gid using srid=4326"
 

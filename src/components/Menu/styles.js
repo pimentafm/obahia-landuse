@@ -11,6 +11,7 @@ export const MenuContainer = styled.div`
         z-index: 1;
         height: 100%;
         width: 300px;
+        text-decoration: none;
     }
 
     & {
@@ -21,6 +22,7 @@ export const MenuContainer = styled.div`
     }
 
     select {
+        text-decoration: none;
         padding: 5px;
         width: 100%;
     }
