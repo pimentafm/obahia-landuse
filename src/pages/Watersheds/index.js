@@ -1,11 +1,16 @@
 import React from 'react';
 
-import Map from '../../components/Map';
+import WatershedsMap from '../../components/WatershedsMap';
 
 export default function Region() {
   return (
     <>
-    <Map id="map" defaultYear={2018} defaultCategory="Bacia hidrográfica"/>
+    <WatershedsMap 
+      id="map" 
+      defaultYear={2018}
+      defaultCode= {76424}
+      defaultCategory="Bacia hidrográfica"
+      />
     </>
   );
 }

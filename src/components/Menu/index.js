@@ -14,12 +14,14 @@ const { Option } = Select;
 class Menu extends React.Component {
   state = {
     defaultYear: this.props.defaultYear,
+    defaultCode: this.props.defaultCode,
     defaultCategory: this.props.defaultCategory,
     categories: [
       ['Região', '/'],
       ['Bacia hidrográfica', 'watersheds']
     ],
     years: Array.from(new Array(29),(val,index) => index+1990),
+    codes: [76424, 76452, 76447, 76284, 76219],
     isHidden: this.props.isHidden,
   }
 
@@ -32,6 +34,7 @@ class Menu extends React.Component {
     })
   }
 
+
   handleMenu = () => {
     if(this.state.isHidden === false) {
       this.setState({isHidden: true});
@@ -41,6 +44,18 @@ class Menu extends React.Component {
   }
 
   render () {
+    let watershedSelect;
+    let watershedsLabel;
+
+    if (this.state.defaultCategory === 'Bacia hidrográfica') {
+      watershedsLabel = <label>Código da bacia</label>
+      watershedSelect = <Select id="select" defaultValue={this.state.defaultCode} onChange={this.props.handleCodes}>
+            {this.state.codes.map(c => <Option key={c} value={c}>{c}</Option>)}
+          </Select>
+    } else {
+      watershedSelect = null;
+    }
+
     return (
         <MenuContainer isHidden={this.state.isHidden}>
           <div id="nav" className="nav">
@@ -62,6 +77,8 @@ class Menu extends React.Component {
           <Select id="select" defaultValue={this.state.defaultCategory} onChange={this.handleCategories}>
             {this.state.categories.map(c => <Option key={c[0]} value={c[0]}><Link to={c[1]}>{c[0]}</Link></Option>)}
           </Select>
+          {watershedsLabel}
+          {watershedSelect}
           <label>Ano</label>
           <Select id="select" defaultValue={this.state.defaultYear} onChange={this.props.handleYears} >
             {this.state.years.map(y => <Option key={y} value={y}>{y}</Option>)}

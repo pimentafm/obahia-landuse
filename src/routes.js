@@ -8,7 +8,7 @@ import Watersheds from './pages/Watersheds';
 export default function Routes() {
     return(
         <Switch>
-            <Route path="/" exact component={Region}/>
+            <Route exact path="/" component={Region}/>
             <Route path="/watersheds" component={Watersheds}/>
         </Switch>
     );

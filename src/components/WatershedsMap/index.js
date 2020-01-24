@@ -4,8 +4,6 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import TileWMS from 'ol/source/TileWMS';
 import OSM from "ol/source/OSM";
-//import MousePosition from 'ol/control/MousePosition';
-//import { createStringXY } from 'ol/coordinate';
 
 import 'ol/ol.css';
 
@@ -16,9 +14,10 @@ import Footer from '../../components/Footer';
 
 import Stackplot from '../../components/Stackplot';
 
-class Map extends Component {
+class WatershedsMap extends Component {
   state = {
     defaultYear: this.props.defaultYear,
+    defaultCode: this.props.defaultCode,
     defaultCategory: this.props.defaultCategory,
     menuIsHidden: false,
     center: [-45.25811, -12.652125],
@@ -29,9 +28,10 @@ class Map extends Component {
   landsat = new TileLayer({
     visible: false,
     source: new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatWatersheds.map',
       params: {
         'year': this.state.defaultYear,
+        'code': this.state.defaultCode,
         'LAYERS': 'Landsat',
       },
       serverType: 'mapserver'
@@ -41,9 +41,10 @@ class Map extends Component {
   landuse = new TileLayer({
     visible: true,
     source: new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseWatersheds.map',
       params: {
         'year': this.state.defaultYear,
+        'code': this.state.defaultCode,
         'LAYERS': 'Landuse',
       },
       serverType: 'mapserver'
@@ -58,7 +59,7 @@ class Map extends Component {
 
   osm = new TileLayer({ source: new OSM() });
 
-  map = new OlMap({
+  map2 = new OlMap({
     controls: [],
     target: null,
     layers: [this.osm, this.landsat, this.landuse],
@@ -80,18 +81,55 @@ class Map extends Component {
     this.setState({defaultYear: year});
 
     const new_landsat = new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatWatersheds.map',
       params: {
-        'year': year,
+        'year': this.state.defaultYear,
+        'code': this.state.defaultCode,
         'LAYERS': 'Landsat',
       },
       serverType: 'mapserver'
     })
 
     const new_landuse = new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseWatersheds.map',
       params: {
-        'year': year,
+        'year': this.state.defaultYear,
+        'code': this.state.defaultCode,
+        'LAYERS': 'Landuse',
+      },
+      serverType: 'mapserver'
+    })
+
+    this.landuse.setSource(new_landuse);
+    this.landuse.getSource().updateParams({ "time": Date.now() });
+    this.landuse.changed();
+
+    this.landsat.setSource(new_landsat);
+    this.landsat.getSource().updateParams({ "time": Date.now() });
+    this.landsat.changed();
+  }
+
+  handleCodes = code => {
+    /*
+      Change the map year and update the map layer
+    */
+    this.setState({defaultCode: code});
+
+    const new_landsat = new TileWMS({
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatWatersheds.map',
+      params: {
+        'year': this.state.defaultYear,
+        'code': code,
+        'LAYERS': 'Landsat',
+      },
+      serverType: 'mapserver'
+    })
+
+    const new_landuse = new TileWMS({
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseWatersheds.map',
+      params: {
+        'year': this.state.defaultYear,
+        'code': code,
         'LAYERS': 'Landuse',
       },
       serverType: 'mapserver'
@@ -107,24 +145,24 @@ class Map extends Component {
   }
 
   updateMap() {
-    this.map.getView().setCenter(this.state.center);
-    this.map.getView().setZoom(this.state.zoom);
+    this.map2.getView().setCenter(this.state.center);
+    this.map2.getView().setZoom(this.state.zoom);
   }
 
   componentDidMount() {
-    this.map.setTarget("map");
+    this.map2.setTarget("map");
 
     // Listen to map changes
-    this.map.on("moveend", () => {
-      let center = this.map.getView().getCenter();
-      let zoom = this.map.getView().getZoom();
+    this.map2.on("moveend", () => {
+      let center = this.map2.getView().getCenter();
+      let zoom = this.map2.getView().getZoom();
       this.setState({ center, zoom });
     });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    let center = this.map.getView().getCenter();
-    let zoom = this.map.getView().getZoom();
+    let center = this.map2.getView().getCenter();
+    let zoom = this.map2.getView().getZoom();
     if (center === nextState.center && zoom === nextState.zoom) return false;
     return true;
   }
@@ -140,17 +178,19 @@ class Map extends Component {
           <Menu 
             key="card" 
             isHidden={this.state.menuIsHidden}
-            defaultYear={2018} 
-            handleYears={this.handleYears} 
-            defaultCategory="Região" 
+            defaultYear={this.state.defaultYear}
+            defaultCode={this.state.defaultCode}
+            handleYears={this.handleYears}
+            handleCodes={this.handleCodes}
+            defaultCategory="Bacia hidrográfica"
             onOffLandsat={this.onOffLandsat} 
             onOffLanduse={this.onOffLanduse}
-            map={this.map}
+            map={this.map2}
           />
 
           <Scalebar 
             key="scalebar"
-            map={this.map}
+            map={this.map2}
           />
 
           <Stackplot 
@@ -159,7 +199,7 @@ class Map extends Component {
 
           <Footer 
             key="footer"
-            map={this.map}
+            map={this.map2}
             projection='EPSG:4326'
           />
         </MapContainer>
@@ -167,4 +207,4 @@ class Map extends Component {
   }
 }
 
-export default Map;
+export default WatershedsMap;
