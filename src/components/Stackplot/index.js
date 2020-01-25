@@ -1,6 +1,7 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-import axios from 'axios';
+
+import oba from '../../services/api';
 
 import { PlotContainer } from './styles';
 
@@ -37,8 +38,7 @@ class Stackplot extends React.Component {
     };
     
     componentDidMount() {
-
-        axios.post('http://corrente.dea.ufv.br/obahiadb/', {
+        oba.post('obahiadb/', {
             year1: 2000,
             year2: 2018,
             headers: {

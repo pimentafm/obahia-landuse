@@ -5,6 +5,8 @@ import TileLayer from "ol/layer/Tile";
 import TileWMS from 'ol/source/TileWMS';
 import OSM from "ol/source/OSM";
 
+import oba from '../../services/api';
+
 import 'ol/ol.css';
 
 import { MapContainer } from './styles';
@@ -51,6 +53,18 @@ class WatershedsMap extends Component {
     })
   });
 
+  watersheds = new TileLayer({
+    visible: true,
+    source: new TileWMS({
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/watersheds.map&REQUEST=GetCapabilities',
+      params: {
+        'code': this.state.defaultCode,
+        'LAYERS': 'watersheds',
+      },
+      serverType: 'mapserver'
+    })
+  });
+
   view = new View({
     projection: 'EPSG:4326',
     center: this.state.center,
@@ -62,7 +76,7 @@ class WatershedsMap extends Component {
   map2 = new OlMap({
     controls: [],
     target: null,
-    layers: [this.osm, this.landsat, this.landuse],
+    layers: [this.osm, this.landsat, this.landuse, this.watersheds],
     view: this.view
   });
 
@@ -135,6 +149,15 @@ class WatershedsMap extends Component {
       serverType: 'mapserver'
     })
 
+    const new_watershed = new TileWMS({
+      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/watersheds.map',
+      params: {
+        'code': code,
+        'LAYERS': 'watersheds',
+      },
+      serverType: 'mapserver'
+    })
+
     this.landuse.setSource(new_landuse);
     this.landuse.getSource().updateParams({ "time": Date.now() });
     this.landuse.changed();
@@ -142,6 +165,28 @@ class WatershedsMap extends Component {
     this.landsat.setSource(new_landsat);
     this.landsat.getSource().updateParams({ "time": Date.now() });
     this.landsat.changed();
+
+    this.watersheds.setSource(new_watershed);
+    this.watersheds.getSource().updateParams({ "time": Date.now() });
+    this.watersheds.changed();
+
+    oba.post('watersheds/', {
+      code: code,
+      headers: {
+        'Content-type': 'application/json',
+      }
+    })
+    .then(response => {
+      let cx = response.data[0].cx;
+      let cy = response.data[0].cy;
+
+      console.log(response)
+      this.setState({center:[cx, cy]});
+      this.setState({zoom: 12})
+    })
+    .catch(e => {
+    this.errors.push(e)
+    })
   }
 
   updateMap() {
