@@ -15,7 +15,7 @@ import Scalebar from '../../components/Scalebar';
 import Footer from '../../components/Footer';
 
 import Stackplot from '../../components/Stackplot';
-
+import Barplot from '../../components/Barplot';
 class WatershedsMap extends Component {
   state = {
     defaultYear: this.props.defaultYear,
@@ -97,7 +97,7 @@ class WatershedsMap extends Component {
     const new_landsat = new TileWMS({
       url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatWatersheds.map',
       params: {
-        'year': this.state.defaultYear,
+        'year': year,
         'code': this.state.defaultCode,
         'LAYERS': 'Landsat',
       },
@@ -107,7 +107,7 @@ class WatershedsMap extends Component {
     const new_landuse = new TileWMS({
       url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseWatersheds.map',
       params: {
-        'year': this.state.defaultYear,
+        'year': year,
         'code': this.state.defaultCode,
         'LAYERS': 'Landuse',
       },
@@ -180,7 +180,6 @@ class WatershedsMap extends Component {
       let cx = response.data[0].cx;
       let cy = response.data[0].cy;
 
-      console.log(response)
       this.setState({center:[cx, cy]});
       this.setState({zoom: 12})
     })
@@ -238,9 +237,17 @@ class WatershedsMap extends Component {
             map={this.map2}
           />
 
-          <Stackplot 
-            key="plottest"
-          />
+          <div id="plots" className="plot-card">
+            <Stackplot 
+              key="stackplot"
+            />
+            
+            <Barplot 
+              key={"barplot"+ this.state.defaultYear}
+              defaultYear={this.state.defaultYear}
+            />
+
+          </div>
 
           <Footer 
             key="footer"

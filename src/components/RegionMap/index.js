@@ -15,6 +15,7 @@ import Scalebar from '../../components/Scalebar';
 import Footer from '../../components/Footer';
 
 import Stackplot from '../../components/Stackplot';
+import Barplot from '../../components/Barplot';
 
 class RegionMap extends Component {
   state = {
@@ -72,7 +73,7 @@ class RegionMap extends Component {
   onOffLanduse = (evt) => {
     this.landuse.setVisible(evt);
   }
-  
+
   handleYears = year => {
     /*
       Change the map year and update the map layer
@@ -126,6 +127,7 @@ class RegionMap extends Component {
     let center = this.map.getView().getCenter();
     let zoom = this.map.getView().getZoom();
     if (center === nextState.center && zoom === nextState.zoom) return false;
+
     return true;
   }
 
@@ -134,13 +136,13 @@ class RegionMap extends Component {
   }
 
   render() {
-    this.updateMap(); // Update map on render?
+
     return (
         <MapContainer id="map">
           <Menu 
             key="card" 
             isHidden={this.state.menuIsHidden}
-            defaultYear={2018} 
+            defaultYear={this.state.defaultYear} 
             handleYears={this.handleYears} 
             defaultCategory="Região" 
             onOffLandsat={this.onOffLandsat} 
@@ -153,9 +155,17 @@ class RegionMap extends Component {
             map={this.map}
           />
 
-          <Stackplot 
-            key="plottest"
-          />
+          <div id="plots" className="plot-card">
+            <Stackplot 
+              key="stackplot"
+            />
+            
+            <Barplot 
+              key={"barplot"+ this.state.defaultYear}
+              defaultYear={this.state.defaultYear}
+            />
+
+          </div>
 
           <Footer 
             key="footer"

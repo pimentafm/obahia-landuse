@@ -38,8 +38,8 @@ class Stackplot extends React.Component {
     };
     
     componentDidMount() {
-        oba.post('obahiadb/', {
-            year1: 2000,
+        oba.post('landuse/', {
+            year1: 1990,
             year2: 2018,
             headers: {
               'Content-type': 'application/json',
