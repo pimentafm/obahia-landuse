@@ -1,21 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
 
 import oba from '../../services/api';
 
 import { PlotContainer } from './styles';
 
-class Barplot extends React.Component {
-  state = {
-    defaultYear: this.props.defaultYear,
-    landuse: [],
-    colors: ['#004000', '#77a605', '#b8af4f', '#f6e6db' , '#ffcaff', '#ff42f9' , '#f4f286', '#0000ff', '#ff0000'],
-    xaxis: ['Formações florestais', 'Formações savânicas', 'Formações campestres', 'Mosaico Agricultura/Pastagem', 'Agricultura de sequeiro', 'Agricultura irrigada', 'Pastagem', 'Corpos dágua', 'Área urbana/Construções rurais']
-  };
+const  Barplot = (props) => {
+  const [defaultYear, setDefaultYear] = useState([]);
+  const [landuse, setLanduseData] = useState([]);
+  const [colors] = useState(['#004000', '#77a605', '#b8af4f', '#f6e6db' , '#ffcaff', '#ff42f9' , '#f4f286', '#0000ff', '#ff0000']);
+  const [xaxis] = useState(['Formações florestais', 'Formações savânicas', 'Formações campestres', 'Mosaico Agricultura/Pastagem', 'Agricultura de sequeiro', 'Agricultura irrigada', 'Pastagem', 'Corpos dágua', 'Área urbana/Construções rurais']);
 
-  componentDidMount() {
+  useEffect(() => {
     oba.post('landuseyear/', {
-      year: this.state.defaultYear,
+      year: props.defaultYear,
       headers: {
         'Content-type': 'application/json',
       }
@@ -23,25 +21,33 @@ class Barplot extends React.Component {
       let data = response.data.map(j => Object.values(j))
       data = data[0];
 
-      this.setState({landuse: data});
+      setDefaultYear(props.defaultYear);
+      setLanduseData(data);
     }).catch(e => {this.errors.push(e)})
-  }
+  }, [props.defaultYear, props.landuse]);
 
-  render() {
     return (
       <PlotContainer>
       <Plot
         data={[
           {
-            x: this.state.xaxis,
-            y: this.state.landuse,
+            x: xaxis,
+            y: landuse,
             stackgroup: 'one',
             type: 'bar',
-            marker: {color: this.state.colors},
+            marker: {color: colors},
           }
         ]}
         layout={ 
           {
+            title: {
+              text: "<b>"+defaultYear+"</b>",
+              font: {
+                family: 'Arial, sans-serif',
+                size: 24,
+
+              },
+            },
             autosize: true,
             xaxis: {
               title: {
@@ -86,7 +92,7 @@ class Barplot extends React.Component {
               tickcolor: '#000'
             },
             showlegend: false,
-            margin: {l: 60, r: 10, t: 10, b: 50}
+            margin: {l: 60, r: 10, t: 50, b: 50}
           } 
         }
         config={
@@ -97,7 +103,6 @@ class Barplot extends React.Component {
       />
       </PlotContainer>
     );
-  }
 }
 
 export default Barplot;

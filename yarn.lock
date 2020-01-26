@@ -11235,6 +11235,11 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-memo@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-memo/-/react-memo-0.3.1.tgz#5a40ae9773a3a6f4344b9e2f4e3eb8073e0396bf"
+  integrity sha1-WkCul3OjpvQ0S54vTj64Bz4Dlr8=
+
 react-plotly.js@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/react-plotly.js/-/react-plotly.js-2.4.0.tgz#7a8fd89ffa126daa36a5855890282960e2e4eaf0"
