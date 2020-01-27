@@ -4,7 +4,7 @@ import { HeaderContainer } from './styles';
 
 import logo from '../../assets/images/logo.png';
 
-export default function Header() {
+const Header = () => {
   return (
     <HeaderContainer>
       <div>
@@ -14,3 +14,5 @@ export default function Header() {
     </HeaderContainer>
   );
 }
+
+export default Header;

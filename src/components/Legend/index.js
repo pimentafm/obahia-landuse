@@ -1,18 +1,14 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import api from '../../services/api';
+import oba from '../../services/api';
 
 import { LegendContainer } from './styles';
 
-class Legend extends Component {
-    state = {
-        legendURL: `http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map&mode=legend&year=2018`,
-        imghtml: [],
-    };
+const Legend = props => {
+    const [legendHTML, setlegendHTML] = useState([]);
 
-    componentDidMount() {
-        // blob arraybuffer text document
-        api.get(this.state.legendURL, {
+    useEffect(() => {
+        oba.get(`cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map&mode=legend&year=2018`, {
             responseType: 'text',
         },
         ).then(res => {
@@ -20,16 +16,15 @@ class Legend extends Component {
 
             html = ReactHtmlParser(html)
             
-            this.setState({imghtml: html});
+            setlegendHTML(html)
         });
-    }
-    
-  render() {
+    }, []);
+
     return (
         <LegendContainer>
-            {this.state.imghtml}
+            {legendHTML}
         </LegendContainer>
-    )}
+    )
 }
 
 export default Legend;

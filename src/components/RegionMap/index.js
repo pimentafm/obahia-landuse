@@ -4,8 +4,6 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import TileWMS from 'ol/source/TileWMS';
 import OSM from "ol/source/OSM";
-//import MousePosition from 'ol/control/MousePosition';
-//import { createStringXY } from 'ol/coordinate';
 
 import 'ol/ol.css';
 
@@ -19,31 +17,16 @@ import Barplot from '../../components/Barplot';
 
 const RegionMap = (props) => {
   const [defaultYear, setYear] = useState(props.defaultYear);
-  const [defaultCategory, setCategory] = useState(props.defaultCategory);
+  const [defaultCategory] = useState(props.defaultCategory);
   const [menuIsHidden] = useState(false);
-  const [center, setCenter] = useState([-45.25811, -12.652125]);
-  const [zoom, setZoom] = useState(8);
-  const [layers, setLayer] = useState([]);
+  const [center] = useState([-45.25811, -12.652125]);
+  const [zoom] = useState(8);
 
   useEffect(() => {
-      setCenter([-45.56258, -20.125457]);
-      setZoom(5);
-
-      map.getView().setCenter(center);
-      map.getView().setZoom(zoom);
-
-      map.setTarget("map");
-      // Listen to map changes
-      map.on("moveend", () => {
-        let center = map.getView().getCenter();
-        let zoom = map.getView().getZoom();
-
-        setYear(props.defaultYear);
-        setCategory(props.defaultCategory);
-        setCenter(center);
-        setZoom(zoom);
-      });
-  }, []);
+    map.getView().setCenter(center);
+    map.getView().setZoom(zoom);
+    map.setTarget("map");
+  });
 
   const landsat = new TileLayer({
     visible: false,
@@ -93,9 +76,6 @@ const RegionMap = (props) => {
   }
 
   const handleYears = year => {
-    /*
-      Change the map year and update the map layer
-    */
     setYear(year);
 
     const new_landsat = new TileWMS({
@@ -132,7 +112,7 @@ const RegionMap = (props) => {
             isHidden={menuIsHidden}
             defaultYear={defaultYear} 
             handleYears={handleYears} 
-            defaultCategory="Região" 
+            defaultCategory={defaultCategory} 
             onOffLandsat={onOffLandsat} 
             onOffLanduse={onOffLanduse}
             map={map}

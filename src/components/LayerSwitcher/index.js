@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import 'antd/dist/antd.css';
 
@@ -6,43 +6,39 @@ import { Switch } from 'antd';
 import { LayerContainer}  from './styles';
 import Legend from '../../components/Legend';
 
-class LayerSwitcher extends React.Component {
-    state = {
-        legend_is_visible: this.props.legend
-    }
+const LayerSwitcher = props => {
+    const [checked] = useState(props.checked);
+    const [legend_is_visible, setLegendVisible] = useState(props.legend);
+    const [switcher] = useState(props.switcher);
+    const [name] = useState(props.name);
 
-    handleLegend = () => {
-        if(this.state.legend_is_visible === true) {
-            this.setState({legend_is_visible: false});
-            return false;
+    const handleLegend = () => {
+        if(legend_is_visible === true) {
+            setLegendVisible(false);
         } else {
-            this.setState({legend_is_visible: true});
-            return true;
+            setLegendVisible(true);
         } 
-
     }
 
-    render () {
-        let legend;
+    let legend;
 
-        if (this.props.legend) {
-            legend = <Legend />
-        } else {
-            legend = null;
-        }
+    if (legend_is_visible && checked) {
+        legend = <Legend />
+    } else {
+        legend = null;
+    }
 
-        return (
-            <LayerContainer legend_is_visible={this.state.legend_is_visible}>
-                <div className="layer-div">
-                    <label>{this.props.name}</label>
-                    <Switch defaultChecked={this.props.checked} onClick={this.handleLegend} onChange={this.props.switcher} />
-                </div>
+    return (
+        <LayerContainer legend_is_visible={legend_is_visible}>
+            <div className="layer-div">
+                <label>{name}</label>
+                <Switch defaultChecked={checked} onClick={handleLegend} onChange={switcher} />
+            </div>
                 
-                {legend}
+            {legend}
 
-            </LayerContainer>
-        )
-    }
+        </LayerContainer>
+    )
 }
 
 export default LayerSwitcher;

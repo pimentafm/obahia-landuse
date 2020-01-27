@@ -1,30 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { ScaleLine } from 'ol/control';
 
 import { ScaleContainer } from './styles';
 
-class Scalebar extends React.Component {
-    scalebar = new ScaleLine({
-        units: 'metric',
-        bar: true,
-        steps: 4,
-        text: true,
-        minWidth: 140,
-    });
+const Scalebar = props => {
+    const [map] = useState(props.map);
+    useEffect(() => {
+        const scalebar = new ScaleLine({
+            units: 'metric',
+            bar: true,
+            steps: 4,
+            text: true,
+            minWidth: 140,
+        });
+        scalebar.setTarget(document.getElementById('scalebar'));
+        map.addControl(scalebar);
+    }, [map]);
 
-    componentDidMount() {
-        this.scalebar.setTarget(document.getElementById('scalebar'));
-        this.props.map.addControl(this.scalebar);
-    }
-
-    render() {
-        return (
-            <ScaleContainer>
-                <div id="scalebar"/>
-            </ScaleContainer>
-        );
-    }
+    return (
+        <ScaleContainer>
+            <div id="scalebar"/>
+        </ScaleContainer>
+    );
   }
 
 export default Scalebar;

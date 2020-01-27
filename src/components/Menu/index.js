@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { Select, Icon} from 'antd';
@@ -11,22 +11,19 @@ import "antd/dist/antd.css";
 
 const { Option } = Select;
 
-class Menu extends React.Component {
-  state = {
-    defaultYear: this.props.defaultYear,
-    defaultCode: this.props.defaultCode,
-    defaultCategory: this.props.defaultCategory,
-    categories: [
-      ['Região', '/'],
-      ['Bacia hidrográfica', 'watersheds']
-    ],
-    years: Array.from(new Array(29),(val,index) => index+1990),
-    codes: [76424, 76452, 76447, 76284, 76219],
-    isHidden: this.props.isHidden,
-  }
+const Menu = (props) => {
+  const [defaultYear] = useState(props.defaultYear);
+  const [defaultCode] = useState(props.defaultCode);
+  const [defaultCategory, setCategory] = useState(props.defaultCategory);
+  const [categories] = useState([['Região', '/'],['Bacia hidrográfica', 'watersheds']]);
+  const [years] = useState(Array.from(new Array(29),(val,index) => index+1990));
+  const [codes] = useState([76424, 76452, 76447, 76284, 76219]);
+  const [isHidden, setHidden] = useState(props.isHidden);
+  const [map] = useState(props.map);
 
-  handleCategories = e => {
-    this.setState({defaultCategory: e});
+  const handleCategory = e => {
+    setCategory(e);
+
     toast.info('Análise por ' + e, {
       autoClose: 3000,
       className: 'toast',
@@ -34,70 +31,71 @@ class Menu extends React.Component {
     })
   }
 
-
-  handleMenu = () => {
-    if(this.state.isHidden === false) {
-      this.setState({isHidden: true});
+  const handleMenu = () => {
+    if(isHidden === false) {
+      setHidden(true);
     } else {
-      this.setState({isHidden: false});
+      setHidden(false);
     }
   }
 
-  render () {
-    let watershedSelect;
-    let watershedsLabel;
+  let watershedsLabel = null;
+  let watershedSelect = null;
 
-    if (this.state.defaultCategory === 'Bacia hidrográfica') {
-      watershedsLabel = <label>Código da bacia</label>
-      watershedSelect = <Select id="select" defaultValue={this.state.defaultCode} onChange={this.props.handleCodes}>
-            {this.state.codes.map(c => <Option key={c} value={c}>{c}</Option>)}
-          </Select>
-    } else {
-      watershedSelect = null;
-    }
+  if (defaultCategory === 'Bacia hidrográfica') {
+    watershedsLabel = <label>Código da bacia</label>
+    watershedSelect = <Select id="select" defaultValue={defaultCode} onChange={props.handleCodes}>
+                        {codes.map(c => <Option key={c} value={c}>{c}</Option>)}
+                      </Select>
+  } else {
+    watershedSelect = null;
+  }
 
-    return (
-        <MenuContainer isHidden={this.state.isHidden}>
+  return (
+        <MenuContainer isHidden={isHidden}>
           <div id="nav" className="nav">
               <Icon 
                 id="handleMenu" 
                 type="menu" 
                 className="nav_icon"
                 style={{fontSize: '20px'}}
-                onClick={() => this.handleMenu()} 
+                onClick={() => handleMenu()} 
               />
           </div>
+
           <Zoom 
             key="zoom"
-            isHidden={this.state.menuIsHidden}
-            map={this.props.map}
+            isHidden={props.menuIsHidden}
+            map={map}
           />
 
           <label>Categoria</label>
-          <Select id="select" defaultValue={this.state.defaultCategory} onChange={this.handleCategories}>
-            {this.state.categories.map(c => <Option key={c[0]} value={c[0]}><Link to={c[1]}>{c[0]}</Link></Option>)}
+          <Select id="select" defaultValue={defaultCategory} onChange={handleCategory}>
+            {categories.map(c => <Option key={c[0]} value={c[0]}><Link to={c[1]}>{c[0]}</Link></Option>)}
           </Select>
+
           {watershedsLabel}
           {watershedSelect}
+
           <label>Ano</label>
-          <Select id="select" defaultValue={this.state.defaultYear} onChange={this.props.handleYears} >
-            {this.state.years.map(y => <Option key={y} value={y}>{y}</Option>)}
+          <Select id="select" defaultValue={defaultYear} onChange={props.handleYears} >
+            {years.map(y => <Option key={y} value={y}>{y}</Option>)}
           </Select>
+
           <LayerSwitcher  
             name="Uso do Solo" 
             checked={true}
             legend={true}
-            switcher={this.props.onOffLanduse} 
+            switcher={() => props.onOffLanduse} 
           />
           <LayerSwitcher  
             name="Imagens de Satélite (Landsat)" 
             checked={false}
             legend={false} 
-            switcher={this.props.onOffLandsat} 
+            switcher={() => props.onOffLandsat} 
           />
         </MenuContainer>
     );
-  }
 }
 
 export default Menu;
