@@ -16,7 +16,7 @@ const Footer = props => {
     useEffect(() => {
         mousePosition.setTarget(document.getElementById('mouse-position-coordinates'));
         map.addControl(mousePosition);
-    });
+    }, [map]);
 
     const mousePosition = new MousePosition({
         coordinateFormat: createStringXY(5),

@@ -1,74 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
 
 import oba from '../../services/api';
 
 import { PlotContainer } from './styles';
 
-class Stackplot extends React.Component {
-    state = {
-      forest: {
-        x: [],
-      },
-      savanna: {
-        x: [],
-      },
-      grass: {
-        x: [],
-      },
-      croppast: {
-        x: [],
-      },
-      raincrop: {
-        x: [],
-      },
-      irrcrop: {
-        x: [],
-      },
-      past: {
-        x: [],
-      },
-      water: {
-        x: [],
-      },
-      urban: {
-        x: [],
-      },
-      xaxis: Array.from(new Array(29),(val,index) => index+1990)
-    };
+const  Stackplot = props => {
+    const [forest, setForest] = useState(null);
+    const [savanna, setSavanna] = useState(null);
+    const [grass, setGrass] = useState(null);
+    const [croppast, setCroppast] = useState(null);
+    const [raincrop, setRaincrop] = useState(null);
+    const [irrcrop, setIrrcrop] = useState(null);
+    const [past, setPast] = useState(null);
+    const [water, setWater] = useState(null);
+    const [urban, setUrban] = useState(null);
+    const [xaxis] = useState(Array.from(new Array(29),(val,index) => index+1990));
     
-    componentDidMount() {
-        oba.post('landuse/', {
-            year1: 1990,
-            year2: 2018,
-            headers: {
-              'Content-type': 'application/json',
-            }
-          })
-          .then(response => {
-            this.setState({forest: {y: response.data.map(j => j.forest)}});
-            this.setState({savanna: {y: response.data.map(j => j.savanna)}});
-            this.setState({grass: {y: response.data.map(j => j.grass)}});
-            this.setState({croppast: {y: response.data.map(j => j.croppast)}});
-            this.setState({raincrop: {y: response.data.map(j => j.raincrop)}});
-            this.setState({irrcrop: {y: response.data.map(j => j.irrcrop)}});
-            this.setState({past: {y: response.data.map(j => j.past)}});
-            this.setState({water: {y: response.data.map(j => j.water)}});
-            this.setState({urban: {y: response.data.map(j => j.urban)}});
-          })
-          .catch(e => {
-          this.errors.push(e)
-          })
-    }
+    useEffect(() => {
+      oba.post('landuse/', {
+        year1: 1990,
+        year2: 2018,
+        headers: {
+          'Content-type': 'application/json',
+        }
+      })
+      .then(response => {
+        setForest(response.data.map(j => j.forest));
+        setSavanna(response.data.map(j => j.savanna));
+        setGrass(response.data.map(j => j.grass));
+        setCroppast(response.data.map(j => j.croppast));
+        setRaincrop(response.data.map(j => j.raincrop));
+        setIrrcrop(response.data.map(j => j.irrcrop));
+        setPast(response.data.map(j => j.past));
+        setWater(response.data.map(j => j.water));
+        setUrban(response.data.map(j => j.urban));
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+    },[]);
   
-  render() {
     return (
       <PlotContainer>
       <Plot
         data={[
           {
-            x: this.state.xaxis,
-            y: this.state.urban.y,
+            x: xaxis,
+            y: urban,
             stackgroup: 'one',
             fillcolor: '#ff0000',
             type: 'scatter',
@@ -76,8 +55,8 @@ class Stackplot extends React.Component {
             line: {color: '#ff0000'},
           },
           {
-            x: this.state.xaxis,
-            y: this.state.water.y,
+            x: xaxis,
+            y: water,
             stackgroup: 'one',
             fillcolor: '#0000ff',
             type: 'scatter',
@@ -85,8 +64,8 @@ class Stackplot extends React.Component {
             line: {color: '#0000ff'},
           },
           {
-            x: this.state.xaxis,
-            y: this.state.past.y,
+            x: xaxis,
+            y: past,
             stackgroup: 'one',
             fillcolor: '#f4f286',
             type: 'scatter',
@@ -94,8 +73,8 @@ class Stackplot extends React.Component {
             line: {color: '#f4f286'},
           },
           {
-            x: this.state.xaxis,
-            y: this.state.irrcrop.y,
+            x: xaxis,
+            y: irrcrop,
             stackgroup: 'one',
             fillcolor: '#ff42f9',
             type: 'scatter',
@@ -103,8 +82,8 @@ class Stackplot extends React.Component {
             line: {color: '#ff42f9'},
           },
           {
-            x: this.state.xaxis,
-            y: this.state.raincrop.y,
+            x: xaxis,
+            y: raincrop,
             stackgroup: 'one',
             fillcolor: '#ffcaff',
             type: 'scatter',
@@ -112,8 +91,8 @@ class Stackplot extends React.Component {
             line: {color: '#ffcaff'},
           },
           {
-            x: this.state.xaxis,
-            y: this.state.croppast.y,
+            x: xaxis,
+            y: croppast,
             stackgroup: 'one',
             fillcolor: '#f6e6db',
             type: 'scatter',
@@ -121,8 +100,8 @@ class Stackplot extends React.Component {
             line: {color: '#f6e6db'},
           },
           {
-            x: this.state.xaxis,
-            y: this.state.grass.y,
+            x: xaxis,
+            y: grass,
             stackgroup: 'one',
             fillcolor: '#b8af4f',
             type: 'scatter',
@@ -130,8 +109,8 @@ class Stackplot extends React.Component {
             line: {color: '#b8af4f'},
           },
           {
-            x: this.state.xaxis,
-            y: this.state.savanna.y,
+            x: xaxis,
+            y: savanna,
             stackgroup: 'one',
             fillcolor: '#77a605',
             type: 'scatter',
@@ -139,8 +118,8 @@ class Stackplot extends React.Component {
             line: {color: '#77a605'},
           },
           {
-            x: this.state.xaxis,
-            y: this.state.forest.y,
+            x: xaxis,
+            y: forest,
             stackgroup: 'one',
             fillcolor: '#004000',
             type: 'scatter',
@@ -151,8 +130,6 @@ class Stackplot extends React.Component {
         layout={ 
           {
             autosize: true,
-            //width: 800,
-            //height: 400, 
             xaxis: {
               title: {
                 text: 'Anos'
@@ -210,7 +187,6 @@ class Stackplot extends React.Component {
       />
       </PlotContainer>
     );
-  }
 }
 
 export default Stackplot;
