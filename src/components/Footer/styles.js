@@ -4,42 +4,28 @@ export const FooterContainer = styled.footer`
     & {
         background: #fff;
         position: fixed;
-        margin: 1px 1px 1px 1px;
         display: flex;
         flex-direction: row;
-        text-decoration: none;
+        align-items: center;
         justify-content: flex-end;
         box-shadow: 0px 2px 3px rgba(0,0,0,.13) ,1px 2px 2px rgba(0,0,0,.1) , -1px -2px 2px rgba(0,0,0,.05);
-        padding: 0;
         bottom: 0;
         width: 100%;
-        text-align: center;
+        height: 30px;
         z-index: 1;
     }
 
     label {
         padding-left: 10px;
-        margin-bottom: 0;
-        border-radius: 0;
-        margin-top: 10px;
-    }
-
-    .select {
-        padding: 2px;
         margin-right: 10px;
-    }
-
-    #unit-select {
-        width: 100px;
-    }
-    #proj-select {
-        width: 120px;
     }
 
     #mouse-position-coordinates {
         width: 250px;
         margin: 5px 5px 5px 5px;
+        height: 25px;
         vertical-align: middle;
+        text-align: center;
         background-color: #f2f2f2;
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
         padding: 2px;
