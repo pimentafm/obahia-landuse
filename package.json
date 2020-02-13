@@ -1,8 +1,8 @@
 {
   "name": "webmap",
   "version": "0.1.0",
-  "homepage": "http://corrente.dea.ufv.br",
-  "proxy": "http://corrente.dea.ufv.br",
+  "homepage": "http://localhost",
+  "proxy": "http://localhost",
   "private": true,
   "dependencies": {
     "antd": "^3.25.2",

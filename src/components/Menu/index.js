@@ -15,7 +15,7 @@ const Menu = (props) => {
   const [defaultYear] = useState(props.defaultYear);
   const [defaultCode] = useState(props.defaultCode);
   const [defaultCategory, setCategory] = useState(props.defaultCategory);
-  const [categories] = useState([['Região', '/'],['Bacia hidrográfica', 'watersheds']]);
+  const [categories] = useState([['Região', '/'],['Bacia hidrográfica', 'watersheds'], ['Área de drenagem', 'drainage']]);
   const [years] = useState(Array.from(new Array(29),(val,index) => index+1990));
   const [codes] = useState([76424, 76452, 76447, 76284, 76219]);
   const [isHidden, setHidden] = useState(props.isHidden);

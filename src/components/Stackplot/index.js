@@ -18,9 +18,10 @@ const  Stackplot = props => {
     const [xaxis] = useState(Array.from(new Array(29),(val,index) => index+1990));
     
     useEffect(() => {
-      oba.post('landuse/', {
+      oba.post('region/', {
         year1: 1990,
         year2: 2018,
+        table_name: 'landuse',
         headers: {
           'Content-type': 'application/json',
         }

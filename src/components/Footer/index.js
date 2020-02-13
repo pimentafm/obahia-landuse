@@ -26,7 +26,7 @@ const Footer = props => {
             <label id="mouse-position-label"> Coordenadas: </label>
             <label id="mouse-position-coordinates" className="mouse-position"></label>
 
-            <label> Projeção: EPSG: 4326</label>   
+            <label> Projeção: EPSG 4326</label>   
         </FooterContainer>
     );
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import WatershedsMap from '../../components/WatershedsMap';
+import WatershedMap from '../../components/WatershedMap';
 
 export default function Region() {
   return (
     <>
-    <WatershedsMap 
+    <WatershedMap 
       id="map" 
       defaultYear={2018}
       defaultCode= {76424}

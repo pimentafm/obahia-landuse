@@ -16,7 +16,7 @@ import Footer from '../../components/Footer';
 
 import Stackplot from '../../components/Stackplot';
 import Barplot from '../../components/Barplot';
-class WatershedsMap extends Component {
+class WatershedMap extends Component {
   state = {
     defaultYear: this.props.defaultYear,
     defaultCode: this.props.defaultCode,
@@ -259,4 +259,4 @@ class WatershedsMap extends Component {
   }
 }
 
-export default WatershedsMap;
+export default WatershedMap;

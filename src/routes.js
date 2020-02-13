@@ -3,13 +3,13 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom'; 
 
 import Region from './pages/Region';
-import Watersheds from './pages/Watersheds';
+import Watershed from './pages/Watershed';
 
 export default function Routes() {
     return(
         <Switch>
             <Route exact path="/" component={Region}/>
-            <Route path="/watersheds" component={Watersheds}/>
+            <Route path="/watershed" component={Watershed}/>
         </Switch>
     );
 }

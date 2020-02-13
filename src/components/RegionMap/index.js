@@ -13,43 +13,46 @@ import Scalebar from '../../components/Scalebar';
 import Footer from '../../components/Footer';
 
 import Stackplot from '../../components/Stackplot';
-import Barplot from '../../components/Barplot';
+//import Barplot from '../../components/Barplot';
 
-const RegionMap = (props) => {
+const RegionMap = props => {
   const [defaultYear, setYear] = useState(props.defaultYear);
   const [defaultCategory] = useState(props.defaultCategory);
   const [menuIsHidden] = useState(false);
   const [center] = useState([-45.25811, -12.652125]);
   const [zoom] = useState(8);
+  const [landuse] = useState(new TileLayer());
+  const [landsat] = useState(new TileLayer({visible: false}));
+
+  const landuse_source = new TileWMS({
+    url: 'http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
+    params: {
+      'year': defaultYear,
+      'LAYERS': 'landuse',
+    },
+    serverType: 'mapserver'
+  })
+
+  const landsat_source = new TileWMS({
+    url: 'http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
+    params: {
+      'year': defaultYear,
+      'LAYERS': 'landsat',
+    },
+    serverType: 'mapserver'
+  })
+
+  landsat.setSource(landsat_source);
+  landsat.getSource().updateParams({ "time": Date.now() });
+  landsat.changed();
+  landuse.setSource(landuse_source);
+  landuse.getSource().updateParams({ "time": Date.now() });
+  landuse.changed();
 
   useEffect(() => {
     map.getView().setCenter(center);
     map.getView().setZoom(zoom);
     map.setTarget("map");
-  });
-
-  const landsat = new TileLayer({
-    visible: false,
-    source: new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
-      params: {
-        'year': defaultYear,
-        'LAYERS': 'Landsat',
-      },
-      serverType: 'mapserver'
-    })
-  });
-
-  const landuse = new TileLayer({
-    visible: true,
-    source: new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
-      params: {
-        'year': defaultYear,
-        'LAYERS': 'Landuse',
-      },
-      serverType: 'mapserver'
-    })
   });
 
   const view = new View({
@@ -67,42 +70,16 @@ const RegionMap = (props) => {
     view: view
   });
 
-  const onOffLandsat = (evt) => {
+  const onOffLandsat = evt => {
     landsat.setVisible(evt);
   }
 
-  const onOffLanduse = (evt) => {
+  const onOffLanduse = evt => {
     landuse.setVisible(evt);
   }
 
   const handleYears = year => {
     setYear(year);
-
-    const new_landsat = new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
-      params: {
-        'year': year,
-        'LAYERS': 'Landsat',
-      },
-      serverType: 'mapserver'
-    })
-
-    const new_landuse = new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
-      params: {
-        'year': year,
-        'LAYERS': 'Landuse',
-      },
-      serverType: 'mapserver'
-    })
-
-    landuse.setSource(new_landuse);
-    landuse.getSource().updateParams({ "time": Date.now() });
-    landuse.changed();
-
-    landsat.setSource(new_landsat);
-    landsat.getSource().updateParams({ "time": Date.now() });
-    landsat.changed();
   }
 
   return (
@@ -122,23 +99,23 @@ const RegionMap = (props) => {
             key="scalebar"
             map={map}
           />
-
           <div id="plots" className="plot-card">
+            
             <Stackplot 
               key="stackplot"
             />
-            
+{/*
             <Barplot 
               key={"barplot"+ defaultYear}
               defaultYear={defaultYear}
             />
-
+*/}
           </div>
+
 
           <Footer 
             key="footer"
             map={map}
-            projection='EPSG:4326'
           />
         </MapContainer>
     );
