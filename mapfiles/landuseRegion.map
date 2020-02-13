@@ -47,16 +47,16 @@ MAP
     END
 
     LAYER
-        NAME "Landuse"
+        NAME "landuse"
         STATUS DEFAULT
         TYPE RASTER
         DUMP TRUE
 
         VALIDATION
-	        "year" "."
+	        "year" "[0-9]+"
         END
 
-        DATA "../../geodb/landuse/19902018/landuse%year%.tif"
+        DATA "../../geodb/landuse/region/landuse%year%.tif"
 
         INCLUDE "includes/style_landuse.map"
     END

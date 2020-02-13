@@ -19,6 +19,7 @@ MAP
     END
 
     LAYER
+        NAME "landsat"
         STATUS DEFAULT
         TYPE RASTER
         DUMP TRUE
@@ -34,6 +35,6 @@ MAP
 
         OFFSITE 0 0 0
 
-        DATA "../../geodb/landsat/19902018/landsat%year%.tif"
+        DATA "../../geodb/landsat/region/landsat%year%.tif"
     END
 END

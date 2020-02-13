@@ -1,13 +1,13 @@
 MAP
-    NAME "Landuse"
-    EXTENT -46.6330735347222216 -15.4471601311111115 -43.1301829158333305 -10.1812359355555557
+    NAME "Landsat"
     SIZE 450 650
+    EXTENT -46.6330735347222216 -15.4471601311111115 -43.1301829158333305 -10.1812359355555557
 
     WEB
         IMAGEPATH "/tmp/"
 	    IMAGEURL "/tmp/"
         METADATA
-            "wms_title" "Landuse"
+            "wms_title" "Landsat"
             "wms_onlineresource" "http://corrente.dea.ufv.br/cgi-bin/mapserv?"
             "wms_enable_request" "*"
             "wms_feature_info_mime_type" "text/html"
@@ -22,19 +22,23 @@ MAP
     END
 
     LAYER
-        NAME "Landuse"
+        NAME "Landsat"
         STATUS DEFAULT
         TYPE RASTER
         DUMP TRUE
-        TOLERANCE 80
 
         VALIDATION
-            "ws" "^[a-zA-Z\-]+$"
-	    "year" "[0-9]+"
+            "year" "[0-9]+"
+	    "code" "[0-9]+"
         END
+  
+        PROCESSING "BANDS=1,2,3"
+        PROCESSING "SCALE_1=0,4268"
+        PROCESSING "SCALE_2=0,3861"
+        PROCESSING "SCALE_3=0,2000"
+        OFFSITE      0 0 0
 
-        DATA "../../geodb/landuse/gcc/%ws%/landuse%year%.tif"
-
-        INCLUDE "includes/style_landuse.map"
+        DATA "../../geodb/landsat/drainage/%year%/landsat_%code%_%year%.tif"
     END
 END
+

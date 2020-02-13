@@ -28,8 +28,8 @@ MAP
         DUMP TRUE
 
         VALIDATION
-            "year" "."
-            "code" "."
+	    "ws" "^[a-zA-Z\-]+$"	
+            "year" "[0-9]+"
         END
   
         PROCESSING "BANDS=1,2,3"
@@ -38,7 +38,7 @@ MAP
         PROCESSING "SCALE_3=0,2000"
         OFFSITE      0 0 0
 
-        DATA "../../geodb/landsat/%year%/landsat_%code%.tif"
+        DATA "../../geodb/landsat/gcc/%ws%/landsat_%ws%_%year%.tif"
     END
 END
 

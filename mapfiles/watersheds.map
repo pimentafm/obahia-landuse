@@ -3,18 +3,17 @@ MAP
   SIZE 450 650
   EXTENT -46.6330735347222216 -15.4471601311111115 -43.1301829158333305 -10.1812359355555557
 
-  OUTPUTFORMAT
-    NAME "png8"
-    DRIVER AGG/PNG8
-    MIMETYPE "image/png; mode=8bit"
-    IMAGEMODE RGB
-    EXTENSION "png"
-  END
+
+OUTPUTFORMAT
+  NAME "geojson"
+  DRIVER "TEMPLATE"
+  FORMATOPTION "FILE=myTemplate.js"
+END
+
 
   WEB
-    IMAGEPATH "/tmp/"
-	  IMAGEURL "/tmp/"
     METADATA
+      "wfs_getfeature_formatlist" "gml,geojson"
       "wms_title" "Bacias"
       "wms_onlineresource" "http://corrente.dea.ufv.br/cgi-bin/mapserv?"
       "wms_enable_request" "*"
@@ -49,6 +48,8 @@ MAP
     STATUS DEFAULT
     TYPE POLYGON
     DUMP TRUE
+
+    TEMPLATE "dummy"
         
     INCLUDE "includes/dbconfig.map"
 

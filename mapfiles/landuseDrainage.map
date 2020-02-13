@@ -29,11 +29,11 @@ MAP
         TOLERANCE 80
 
         VALIDATION
-            "ws" "^[a-zA-Z\-]+$"
 	    "year" "[0-9]+"
+	    "code" "[0-9]+"
         END
 
-        DATA "../../geodb/landuse/gcc/%ws%/landuse%year%.tif"
+        DATA "../../geodb/landuse/drainage/%year%/landuse_%code%.tif"
 
         INCLUDE "includes/style_landuse.map"
     END
