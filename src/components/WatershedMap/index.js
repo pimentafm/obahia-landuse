@@ -1,262 +1,153 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import OlMap from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
-import TileWMS from 'ol/source/TileWMS';
+import TileWMS from "ol/source/TileWMS";
 import OSM from "ol/source/OSM";
 
-import oba from '../../services/api';
+import oba from "../../services/api";
 
-import 'ol/ol.css';
+import "ol/ol.css";
 
-import { MapContainer } from './styles';
-import Menu from '../../components/Menu';
-import Scalebar from '../../components/Scalebar';
-import Footer from '../../components/Footer';
+import { MapContainer } from "./styles";
+import Menu from "../../components/Menu";
+import Scalebar from "../../components/Scalebar";
+import Footer from "../../components/Footer";
 
-import Stackplot from '../../components/Stackplot';
-import Barplot from '../../components/Barplot';
-class WatershedMap extends Component {
-  state = {
-    defaultYear: this.props.defaultYear,
-    defaultCode: this.props.defaultCode,
-    defaultCategory: this.props.defaultCategory,
-    menuIsHidden: false,
-    center: [-45.25811, -12.652125],
-      zoom: 8,
-      layers: []
-  };
+import Stackplot from "../../components/StackplotWatershed";
+import Barplot from "../../components/BarplotWatershed";
 
-  landsat = new TileLayer({
-    visible: false,
-    source: new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatWatersheds.map',
-      params: {
-        'year': this.state.defaultYear,
-        'code': this.state.defaultCode,
-        'LAYERS': 'Landsat',
-      },
-      serverType: 'mapserver'
-    })
+const WatershedMap = props => {
+  const [defaultYear, setYear] = useState(props.defaultYear);
+  const [defaultWatershed, setWatershed] = useState(props.defaultWatershed);
+  const [defaultCategory] = useState(props.defaultCategory);
+  const [menuIsHidden] = useState(false);
+  const [center, setCenter] = useState([]);
+  const [zoom, setZoom] = useState([]);
+  const [landuse] = useState(new TileLayer());
+  const [landsat] = useState(new TileLayer({ visible: false }));
+
+  const landuse_source = new TileWMS({
+    url:
+      "http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseWatersheds.map",
+    params: {
+      year: defaultYear,
+      ws: defaultWatershed,
+      LAYERS: "landuse"
+    },
+    serverType: "mapserver"
   });
 
-  landuse = new TileLayer({
-    visible: true,
-    source: new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseWatersheds.map',
-      params: {
-        'year': this.state.defaultYear,
-        'code': this.state.defaultCode,
-        'LAYERS': 'Landuse',
-      },
-      serverType: 'mapserver'
-    })
+  const landsat_source = new TileWMS({
+    url:
+      "http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatWatersheds.map",
+    params: {
+      year: defaultYear,
+      ws: defaultWatershed,
+      LAYERS: "landsat"
+    },
+    serverType: "mapserver"
   });
 
-  watersheds = new TileLayer({
-    visible: true,
-    source: new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/watersheds.map&REQUEST=GetCapabilities',
-      params: {
-        'code': this.state.defaultCode,
-        'LAYERS': 'watersheds',
-      },
-      serverType: 'mapserver'
-    })
+  landsat.setSource(landsat_source);
+  landsat.getSource().updateParams({ time: Date.now() });
+  landsat.changed();
+  landuse.setSource(landuse_source);
+  landuse.getSource().updateParams({ time: Date.now() });
+  landuse.changed();
+
+  const view = new View({
+    projection: "EPSG:4326",
+    center: center,
+    zoom: zoom
   });
 
-  view = new View({
-    projection: 'EPSG:4326',
-    center: this.state.center,
-    zoom: this.state.zoom
-  });
+  const osm = new TileLayer({ source: new OSM() });
 
-  osm = new TileLayer({ source: new OSM() });
-
-  map2 = new OlMap({
+  const map = new OlMap({
     controls: [],
     target: null,
-    layers: [this.osm, this.landsat, this.landuse, this.watersheds],
-    view: this.view
+    layers: [osm, landsat, landuse],
+    view: view
   });
 
-  onOffLandsat = (evt) => {
-    this.landsat.setVisible(evt);
-  }
+  useEffect(() => {
+    map.getView().setCenter(props.center);
+    map.getView().setZoom(props.zoom);
+    map.setTarget("map");
+  }, [props.center, props.zoom, map]);
 
-  onOffLanduse = (evt) => {
-    this.landuse.setVisible(evt);
-  }
-  
-  handleYears = year => {
-    /*
-      Change the map year and update the map layer
-    */
-    this.setState({defaultYear: year});
+  const onOffLandsat = evt => {
+    landsat.setVisible(evt);
+  };
 
-    const new_landsat = new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatWatersheds.map',
-      params: {
-        'year': year,
-        'code': this.state.defaultCode,
-        'LAYERS': 'Landsat',
-      },
-      serverType: 'mapserver'
-    })
+  const onOffLanduse = evt => {
+    landuse.setVisible(evt);
+  };
 
-    const new_landuse = new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseWatersheds.map',
-      params: {
-        'year': year,
-        'code': this.state.defaultCode,
-        'LAYERS': 'Landuse',
-      },
-      serverType: 'mapserver'
-    })
+  const handleYears = year => {
+    setYear(year);
+  };
 
-    this.landuse.setSource(new_landuse);
-    this.landuse.getSource().updateParams({ "time": Date.now() });
-    this.landuse.changed();
+  const handleWatersheds = ws => {
+    setWatershed(ws);
 
-    this.landsat.setSource(new_landsat);
-    this.landsat.getSource().updateParams({ "time": Date.now() });
-    this.landsat.changed();
-  }
+    oba
+      .post("geom/", {
+        table_name: "gcc",
+        headers: {
+          "Content-type": "application/json"
+        }
+      })
+      .then(response => {
+        const cxcy = response.data
+          .filter(f => f.name === defaultWatershed.toUpperCase())
+          .map(c => c.centroid);
+        const extent = response.data
+          .filter(f => f.name === defaultWatershed.toUpperCase())
+          .map(c => c.extent);
 
-  handleCodes = code => {
-    /*
-      Change the map year and update the map layer
-    */
-    this.setState({defaultCode: code});
+        setCenter(cxcy[0]);
+        setZoom(extent[0]);
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
+  };
 
-    const new_landsat = new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatWatersheds.map',
-      params: {
-        'year': this.state.defaultYear,
-        'code': code,
-        'LAYERS': 'Landsat',
-      },
-      serverType: 'mapserver'
-    })
+  return (
+    <MapContainer id="map">
+      <Menu
+        key="menu"
+        isHidden={menuIsHidden}
+        defaultYear={defaultYear}
+        handleYears={handleYears}
+        handleWatersheds={handleWatersheds}
+        defaultWatershed={defaultWatershed}
+        defaultCategory={defaultCategory}
+        onOffLandsat={onOffLandsat}
+        onOffLanduse={onOffLanduse}
+        map={map}
+      />
 
-    const new_landuse = new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseWatersheds.map',
-      params: {
-        'year': this.state.defaultYear,
-        'code': code,
-        'LAYERS': 'Landuse',
-      },
-      serverType: 'mapserver'
-    })
+      <Scalebar key="scalebar" map={map} />
+      <div id="plots" className="plot-card">
+        <Stackplot
+          key="stackplot"
+          defaultWatershed={defaultWatershed}
+          defaultYear={defaultYear}
+        />
 
-    const new_watershed = new TileWMS({
-      url: 'http://corrente.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/watersheds.map',
-      params: {
-        'code': code,
-        'LAYERS': 'watersheds',
-      },
-      serverType: 'mapserver'
-    })
+        <Barplot
+          key={"barplot" + defaultYear}
+          defaultWatershed={defaultWatershed}
+          defaultYear={defaultYear}
+        />
+      </div>
 
-    this.landuse.setSource(new_landuse);
-    this.landuse.getSource().updateParams({ "time": Date.now() });
-    this.landuse.changed();
-
-    this.landsat.setSource(new_landsat);
-    this.landsat.getSource().updateParams({ "time": Date.now() });
-    this.landsat.changed();
-
-    this.watersheds.setSource(new_watershed);
-    this.watersheds.getSource().updateParams({ "time": Date.now() });
-    this.watersheds.changed();
-
-    oba.post('watersheds/', {
-      code: code,
-      headers: {
-        'Content-type': 'application/json',
-      }
-    })
-    .then(response => {
-      let cx = response.data[0].cx;
-      let cy = response.data[0].cy;
-
-      this.setState({center:[cx, cy]});
-      this.setState({zoom: 12})
-    })
-    .catch(e => {
-    this.errors.push(e)
-    })
-  }
-
-  updateMap() {
-    this.map2.getView().setCenter(this.state.center);
-    this.map2.getView().setZoom(this.state.zoom);
-  }
-
-  componentDidMount() {
-    this.map2.setTarget("map");
-
-    // Listen to map changes
-    this.map2.on("moveend", () => {
-      let center = this.map2.getView().getCenter();
-      let zoom = this.map2.getView().getZoom();
-      this.setState({ center, zoom });
-    });
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    let center = this.map2.getView().getCenter();
-    let zoom = this.map2.getView().getZoom();
-    if (center === nextState.center && zoom === nextState.zoom) return false;
-    return true;
-  }
-
-  userAction() {
-    this.setState({ center: [-45.56258, -20.125457], zoom: 5 });
-  }
-
-  render() {
-    this.updateMap(); // Update map on render?
-    return (
-        <MapContainer id="map">
-          <Menu 
-            key="card" 
-            isHidden={this.state.menuIsHidden}
-            defaultYear={this.state.defaultYear}
-            defaultCode={this.state.defaultCode}
-            handleYears={this.handleYears}
-            handleCodes={this.handleCodes}
-            defaultCategory="Bacia hidrográfica"
-            onOffLandsat={this.onOffLandsat} 
-            onOffLanduse={this.onOffLanduse}
-            map={this.map2}
-          />
-
-          <Scalebar 
-            key="scalebar"
-            map={this.map2}
-          />
-
-          <div id="plots" className="plot-card">
-            <Stackplot 
-              key="stackplot"
-            />
-            
-            <Barplot 
-              key={"barplot"+ this.state.defaultYear}
-              defaultYear={this.state.defaultYear}
-            />
-
-          </div>
-
-          <Footer 
-            key="footer"
-            map={this.map2}
-            projection='EPSG:4326'
-          />
-        </MapContainer>
-    );
-  }
-}
+      <Footer key="footer" map={map} />
+    </MapContainer>
+  );
+};
 
 export default WatershedMap;

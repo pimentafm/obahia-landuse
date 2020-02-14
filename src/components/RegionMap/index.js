@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import OlMap from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
-import TileWMS from 'ol/source/TileWMS';
+import TileWMS from "ol/source/TileWMS";
 import OSM from "ol/source/OSM";
 
-import 'ol/ol.css';
+import "ol/ol.css";
 
-import { MapContainer } from './styles';
-import Menu from '../../components/Menu';
-import Scalebar from '../../components/Scalebar';
-import Footer from '../../components/Footer';
+import { MapContainer } from "./styles";
+import Menu from "../../components/Menu";
+import Scalebar from "../../components/Scalebar";
+import Footer from "../../components/Footer";
 
-import Stackplot from '../../components/Stackplot';
-//import Barplot from '../../components/Barplot';
+import Stackplot from "../../components/Stackplot";
+import Barplot from "../../components/Barplot";
 
 const RegionMap = props => {
   const [defaultYear, setYear] = useState(props.defaultYear);
@@ -22,31 +22,33 @@ const RegionMap = props => {
   const [center] = useState([-45.25811, -12.652125]);
   const [zoom] = useState(8);
   const [landuse] = useState(new TileLayer());
-  const [landsat] = useState(new TileLayer({visible: false}));
+  const [landsat] = useState(new TileLayer({ visible: false }));
 
   const landuse_source = new TileWMS({
-    url: 'http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map',
+    url:
+      "http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map",
     params: {
-      'year': defaultYear,
-      'LAYERS': 'landuse',
+      year: defaultYear,
+      LAYERS: "landuse"
     },
-    serverType: 'mapserver'
-  })
+    serverType: "mapserver"
+  });
 
   const landsat_source = new TileWMS({
-    url: 'http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map',
+    url:
+      "http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map",
     params: {
-      'year': defaultYear,
-      'LAYERS': 'landsat',
+      year: defaultYear,
+      LAYERS: "landsat"
     },
-    serverType: 'mapserver'
-  })
+    serverType: "mapserver"
+  });
 
   landsat.setSource(landsat_source);
-  landsat.getSource().updateParams({ "time": Date.now() });
+  landsat.getSource().updateParams({ time: Date.now() });
   landsat.changed();
   landuse.setSource(landuse_source);
-  landuse.getSource().updateParams({ "time": Date.now() });
+  landuse.getSource().updateParams({ time: Date.now() });
   landuse.changed();
 
   useEffect(() => {
@@ -56,7 +58,7 @@ const RegionMap = props => {
   });
 
   const view = new View({
-    projection: 'EPSG:4326',
+    projection: "EPSG:4326",
     center: center,
     zoom: zoom
   });
@@ -72,53 +74,39 @@ const RegionMap = props => {
 
   const onOffLandsat = evt => {
     landsat.setVisible(evt);
-  }
+  };
 
   const onOffLanduse = evt => {
     landuse.setVisible(evt);
-  }
+  };
 
   const handleYears = year => {
     setYear(year);
-  }
+  };
 
   return (
-        <MapContainer id="map">
-          <Menu 
-            key="menu" 
-            isHidden={menuIsHidden}
-            defaultYear={defaultYear} 
-            handleYears={handleYears} 
-            defaultCategory={defaultCategory} 
-            onOffLandsat={onOffLandsat} 
-            onOffLanduse={onOffLanduse}
-            map={map}
-          />
+    <MapContainer id="map">
+      <Menu
+        key="menu"
+        isHidden={menuIsHidden}
+        defaultYear={defaultYear}
+        handleYears={handleYears}
+        defaultCategory={defaultCategory}
+        onOffLandsat={onOffLandsat}
+        onOffLanduse={onOffLanduse}
+        map={map}
+      />
 
-          <Scalebar 
-            key="scalebar"
-            map={map}
-          />
-          <div id="plots" className="plot-card">
-            
-            <Stackplot 
-              key="stackplot"
-            />
-{/*
-            <Barplot 
-              key={"barplot"+ defaultYear}
-              defaultYear={defaultYear}
-            />
-*/}
-          </div>
+      <Scalebar key="scalebar" map={map} />
+      <div id="plots" className="plot-card">
+        <Stackplot key="stackplot" />
 
+        <Barplot key={"barplot" + defaultYear} defaultYear={defaultYear} />
+      </div>
 
-          <Footer 
-            key="footer"
-            map={map}
-          />
-        </MapContainer>
-    );
-}
+      <Footer key="footer" map={map} />
+    </MapContainer>
+  );
+};
 
 export default RegionMap;
