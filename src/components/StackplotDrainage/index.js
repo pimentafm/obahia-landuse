@@ -6,8 +6,6 @@ import oba from "../../services/api";
 import { PlotContainer } from "./styles";
 
 const Stackplot = props => {
-  const [defaultYear, setYear] = useState([]);
-  const [defaultCodeName, setCodeName] = useState([]);
   const [forest, setForest] = useState(null);
   const [savanna, setSavanna] = useState(null);
   const [grass, setGrass] = useState(null);
@@ -33,8 +31,6 @@ const Stackplot = props => {
         }
       })
       .then(response => {
-        setYear(props.defaultYear);
-        setCodeName(props.defaultCodeName);
         setForest(response.data.filter(f => f.classname === "Forest formations").map(a => a.areakm2));
         setSavanna(response.data.filter(f => f.classname === "Savanna formations").map(a => a.areakm2));
         setGrass(response.data.filter(f => f.classname === "Grasslands").map(a => a.areakm2));
@@ -140,7 +136,7 @@ const Stackplot = props => {
           title: {
             text:
               "<b>Cobertura e uso do solo (1990 - 2018) <br>" +
-              defaultCodeName.name +
+              props.defaultCodeName.name +
               "</b>",
             font: {
               family: "Arial, sans-serif",

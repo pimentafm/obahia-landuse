@@ -6,7 +6,6 @@ import oba from "../../services/api";
 import { PlotContainer } from "./styles";
 
 const Stackplot = props => {
-  const [defaultYear, setYear] = useState([]);
   const [defaultWatershed, setWatershed] = useState([]);
   const [forest, setForest] = useState(null);
   const [savanna, setSavanna] = useState(null);
@@ -33,7 +32,6 @@ const Stackplot = props => {
         }
       })
       .then(response => {
-        setYear(props.defaultYear);
         setWatershed(props.defaultWatershed);
         setForest(response.data.filter(f => f.classname === "Forest formations").map(a => a.areakm2));
         setSavanna(response.data.filter(f => f.classname === "Savanna formations").map(a => a.areakm2));
