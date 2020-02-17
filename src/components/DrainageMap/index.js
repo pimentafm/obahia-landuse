@@ -14,7 +14,7 @@ import Menu from "../../components/Menu";
 import Scalebar from "../../components/Scalebar";
 import Footer from "../../components/Footer";
 
-//import Stackplot from "../../components/StackplotDrainage";
+import Stackplot from "../../components/StackplotDrainage";
 //import Barplot from "../../components/BarplotDrainage";
 
 const DrainageMap = props => {
@@ -96,7 +96,7 @@ const DrainageMap = props => {
 
     oba
       .post("geom/", {
-        table_name: "gcc",
+        table_name: "drainageareas",
         headers: {
           "Content-type": "application/json"
         }
@@ -134,13 +134,12 @@ const DrainageMap = props => {
 
       <Scalebar key="scalebar" map={map} />
       <div id="plots" className="plot-card">
-        {/*
         <Stackplot
           key="stackplot"
-          defaultWatershed={defaultWatershed}
+          defaultCodeName={defaultCodeName}
           defaultYear={defaultYear}
         />
-
+        {/*
         <Barplot
           key={"barplot" + defaultYear}
           defaultWatershed={defaultWatershed}
