@@ -102,7 +102,7 @@ const Menu = props => {
       <Select
         id="select"
         defaultValue={defaultCodeName}
-        onChange={props.handleDrainage}
+        onChange={props.handleCodeNames}
       >
         {codenames.map(c => (
           <Option key={c} value={c}>
