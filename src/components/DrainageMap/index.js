@@ -15,7 +15,7 @@ import Scalebar from "../../components/Scalebar";
 import Footer from "../../components/Footer";
 
 import Stackplot from "../../components/StackplotDrainage";
-//import Barplot from "../../components/BarplotDrainage";
+import Barplot from "../../components/BarplotDrainage";
 
 const DrainageMap = props => {
   const [defaultYear, setYear] = useState(props.defaultYear);
@@ -89,10 +89,10 @@ const DrainageMap = props => {
     setYear(year);
   };
 
-  const handleDrainage = code => {
-    const c = code.match(/\d+/g).map(Number);
+  const handleCodeNames = codename => {
+    const code = codename.split(" - ")[1];
 
-    setCode({code: c[0]});
+    setCode({code: parseInt(code), name: codename});
 
     oba
       .post("geom/", {
@@ -124,7 +124,7 @@ const DrainageMap = props => {
         isHidden={menuIsHidden}
         defaultYear={defaultYear}
         handleYears={handleYears}
-        handleDrainage={handleDrainage}
+        handleCodeNames={handleCodeNames}
         defaultCodeName={defaultCodeName.name}
         defaultCategory={defaultCategory}
         onOffLandsat={onOffLandsat}
@@ -139,13 +139,11 @@ const DrainageMap = props => {
           defaultCodeName={defaultCodeName}
           defaultYear={defaultYear}
         />
-        {/*
         <Barplot
           key={"barplot" + defaultYear}
-          defaultWatershed={defaultWatershed}
+          defaultCodeName={defaultCodeName}
           defaultYear={defaultYear}
         />
-        */}
       </div>
 
       <Footer key="footer" map={map} />
