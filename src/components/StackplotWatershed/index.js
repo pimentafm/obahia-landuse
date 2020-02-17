@@ -35,52 +35,15 @@ const Stackplot = props => {
       .then(response => {
         setYear(props.defaultYear);
         setWatershed(props.defaultWatershed);
-
-        setForest(
-          response.data
-            .filter(f => f.classname === "Forest formations")
-            .map(a => a.areakm2)
-        );
-        setSavanna(
-          response.data
-            .filter(f => f.classname === "Savanna formations")
-            .map(a => a.areakm2)
-        );
-        setGrass(
-          response.data
-            .filter(f => f.classname === "Grasslands")
-            .map(a => a.areakm2)
-        );
-        setMosaic(
-          response.data
-            .filter(f => f.classname === "Mosaic of crop and pasture")
-            .map(a => a.areakm2)
-        );
-        setRaincrop(
-          response.data
-            .filter(f => f.classname === "Rainfed crop")
-            .map(a => a.areakm2)
-        );
-        setIrrcrop(
-          response.data
-            .filter(f => f.classname === "Irrigated crop")
-            .map(a => a.areakm2)
-        );
-        setPast(
-          response.data
-            .filter(f => f.classname === "Pasturelands")
-            .map(a => a.areakm2)
-        );
-        setWater(
-          response.data
-            .filter(f => f.classname === "Water bodies")
-            .map(a => a.areakm2)
-        );
-        setUrban(
-          response.data
-            .filter(f => f.classname === "Urban areas")
-            .map(a => a.areakm2)
-        );
+        setForest(response.data.filter(f => f.classname === "Forest formations").map(a => a.areakm2));
+        setSavanna(response.data.filter(f => f.classname === "Savanna formations").map(a => a.areakm2));
+        setGrass(response.data.filter(f => f.classname === "Grasslands").map(a => a.areakm2));
+        setMosaic(response.data.filter(f => f.classname === "Mosaic of crop and pasture").map(a => a.areakm2));
+        setRaincrop(response.data.filter(f => f.classname === "Rainfed crop").map(a => a.areakm2));
+        setIrrcrop(response.data.filter(f => f.classname === "Irrigated crop").map(a => a.areakm2));
+        setPast(response.data.filter(f => f.classname === "Pasturelands").map(a => a.areakm2));
+        setWater(response.data.filter(f => f.classname === "Water bodies").map(a => a.areakm2));
+        setUrban(response.data.filter(f => f.classname === "Urban areas").map(a => a.areakm2));
       })
       .catch(e => {
         this.errors.push(e);

@@ -17,7 +17,7 @@ import Footer from "../../components/Footer";
 import Stackplot from "../../components/StackplotWatershed";
 import Barplot from "../../components/BarplotWatershed";
 
-const WatershedMap = props => {
+const DrainageMap = props => {
   const [defaultYear, setYear] = useState(props.defaultYear);
   const [defaultWatershed, setWatershed] = useState(props.defaultWatershed);
   const [defaultCategory] = useState(props.defaultCategory);
@@ -150,4 +150,4 @@ const WatershedMap = props => {
   );
 };
 
-export default WatershedMap;
+export default DrainageMap;
