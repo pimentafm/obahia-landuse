@@ -190,7 +190,7 @@ const Stackplot = props => {
             tickcolor: "#000"
           },
           showlegend: false,
-          margin: { l: 60, r: 10, t: 100, b: 50 }
+          margin: { l: 60, r: 10, t: 80, b: 50 }
         }}
         config={{
           displaylogo: false

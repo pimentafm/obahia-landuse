@@ -68,7 +68,8 @@ const Barplot = props => {
         ]}
         layout={{
           title: {
-            text: "<b>" + defaultYear + "</b>",
+            text:
+              "<b>Cobertura e uso do solo " + defaultYear +"</b>",
             font: {
               family: "Arial, sans-serif",
               size: 24
@@ -118,7 +119,7 @@ const Barplot = props => {
             tickcolor: "#000"
           },
           showlegend: false,
-          margin: { l: 60, r: 10, t: 50, b: 50 }
+          margin: { l: 60, r: 10, t: 80, b: 50 }
         }}
         config={{
           displaylogo: false

@@ -132,6 +132,14 @@ const Stackplot = props => {
           }
         ]}
         layout={{
+          title: {
+            text:
+              "<b>Cobertura e uso do solo (1990 - 2018) - Rio</b>",
+            font: {
+              family: "Arial, sans-serif",
+              size: 24
+            }
+          },
           autosize: true,
           xaxis: {
             title: {
@@ -179,7 +187,7 @@ const Stackplot = props => {
             tickcolor: "#000"
           },
           showlegend: false,
-          margin: { l: 60, r: 10, t: 10, b: 50 }
+          margin: { l: 60, r: 10, t: 80, b: 50 }
         }}
         config={{
           displaylogo: false
