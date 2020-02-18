@@ -66,15 +66,59 @@ Run `yarn start` to develop the app.
 
 Run `yarn build` to deploy the app.
 
-<p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/pimentafm/obahia-webmap?color=%2304D361">
+<hr>
 
-  <a href="https://github.com/pimentafm">
-    <img alt="Made by Fernando Pimenta" src="https://img.shields.io/badge/made%20by-Fernando%20Pimenta-%2304D361%22">
-  </a>
+## Build App using BrowserRouter in an Apache server:
 
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361">
-</p>
+In `package.json` set the proxy and homepage with the `<app-folder-name>`:
+
+```json
+{
+  ...
+  "homepage": "http://localhost/<app-folder-name>",
+  "proxy": "http://localhost:80",
+  ...
+}
+```
+
+Add the basename in your BrowserRouter component:
+
+```jsx
+
+<!-- A Code Snippet example -->
+import React from 'react';
+import { ToastContainer } from 'react-toastify'
+import { BrowserRouter } from 'react-router-dom';
+
+import GlobalStyle from './styles/global';
+
+import Header from './components/Header';
+import Routes from './routes';
+
+function App() {
+  return (
+    <BrowserRouter basename="/<app-folder-name>">
+    <Header />
+    <Routes />
+    <GlobalStyle />
+    <ToastContainer className="toast-class" />
+    </BrowserRouter>
+  );
+}
+
+export default App;
+```
+
+Add the `.htaccess` into public folder or directly into your `<app-folder-name>` folder:
+
+```apache
+<IfModule mod_rewrite.c>
+  Options -MultiViews
+	RewriteEngine On
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^ index.html [QSA,L]
+</IfModule>
+```
 <hr>
 
 Fernando Pimenta [My Github!](https://github.com/pimentafm)
