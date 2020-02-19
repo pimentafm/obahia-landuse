@@ -187,7 +187,7 @@ const Stackplot = props => {
           margin: { l: 60, r: 10, t: 80, b: 50 }
         }}
         config={{
-          displaylogo: false
+          displaylogo: false,
         }}
       />
     </PlotContainer>

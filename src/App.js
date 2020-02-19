@@ -9,7 +9,7 @@ import Routes from './routes';
 
 function App() {
   return (
-    <BrowserRouter basename="/webmap">
+    <BrowserRouter basename="/">
     <Header />
     <Routes />
     <GlobalStyle />
