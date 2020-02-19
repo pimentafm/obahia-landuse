@@ -26,9 +26,10 @@ const RegionMap = props => {
   const [landuse] = useState(new TileLayer());
   const [landsat] = useState(new TileLayer({ visible: false }));
 
+
   const landuse_source = new TileWMS({
     url:
-      "http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map",
     params: {
       year: defaultYear,
       LAYERS: "landuse"
@@ -38,7 +39,7 @@ const RegionMap = props => {
 
   const landsat_source = new TileWMS({
     url:
-      "http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map",
     params: {
       year: defaultYear,
       LAYERS: "landsat"

@@ -31,7 +31,7 @@ const DrainageMap = props => {
 
   const landuse_source = new TileWMS({
     url:
-      "http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseWatersheds.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseWatersheds.map",
     params: {
       year: defaultYear,
       ws: defaultWatershed,
@@ -42,7 +42,7 @@ const DrainageMap = props => {
 
   const landsat_source = new TileWMS({
     url:
-      "http://localhost/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatWatersheds.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatWatersheds.map",
     params: {
       year: defaultYear,
       ws: defaultWatershed,

@@ -69,22 +69,24 @@ const Barplot = props => {
               + props.defaultCodeName.name + "</b>",
             font: {
               family: "Arial, sans-serif",
-              size: 24
+              size: 14
             }
           },
-          autosize: true,
+          autosize: false,
+          width: 500,
+          height: 300,
           xaxis: {
             title: {
               text: "Classes"
             },
             titlefont: {
               family: "Arial, sans-serif",
-              size: 18,
+              size: 12,
               color: "#000"
             },
             tickfont: {
               family: "Arial, sans-serif",
-              size: 16,
+              size: 12,
               color: "black"
             },
             autotick: false,
@@ -98,12 +100,12 @@ const Barplot = props => {
             },
             titlefont: {
               family: "Arial, sans-serif",
-              size: 18,
+              size: 12,
               color: "#000"
             },
             tickfont: {
               family: "Arial, sans-serif",
-              size: 16,
+              size: 12,
               color: "black"
             },
 
@@ -116,7 +118,7 @@ const Barplot = props => {
             tickcolor: "#000"
           },
           showlegend: false,
-          margin: { l: 60, r: 10, t: 80, b: 50 }
+          margin: { l: 60, r: 10, t: 70, b: 50 }
         }}
         config={{
           displaylogo: false
