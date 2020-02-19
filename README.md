@@ -18,7 +18,7 @@
 [![made-with-Yarn](https://img.shields.io/badge/Yarn-2188b6.svg)](https://yarnpkg.com/)
 [![made-with-React](https://img.shields.io/badge/React-61dafb.svg)](https://https://reactjs.org/)
 [![made-with-Mapserver](https://img.shields.io/badge/Mapserver-33a333.svg)](https://mapserver.org/)
-[![made-with-PHP](https://img.shields.io/badge/PHP-purple.svg)](https://www.php.net/)
+[![made-with-PHP](https://img.shields.io/badge/Django-purple.svg)](https://www.php.net/)
 [![made-with-PostgreSQL](https://img.shields.io/badge/PostgreSQL-33658f.svg)](https://www.postgresql.org/)
 [![made-with-PostGIS](https://img.shields.io/badge/PostGIS-5a7a9f.svg)](https://postgis.net/)
 
@@ -70,13 +70,13 @@ Run `yarn build` to deploy the app.
 
 ## Build App using BrowserRouter in an Apache server:
 
-In `package.json` set the proxy and homepage with the `<app-folder-name>`:
+In `package.json` set the proxy and homepage with the `<app-base-name>`:
 
 ```json
 {
   ...
-  "homepage": "http://localhost/<app-folder-name>",
-  "proxy": "http://localhost:80",
+  "homepage": "http://yourhost.com/<app-base-name>",
+  "proxy": "http://yourhost.com:80",
   ...
 }
 ```
@@ -88,7 +88,7 @@ Add the basename in your BrowserRouter component:
 <!-- A Code Snippet example -->
 import React from 'react';
 import { ToastContainer } from 'react-toastify'
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import GlobalStyle from './styles/global';
 
@@ -97,19 +97,19 @@ import Routes from './routes';
 
 function App() {
   return (
-    <BrowserRouter basename="/<app-folder-name>">
+    <HashRouter basename="/<app-base-name>">
     <Header />
     <Routes />
     <GlobalStyle />
     <ToastContainer className="toast-class" />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
 export default App;
 ```
 
-Add the `.htaccess` into public folder or directly into your `<app-folder-name>` folder:
+Add the `.htaccess` into public folder or directly into your `<app-base-name>` folder:
 
 ```apache
 <IfModule mod_rewrite.c>
