@@ -12,6 +12,7 @@ import Menu from "../../components/Menu";
 import Scalebar from "../../components/Scalebar";
 import Footer from "../../components/Footer";
 
+import Cardplot from "../../components/Cardplot";
 import Stackplot from "../../components/Stackplot";
 import Barplot from "../../components/Barplot";
 
@@ -19,6 +20,7 @@ const RegionMap = props => {
   const [defaultYear, setYear] = useState(props.defaultYear);
   const [defaultCategory] = useState(props.defaultCategory);
   const [menuIsHidden] = useState(false);
+  const [plotsAreHidden] = useState(false);
   const [center] = useState([-45.25811, -12.652125]);
   const [zoom] = useState(8);
   const [landuse] = useState(new TileLayer());
@@ -99,11 +101,10 @@ const RegionMap = props => {
 
       <Scalebar key="scalebar" map={map} />
       
-      <div id="plots" className="plot-card">
-        <Stackplot key="stackplot" />
-
-        <Barplot key={"barplot" + defaultYear} defaultYear={defaultYear} />
-      </div>
+      <Cardplot plotsAreHidden={plotsAreHidden}
+        stackplot={<Stackplot key="stackplot" />}
+        barplot={<Barplot key={"barplot" + defaultYear} defaultYear={defaultYear} />}
+      />
 
       <Footer key="footer" map={map} />
     </MapContainer>
