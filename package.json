@@ -1,8 +1,8 @@
 {
   "name": "webmap",
   "version": "0.1.0",
-  "homepage": "http://localhost/webmap",
-  "proxy": "http://localhost:80",
+  "homepage": "http://ucayali.dea.ufv.br/webmap",
+  "proxy": "http://ucayali.dea.ufv.br:80",
   "private": true,
   "dependencies": {
     "antd": "^3.25.2",
