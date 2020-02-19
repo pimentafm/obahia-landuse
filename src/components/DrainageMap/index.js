@@ -14,6 +14,7 @@ import Menu from "../../components/Menu";
 import Scalebar from "../../components/Scalebar";
 import Footer from "../../components/Footer";
 
+import Cardplot from "../../components/Cardplot";
 import Stackplot from "../../components/StackplotDrainage";
 import Barplot from "../../components/BarplotDrainage";
 
@@ -22,6 +23,7 @@ const DrainageMap = props => {
   const [defaultCodeName, setCode] = useState(props.defaultCodeName);
   const [defaultCategory] = useState(props.defaultCategory);
   const [menuIsHidden] = useState(false);
+  const [plotsAreHidden] = useState(false);
   const [center, setCenter] = useState([]);
   const [zoom, setZoom] = useState([]);
   const [landuse] = useState(new TileLayer());
@@ -133,18 +135,23 @@ const DrainageMap = props => {
       />
 
       <Scalebar key="scalebar" map={map} />
-      <div id="plots" className="plot-card">
-        <Stackplot
-          key="stackplot"
-          defaultCodeName={defaultCodeName}
-          defaultYear={defaultYear}
-        />
-        <Barplot
-          key={"barplot" + defaultYear}
-          defaultCodeName={defaultCodeName}
-          defaultYear={defaultYear}
-        />
-      </div>
+
+      <Cardplot plotsAreHidden={plotsAreHidden}
+        stackplot={
+          <Stackplot
+            key="stackplot"
+            defaultCodeName={defaultCodeName}
+            defaultYear={defaultYear}
+          />
+        }
+        barplot={
+          <Barplot
+            key={"barplot" + defaultYear}
+            defaultCodeName={defaultCodeName}
+            defaultYear={defaultYear}
+          />
+        }
+      />
 
       <Footer key="footer" map={map} />
     </MapContainer>
