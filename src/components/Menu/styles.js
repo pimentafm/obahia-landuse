@@ -6,7 +6,7 @@ export const MenuContainer = styled.div`
         padding: 10px 5px 10px 10px;
         display: flex;
         flex-direction: column;
-        box-shadow: 0px 2px 3px rgba(0,0,0,.13) ,1px 2px 2px rgba(0,0,0,.1) , -1px -2px 2px rgba(0,0,0,.05);
+        box-shadow: 0px 0px 3px rgba(0,0,0,.13) ,1px 0px 2px rgba(0,0,0,.1) , -1px 0px 2px rgba(0,0,0,.05);
         position: absolute;
         z-index: 2;
         height: 100%;
