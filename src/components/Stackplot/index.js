@@ -142,9 +142,6 @@ const Stackplot = props => {
           },
           autosize: true,
           xaxis: {
-            title: {
-              text: "Anos"
-            },
             titlefont: {
               family: "Arial, sans-serif",
               size: 18,

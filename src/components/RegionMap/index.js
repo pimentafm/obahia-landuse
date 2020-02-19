@@ -98,6 +98,7 @@ const RegionMap = props => {
       />
 
       <Scalebar key="scalebar" map={map} />
+      
       <div id="plots" className="plot-card">
         <Stackplot key="stackplot" />
 

@@ -7,7 +7,7 @@ export const MapContainer = styled.div`
     position: fixed;
 
     .plot-card {
-      top: 10px;
+      top: 30px;
       right: 10px;
       flex-direction: column;
       position: absolute;

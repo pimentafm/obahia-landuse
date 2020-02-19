@@ -9,7 +9,7 @@ const Header = () => {
     <HeaderContainer>
       <div>
         <a href="http://obahia.dea.ufv.br"><img src={logo} alt="Obahia" /> </a>
-        <h1>Sistema de Inteligência Territorial Estratégica (Beta)</h1>
+        <h1>Sistema de Inteligência Territorial Estratégica (Alpha - Version)</h1>
       </div>
     </HeaderContainer>
   );
