@@ -12,9 +12,9 @@ import Menu from "~/components/Menu";
 import Scalebar from "~/components/Scalebar";
 import Footer from "~/components/Footer";
 
-import Cardplot from "~/components/Cardplot";
-import Stackplot from "~/components/Stackplot";
-import Barplot from "~/components/Barplot";
+import CardPlot from "~/components/CardPlot";
+import Stackplot from "~/components/Stackplot/StackplotRegion";
+import Barplot from "~/components/Barplot/BarplotRegion";
 
 const RegionMap = props => {
   const [defaultYear, setYear] = useState(props.defaultYear);
@@ -102,7 +102,7 @@ const RegionMap = props => {
 
       <Scalebar key="scalebar" map={map} />
       
-      <Cardplot plotsAreHidden={plotsAreHidden}
+      <CardPlot plotsAreHidden={plotsAreHidden}
         stackplot={<Stackplot key="stackplot" />}
         barplot={<Barplot key={"barplot" + defaultYear} defaultYear={defaultYear} />}
       />

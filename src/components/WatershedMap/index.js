@@ -14,9 +14,9 @@ import Menu from "~/components/Menu";
 import Scalebar from "~/components/Scalebar";
 import Footer from "~/components/Footer";
 
-import Cardplot from "~/components/Cardplot";
-import Stackplot from "~/components/StackplotWatershed";
-import Barplot from "~/components/BarplotWatershed";
+import CardPlot from "~/components/CardPlot";
+import Stackplot from "~/components/Stackplot/StackplotWatershed";
+import Barplot from "~/components/Barplot/BarplotWatershed";
 
 const DrainageMap = props => {
   const [defaultYear, setYear] = useState(props.defaultYear);
@@ -134,7 +134,7 @@ const DrainageMap = props => {
 
       <Scalebar key="scalebar" map={map} />
 
-      <Cardplot plotsAreHidden={plotsAreHidden}
+      <CardPlot plotsAreHidden={plotsAreHidden}
         stackplot={
           <Stackplot 
             key="stackplot" 

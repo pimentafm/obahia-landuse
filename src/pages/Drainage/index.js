@@ -8,7 +8,7 @@ export default function Region() {
     <DrainageMap 
       id="map" 
       defaultYear={2018}
-      defaultCodeName={{"code": 45131000, "name": "RIO CARINHANHA - 45131000"}}
+      defaultCodeName={{"code": 46543000, "name": "RIO DE ONDAS - 46543000"}}
       defaultCategory="Área de drenagem"
       center={[-45.25811, -12.652125]}
       zoom={8}

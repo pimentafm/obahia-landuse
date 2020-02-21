@@ -15,9 +15,9 @@ import Scalebar from "~/components/Scalebar";
 import Footer from "~/components/Footer";
 
 
-import Cardplot from "~/components/Cardplot";
-import Stackplot from "~/components/StackplotCounty";
-import Barplot from "~/components/BarplotCounty";
+import CardPlot from "~/components/CardPlot";
+import Stackplot from "~/components/Stackplot/StackplotCounty";
+import Barplot from "~/components/Barplot/BarplotCounty";
 
 const CountyMap = props => {
   const [defaultYear, setYear] = useState(props.defaultYear);
@@ -137,7 +137,7 @@ const CountyMap = props => {
 
       <Scalebar key="scalebar" map={map} />
 
-      <Cardplot plotsAreHidden={plotsAreHidden}
+      <CardPlot plotsAreHidden={plotsAreHidden}
         stackplot={
           <Stackplot
             key="stackplot"
