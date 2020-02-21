@@ -4,10 +4,10 @@ import { ToastContainer } from 'react-toastify'
 //If application is hosted on a static file server, use <HashRouter> instead of a <BrowserRouter>
 import { HashRouter } from 'react-router-dom'; 
 
-import GlobalStyle from './styles/global';
+import GlobalStyle from '~/styles/global';
 
-import Header from './components/Header';
-import Routes from './routes';
+import Header from '~/components/Header';
+import Routes from '~/routes';
 
 function App() {
   return (

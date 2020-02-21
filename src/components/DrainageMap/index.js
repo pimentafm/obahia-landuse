@@ -5,18 +5,18 @@ import TileLayer from "ol/layer/Tile";
 import TileWMS from "ol/source/TileWMS";
 import OSM from "ol/source/OSM";
 
-import oba from "../../services/api";
+import oba from "~/services/api";
 
 import "ol/ol.css";
 
 import { MapContainer } from "./styles";
-import Menu from "../../components/Menu";
-import Scalebar from "../../components/Scalebar";
-import Footer from "../../components/Footer";
+import Menu from "~/components/Menu";
+import Scalebar from "~/components/Scalebar";
+import Footer from "~/components/Footer";
 
-import Cardplot from "../../components/Cardplot";
-import Stackplot from "../../components/StackplotDrainage";
-import Barplot from "../../components/BarplotDrainage";
+import Cardplot from "~/components/Cardplot";
+import Stackplot from "~/components/StackplotDrainage";
+import Barplot from "~/components/BarplotDrainage";
 
 const DrainageMap = props => {
   const [defaultYear, setYear] = useState(props.defaultYear);

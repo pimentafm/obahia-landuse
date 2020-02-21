@@ -3,11 +3,11 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { Select, Icon } from "antd";
 
-import oba from "../../services/api";
+import oba from "~/services/api";
 
 import { MenuContainer } from "./styles";
-import LayerSwitcher from "../../components/LayerSwitcher";
-import Zoom from "../Zoom";
+import LayerSwitcher from "~/components/LayerSwitcher";
+import Zoom from "~/components/Zoom";
 
 import "antd/dist/antd.css";
 

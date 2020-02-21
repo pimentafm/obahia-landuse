@@ -1,6 +1,6 @@
 import React from 'react';
 
-import WatershedMap from '../../components/WatershedMap';
+import WatershedMap from '~/components/WatershedMap';
 
 export default function Region() {
   return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import ucayali from '../../services/local';
+import ucayali from '~/services/local';
 
 import { LegendContainer } from './styles';
 

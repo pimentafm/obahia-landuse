@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CountyMap from '../../components/CountyMap';
+import CountyMap from '~/components/CountyMap';
 
 export default function Region() {
   return (

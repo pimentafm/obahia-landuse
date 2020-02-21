@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
 
-import oba from "../../services/api";
+import oba from "~/services/api";
 
 import { PlotContainer } from "./styles";
 
@@ -31,7 +31,6 @@ const Stackplot = props => {
         }
       })
       .then(response => {
-        console.log(response.data)
         setForest(response.data.filter(f => f.classname === "Forest formations").map(a => a.areakm2));
         setSavanna(response.data.filter(f => f.classname === "Savanna formations").map(a => a.areakm2));
         setGrass(response.data.filter(f => f.classname === "Grasslands").map(a => a.areakm2));

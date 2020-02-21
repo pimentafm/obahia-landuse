@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 
 import { Switch } from 'antd';
 import { LayerContainer}  from './styles';
-import Legend from '../../components/Legend';
+import Legend from '~/components/Legend';
 
 const LayerSwitcher = props => {
     const [checked] = useState(props.checked);

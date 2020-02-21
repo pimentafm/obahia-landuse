@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DrainageMap from '../../components/DrainageMap';
+import DrainageMap from '~/components/DrainageMap';
 
 export default function Region() {
   return (

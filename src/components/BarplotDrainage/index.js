@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
 
-import oba from "../../services/api";
+import oba from "~/services/api";
 
 import { PlotContainer } from "./styles";
 

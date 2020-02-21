@@ -1,6 +1,6 @@
 import React from 'react';
 
-import RegionMap from '../../components/RegionMap';
+import RegionMap from '~/components/RegionMap';
 
 export default function Region() {
   return (
