@@ -34,7 +34,7 @@ const Menu = props => {
 
   useEffect(() => {
     oba.post("geom/", {
-      table_name: "counties",
+      table_name: (props.defaultCategory === "Municípios") ? "counties" : "drainage",
       headers: {
         "Content-type": "application/json"
       }
