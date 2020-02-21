@@ -4,6 +4,7 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import TileWMS from "ol/source/TileWMS";
 import OSM from "ol/source/OSM";
+import { defaults } from 'ol/interaction';
 
 import "ol/ol.css";
 
@@ -72,7 +73,10 @@ const RegionMap = props => {
     controls: [],
     target: null,
     layers: [osm, landsat, landuse],
-    view: view
+    view: view,
+    interactions: defaults({
+      keyboard: false
+    })
   });
 
   const onOffLandsat = evt => {

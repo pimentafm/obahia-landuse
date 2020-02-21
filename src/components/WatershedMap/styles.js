@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const MapContainer = styled.div`
     & {
         width: 100%;
-        height: calc(100% - 105px);
+        height: 100%;
         position: fixed;
 
         .plot-card {
