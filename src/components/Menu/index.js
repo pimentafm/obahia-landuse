@@ -21,7 +21,8 @@ const Menu = props => {
   const [categories] = useState([
     ["Região", "/"],
     ["Bacia hidrográfica", "watershed"],
-    ["Área de drenagem", "drainage"]
+    ["Área de drenagem", "drainage"],
+    ["Municípios", "county"]
   ]);
   const [years] = useState(
     Array.from(new Array(29), (val, index) => index + 1990)
@@ -33,7 +34,7 @@ const Menu = props => {
 
   useEffect(() => {
     oba.post("geom/", {
-      table_name: "drainageareas",
+      table_name: "counties",
       headers: {
         "Content-type": "application/json"
       }
@@ -96,7 +97,7 @@ const Menu = props => {
   let drainageLabel = null;
   let drainageSelect = null;
 
-  if (defaultCategory === "Área de drenagem") {
+  if (defaultCategory === "Área de drenagem" || defaultCategory === "Municípios") {
     drainageLabel = <label>Nome</label>;
     drainageSelect = (
       <Select
