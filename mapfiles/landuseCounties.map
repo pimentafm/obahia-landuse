@@ -1,0 +1,40 @@
+MAP
+    NAME "Landuse"
+    EXTENT -46.6330735347222216 -15.4471601311111115 -43.1301829158333305 -10.1812359355555557
+    SIZE 450 650
+
+    WEB
+        IMAGEPATH "/tmp/"
+	    IMAGEURL "/tmp/"
+        METADATA
+            "wms_title" "Landuse"
+            "wms_onlineresource" "http://corrente.dea.ufv.br/cgi-bin/mapserv?"
+            "wms_enable_request" "*"
+            "wms_feature_info_mime_type" "text/html"
+            "wms_include_items" "all"
+        END
+    END
+
+    PROJECTION
+        "proj=longlat"
+        "datum=WGS84"
+        "no_defs"
+    END
+
+    LAYER
+        NAME "Landuse"
+        STATUS DEFAULT
+        TYPE RASTER
+        DUMP TRUE
+        TOLERANCE 80
+
+        VALIDATION
+	    "year" "[0-9]+"
+	    "code" "[0-9]+"
+        END
+
+        DATA "../../geodb/landuse/counties/landuse_%code%_%year%.tif"
+
+        INCLUDE "includes/style_landuse.map"
+    END
+END
