@@ -12,6 +12,9 @@ export const MenuContainer = styled.div`
         height: 100%;
         width: 300px;
         text-decoration: none;
+        a {
+            color: #000;
+        }
     }
 
     & {
@@ -44,9 +47,19 @@ export const MenuContainer = styled.div`
     }
 
     label {
-        color: #888;
+        color: #000;
         margin-bottom: 0;
         border-radius: 0;
         margin-top: 10px;
+    }
+
+    .relink {
+        color: #000;
+        text-decoration: none;
+        padding: 0;
+    }
+
+    .relink:hover {
+        color: #1f5582;
     }
 `;

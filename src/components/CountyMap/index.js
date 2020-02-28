@@ -15,7 +15,6 @@ import Menu from "~/components/Menu";
 import Scalebar from "~/components/Scalebar";
 import Footer from "~/components/Footer";
 
-
 import CardPlot from "~/components/CardPlot";
 import Stackplot from "~/components/Stackplot/StackplotCounty";
 import Barplot from "~/components/Barplot/BarplotCounty";
@@ -26,8 +25,8 @@ const CountyMap = props => {
   const [defaultCategory] = useState(props.defaultCategory);
   const [menuIsHidden] = useState(false);
   const [plotsAreHidden] = useState(false);
-  const [center, setCenter] = useState([]);
-  const [zoom, setZoom] = useState([]);
+  const [center, setCenter] = useState(props.center);
+  const [zoom] = useState(props.zoom);
   const [landuse] = useState(new TileLayer());
   const [landsat] = useState(new TileLayer({ visible: false }));
 
@@ -79,10 +78,11 @@ const CountyMap = props => {
   });
 
   useEffect(() => {
-    map.getView().setCenter(props.center);
-    map.getView().setZoom(props.zoom);
+    map.getView().setCenter(center);
+    map.getView().setZoom(zoom);
+
     map.setTarget("map");
-  }, [props.center, props.zoom, map]);
+  }, [center, zoom, map]);
 
   const onOffLandsat = evt => {
     landsat.setVisible(evt);
@@ -110,14 +110,16 @@ const CountyMap = props => {
       })
       .then(response => {
         const cxcy = response.data
-          .filter(f => f.name === defaultCodeName.name)
+          .filter(f => f.code === defaultCodeName.code)
           .map(c => c.centroid);
-        const extent = response.data
-          .filter(f => f.name === defaultCodeName.name)
-          .map(c => c.extent);
 
-        setCenter(cxcy[0]);
-        setZoom(extent[0]);
+        /*
+        const extent = response.data
+          .filter(f => f.code === defaultCodeName.code)
+          .map(c => c.extent);
+        */
+        
+        setCenter(JSON.parse(cxcy[0]));
       })
       .catch(e => {
         this.errors.push(e);

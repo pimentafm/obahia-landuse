@@ -12,10 +12,10 @@ import Routes from '~/routes';
 function App() {
   return (
     <HashRouter basename="/">
-    <Header />
-    <Routes />
-    <GlobalStyle />
-    <ToastContainer className="toast-class" />
+      <Header />
+      <Routes />
+      <GlobalStyle />
+      <ToastContainer className="toast-class" />
     </HashRouter>
   );
 }

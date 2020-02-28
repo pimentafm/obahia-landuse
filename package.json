@@ -5,6 +5,7 @@
   "proxy": "http://ucayali.dea.ufv.br:80",
   "private": true,
   "dependencies": {
+    "@react-pdf/renderer": "^1.6.8",
     "antd": "^3.25.2",
     "axios": "^0.19.1",
     "ol": "^6.1.1",

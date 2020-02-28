@@ -82,9 +82,10 @@ const Menu = props => {
         id="select"
         defaultValue={defaultWatershed}
         onChange={props.handleWatersheds}
+        style={{ color: "#000" }}
       >
         {watersheds.map(c => (
-          <Option key={c} value={c}>
+          <Option key={c} value={c} style={{ color: "#000" }}>
             {c}
           </Option>
         ))}
@@ -106,7 +107,7 @@ const Menu = props => {
         onChange={props.handleCodeNames}
       >
         {codenames.map(c => (
-          <Option key={c} value={c}>
+          <Option key={c} value={c} style={{ color: "#000" }}>
             {c}
           </Option>
         ))}
@@ -118,7 +119,8 @@ const Menu = props => {
 
   return (
     <MenuContainer isHidden={isHidden}>
-      <div id="nav" className="nav">
+
+      <div id="nav" className="nav">  
         <Icon
           id="handleMenu"
           type="menu"
@@ -126,7 +128,15 @@ const Menu = props => {
           style={{ fontSize: "20px" }}
           onClick={() => handleMenu()}
         />
+        <Link 
+          target="_blank" 
+          to="/report" 
+          title="Gera relatório"
+          className="relink">Relatorio
+        </Link>
       </div>
+
+      <hr></hr>
 
       <Zoom key="zoom" isHidden={props.menuIsHidden} map={map} />
 
@@ -138,7 +148,7 @@ const Menu = props => {
       >
         {categories.map(c => (
           <Option key={c[0]} value={c[0]}>
-            <Link to={c[1]}>{c[0]}</Link>
+            <Link to={c[1]} style={{ color: "#000" }}>{c[0]}</Link>
           </Option>
         ))}
       </Select>
@@ -154,9 +164,10 @@ const Menu = props => {
         id="select"
         defaultValue={defaultYear}
         onChange={props.handleYears}
+        style={{ color: "#000" }}
       >
         {years.map(y => (
-          <Option key={y} value={y}>
+          <Option key={y} value={y} style={{ color: "#000" }}>
             {y}
           </Option>
         ))}
@@ -174,6 +185,7 @@ const Menu = props => {
         legend={false}
         switcher={() => props.onOffLandsat}
       />
+
     </MenuContainer>
   );
 };

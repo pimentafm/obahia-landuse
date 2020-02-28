@@ -4,5 +4,6 @@ export const LegendContainer = styled.div`
 
     li {
         list-style: none;
+        color: #000;
     }
 `;
