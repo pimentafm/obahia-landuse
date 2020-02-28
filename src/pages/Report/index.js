@@ -1,9 +1,12 @@
 import React from 'react';
+import { useLocation } from "react-router";
 import Report from '~/components/Report';
 
-export default function Region() {
+const ReportPage = props => {
+  const location = useLocation()
   return (
-    <Report id="report" />
+    <Report id="report" params={location.state}/>
   );
 }
 
+export default ReportPage;

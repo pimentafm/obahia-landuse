@@ -9,6 +9,5 @@ export const ReportContainer = styled.div`
             margin: 0;
             border:none;
         }
-
     }
 `;

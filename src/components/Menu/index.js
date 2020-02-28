@@ -129,10 +129,17 @@ const Menu = props => {
           onClick={() => handleMenu()}
         />
         <Link 
-          target="_blank" 
-          to="/report" 
+          to={{ 
+            pathname: "/report",
+            state: { 
+              defaultCategory,
+              defaultWatershed,
+              defaultCodeName
+            }
+          }}
           title="Gera relatório"
-          className="relink">Relatorio
+          className="relink"
+          >Relatorio
         </Link>
       </div>
 

@@ -1,11 +1,15 @@
-import React from 'react';
-//import ReactDOM from 'react-dom';
+import React, {useState} from 'react';
 
-import { PDFViewer, Page, Text, Document, StyleSheet } from '@react-pdf/renderer';
+import { PDFViewer, Page, Text, Document, Image, StyleSheet } from '@react-pdf/renderer';
 
 import { ReportContainer } from './styles';
 
 const Report = props => {
+  const [params] = useState(props.params);
+
+  console.log("Report component: ");
+  console.log(params);
+
   const styles = StyleSheet.create({
     body: {
       paddingTop: 35,
@@ -16,18 +20,12 @@ const Report = props => {
       fontSize: 24,
       textAlign: 'center',
     },
-    author: {
-      fontSize: 12,
-      textAlign: 'center',
-      marginBottom: 40,
-    },
     subtitle: {
       fontSize: 18,
       margin: 12,
     },
     text: {
-      marginLeft: 25,
-      marginRight: 15,
+      margin: 12,
       fontSize: 14,
       textAlign: 'justify',
     },
@@ -52,40 +50,32 @@ const Report = props => {
     },
   });
 
+  let region_text = null;
+
+  if(params.defaultCategory) {
+    // eslint-disable-next-line no-multi-str
+    region_text = 'Hechas, pues, estas prevenciones, no quiso aguardar más tiempo \
+    a poner en efeto su pensamiento, apretándole a ello la falta que él pensaba que \
+    hacía en el mundo su tardanza, según eran los agravios que pensaba deshacer, \
+    tuertos que enderezar, sinrazones que emendar y abusos que mejorar y deudas que \
+    satisfacer. Y así, sin dar parte a persona alguna de su intención y sin que nadie \
+    le viese, una mañana, antes del día, que era uno de los calurosos del mes de Julio, \
+    se armó de todas sus armas, subió sobre Rocinante, puesta su mal compuesta celada, \
+    embrazó su adarga, tomó su lanza y por la puerta falsa de un corral salió al campo';
+  } else {
+    region_text = `OK`;
+  }
+
   return(
     <ReportContainer className="class-report">
       <PDFViewer className="pdf-viewer">
         <Document>
-          <Page size="A4" style={styles.page}>
-            <Text style={styles.header} fixed>
-            ~ Created with react-pdf ~
-            </Text>
-            <Text style={styles.title}>Don Quijote de la Mancha</Text>
-            <Text style={styles.author}>Miguel de Cervantes</Text>
-            <Text style={styles.subtitle}>
-              Capítulo I: Que trata de la condición y ejercicio del famoso hidalgo D.
-              Quijote de la Mancha
-            </Text>
-            <Text style={styles.text}>
-              En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha
-              mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga
-              antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que
-              carnero, salpicón las más noches, duelos y quebrantos los sábados,
-              lentejas los viernes, algún palomino de añadidura los domingos,
-              consumían las tres partes de su hacienda. El resto della concluían sayo
-              de velarte, calzas de velludo para las fiestas con sus pantuflos de lo
-              mismo, los días de entre semana se honraba con su vellori de lo más
-              fino. Tenía en su casa una ama que pasaba de los cuarenta, y una sobrina
-              que no llegaba a los veinte, y un mozo de campo y plaza, que así
-              ensillaba el rocín como tomaba la podadera. Frisaba la edad de nuestro
-              hidalgo con los cincuenta años, era de complexión recia, seco de carnes,
-              enjuto de rostro; gran madrugador y amigo de la caza. Quieren decir que
-              tenía el sobrenombre de Quijada o Quesada (que en esto hay alguna
-              diferencia en los autores que deste caso escriben), aunque por
-              conjeturas verosímiles se deja entender que se llama Quijana; pero esto
-              importa poco a nuestro cuento; basta que en la narración dél no se salga
-              un punto de la verdad
-            </Text>
+          <Page size="A4" style={styles.body}>
+            <Image style={styles.image} src="/obahia-webmap/src/assets/images/logo.png"/>
+            <Text style={styles.title}>{params.defaultCategory}</Text>
+            <Text style={styles.subtitle}>{params.defaultYear}</Text>
+            <Text style={styles.subtitle}>Capítulo I</Text>
+            <Text style={styles.text} >{region_text}</Text>
           </Page>
         </Document>
       </PDFViewer>
