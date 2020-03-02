@@ -17,16 +17,19 @@ import CardPlot from "~/components/CardPlot";
 import Stackplot from "~/components/Stackplot/StackplotRegion";
 import Barplot from "~/components/Barplot/BarplotRegion";
 
+import CardReport from "~/components/CardReport";
+import Report from "~/components/Report";
+
 const RegionMap = props => {
   const [defaultYear, setYear] = useState(props.defaultYear);
   const [defaultCategory] = useState(props.defaultCategory);
   const [menuIsHidden] = useState(false);
   const [plotsAreHidden] = useState(false);
+  const [reportIsHidden, setReportHidden] = useState(true);
   const [center] = useState([-45.25811, -12.652125]);
   const [zoom] = useState(8);
   const [landuse] = useState(new TileLayer());
   const [landsat] = useState(new TileLayer({ visible: false }));
-
 
   const landuse_source = new TileWMS({
     url:
@@ -55,12 +58,6 @@ const RegionMap = props => {
   landuse.getSource().updateParams({ time: Date.now() });
   landuse.changed();
 
-  useEffect(() => {
-    map.getView().setCenter(center);
-    map.getView().setZoom(zoom);
-    map.setTarget("map");
-  });
-
   const view = new View({
     projection: "EPSG:4326",
     center: center,
@@ -79,6 +76,10 @@ const RegionMap = props => {
     })
   });
 
+  useEffect(() => {
+    map.setTarget("map");
+  });
+
   const onOffLandsat = evt => {
     landsat.setVisible(evt);
   };
@@ -91,11 +92,21 @@ const RegionMap = props => {
     setYear(year);
   };
 
+  const handleReport = () => {
+    if (reportIsHidden === false) {
+      setReportHidden(true);
+    } else {
+      setReportHidden(false);
+    }
+  };
+
   return (
     <MapContainer id="map">
       <Menu
         key="menu"
         isHidden={menuIsHidden}
+        reportIsHidden={reportIsHidden}
+        handleReport={handleReport}
         defaultYear={defaultYear}
         handleYears={handleYears}
         defaultCategory={defaultCategory}
@@ -112,6 +123,19 @@ const RegionMap = props => {
       />
 
       <Footer key="footer" map={map} />
+
+      <CardReport reportIsHidden={reportIsHidden}
+        report={
+          <Report 
+            key="report" 
+            params={{
+              defaultYear, 
+              defaultCategory
+            }}
+          />
+        }
+      />
+
     </MapContainer>
   );
 };
