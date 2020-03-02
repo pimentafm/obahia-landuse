@@ -46,7 +46,7 @@ const Stackplot = props => {
   }, []);
 
   return (
-    <PlotContainer>
+    <PlotContainer id="stack-plot">
       <Plot
         data={[
           {

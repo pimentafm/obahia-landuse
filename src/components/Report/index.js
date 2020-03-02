@@ -21,7 +21,8 @@ const Report = props => {
       paddingTop: 10,
       paddingBottom: 5,
       fontSize: 14,
-      textAlign: 'left',
+      fontFamily: 'Times-Bold',
+      textAlign: 'left'
     },
     header: {
       backgroundColor: '#1f5582',
@@ -34,8 +35,7 @@ const Report = props => {
     },
     image: {
       marginVertical: 10,
-      marginHorizontal: 10,
-      border: 1
+      marginHorizontal: 100
     },
     row: {
       border: 0,
@@ -43,6 +43,8 @@ const Report = props => {
     text: {
       fontSize: 12,
       textAlign: 'justify',
+      textIndent: 25,
+      fontFamily: 'Times-Roman'
     },
     pageNumber: {
       position: 'absolute',
@@ -78,10 +80,14 @@ const Report = props => {
             <View style={styles.header} fixed>
               <Image style={styles.imageHeader} src="/obahia-webmap/src/assets/images/logo.png"/>
             </View>
+            <Text style={styles.title}>{"Mudanças do uso e cobertura do solo - 1990-2018"}</Text>
+            <Text style={styles.text} >{region_text}</Text>
+            <Image style={styles.image} src={params.stackImage}/>
+            
             <Text style={styles.title}>{params.defaultCategory +" - "+ params.defaultYear}</Text>
             <Text style={styles.text} >{region_text}</Text>
-            <Image style={styles.image} src="/obahia-webmap/src/assets/images/logo.png"/>
-            <Image style={styles.image} src="/obahia-webmap/src/assets/images/logo.png"/>
+            <Image style={styles.image} src={params.barImage}/>
+
             <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (`${pageNumber} / ${totalPages}`)} fixed />
           </Page>
         </Document>

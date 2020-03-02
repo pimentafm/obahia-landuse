@@ -20,16 +20,20 @@ import Barplot from "~/components/Barplot/BarplotRegion";
 import CardReport from "~/components/CardReport";
 import Report from "~/components/Report";
 
+import domtoimage from 'dom-to-image';
+
 const RegionMap = props => {
   const [defaultYear, setYear] = useState(props.defaultYear);
   const [defaultCategory] = useState(props.defaultCategory);
   const [menuIsHidden] = useState(false);
   const [plotsAreHidden] = useState(false);
-  const [reportIsHidden, setReportHidden] = useState(false);
+  const [reportIsHidden, setReportHidden] = useState(true);
   const [center] = useState([-45.25811, -12.652125]);
   const [zoom] = useState(8);
   const [landuse] = useState(new TileLayer());
   const [landsat] = useState(new TileLayer({ visible: false }));
+  const [stackImage, setStackImage] = useState("/obahia-webmap/src/assets/images/logo.png");
+  const [barImage, setBarImage] = useState("/obahia-webmap/src/assets/images/logo.png");
 
   const landuse_source = new TileWMS({
     url:
@@ -93,6 +97,26 @@ const RegionMap = props => {
   };
 
   const handleReport = () => {
+    domtoimage.toPng(document.getElementById('stack-plot'))
+    .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+        setStackImage(img.src);
+    })
+    .catch(function (error) {
+        console.error('oops, something went wrong when generate StackPlot image!', error);
+    });
+
+    domtoimage.toPng(document.getElementById('bar-plot'))
+    .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+        setBarImage(img.src);
+    })
+    .catch(function (error) {
+        console.error('oops, something went wrong when generate BarPlot image!', error);
+    });
+
     if (reportIsHidden === false) {
       setReportHidden(true);
     } else {
@@ -118,7 +142,7 @@ const RegionMap = props => {
       <Scalebar key="scalebar" map={map} />
       
       <CardPlot plotsAreHidden={plotsAreHidden}
-        stackplot={<Stackplot key="stackplot" />}
+        stackplot={<Stackplot key={"stackplot" + defaultYear} id="stackplot" />}
         barplot={<Barplot key={"barplot" + defaultYear} defaultYear={defaultYear} />}
       />
 
@@ -130,7 +154,9 @@ const RegionMap = props => {
             key="report" 
             params={{
               defaultYear, 
-              defaultCategory
+              defaultCategory,
+              stackImage,
+              barImage
             }}
           />
         }

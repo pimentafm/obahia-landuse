@@ -17,7 +17,7 @@ const Cardplot = props => {
     };
 
   return (
-    <CardContainer areHidden={areHidden}>
+    <CardContainer id="card-plot-container" areHidden={areHidden}>
         <Icon
             className="showhide-plots"
             type="menu"
