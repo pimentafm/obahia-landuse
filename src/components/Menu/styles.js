@@ -53,13 +53,17 @@ export const MenuContainer = styled.div`
         margin-top: 10px;
     }
 
-    .relink {
+    #report-button {
         color: #000;
         text-decoration: none;
         padding: 0;
+        border: 0px;
+        text-align: left;
+        background: #fff;
     }
 
-    .relink:hover {
+    #report-button:hover {
         color: #1f5582;
+        cursor: pointer;
     }
 `;

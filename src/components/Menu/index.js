@@ -128,19 +128,11 @@ const Menu = props => {
           style={{ fontSize: "20px" }}
           onClick={() => handleMenu()}
         />
-        <Link 
-          to={{ 
-            pathname: "/report",
-            state: { 
-              defaultCategory,
-              defaultWatershed,
-              defaultCodeName
-            }
-          }}
+        <button id="report-button"
           title="Gera relatório"
-          className="relink"
+          onClick={props.handleReport}
           >Relatorio
-        </Link>
+        </button>
       </div>
 
       <hr></hr>
