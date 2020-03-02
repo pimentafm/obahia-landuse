@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 
 import { PDFViewer, Page, Text, Document, Image, StyleSheet } from '@react-pdf/renderer';
 
 import { ReportContainer } from './styles';
 
 const Report = props => {
-  const [params] = useState(props.params);
+  const [params, setParams] = useState(props.params);
 
-  console.log("Report component: ");
-  console.log(params);
+  useEffect(() => {
+    setParams(props.params)
+  }, [props.params]);
 
   const styles = StyleSheet.create({
     body: {
@@ -50,7 +51,7 @@ const Report = props => {
     },
   });
 
-  let region_text = null;
+  let region_text = "OK";
 
   if(params.defaultCategory) {
     // eslint-disable-next-line no-multi-str
