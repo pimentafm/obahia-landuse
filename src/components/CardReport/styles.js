@@ -5,10 +5,9 @@ export const ReportContainer = styled.div`
       right: 0px;
       flex-direction: column;
       position: absolute;
-      background: blue;
       z-index: 3;
       width: 60%;
-      height: 100%;
+      height: 95%;
 
       transform: translateX(
             ${({ isHidden }) => (isHidden ? 100 : 0)}pc

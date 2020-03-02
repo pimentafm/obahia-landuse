@@ -25,7 +25,7 @@ const RegionMap = props => {
   const [defaultCategory] = useState(props.defaultCategory);
   const [menuIsHidden] = useState(false);
   const [plotsAreHidden] = useState(false);
-  const [reportIsHidden, setReportHidden] = useState(true);
+  const [reportIsHidden, setReportHidden] = useState(false);
   const [center] = useState([-45.25811, -12.652125]);
   const [zoom] = useState(8);
   const [landuse] = useState(new TileLayer());
