@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import { Select, Icon } from "antd";
+import { Select, Icon, Button } from "antd";
 
 import oba from "~/services/api";
 
@@ -128,14 +128,7 @@ const Menu = props => {
           style={{ fontSize: "20px" }}
           onClick={() => handleMenu()}
         />
-        <button id="report-button"
-          title="Gera relatório"
-          onClick={props.handleReport}
-          >Relatorio
-        </button>
       </div>
-
-      <hr></hr>
 
       <Zoom key="zoom" isHidden={props.menuIsHidden} map={map} />
 
@@ -184,7 +177,11 @@ const Menu = props => {
         legend={false}
         switcher={() => props.onOffLandsat}
       />
-
+      <Button id="report-button"
+        title="Gera relatório"
+        onClick={props.handleReport}
+        >Relatorio
+      </Button>
     </MenuContainer>
   );
 };

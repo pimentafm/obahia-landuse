@@ -54,16 +54,6 @@ export const MenuContainer = styled.div`
     }
 
     #report-button {
-        color: #000;
-        text-decoration: none;
-        padding: 0;
-        border: 0px;
-        text-align: left;
-        background: #fff;
-    }
-
-    #report-button:hover {
-        color: #1f5582;
-        cursor: pointer;
+        top: 10px;
     }
 `;
