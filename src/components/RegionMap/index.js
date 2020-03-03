@@ -32,8 +32,8 @@ const RegionMap = props => {
   const [zoom] = useState(8);
   const [landuse] = useState(new TileLayer());
   const [landsat] = useState(new TileLayer({ visible: false }));
-  const [stackImage, setStackImage] = useState("/obahia-webmap/src/assets/images/logo.png");
-  const [barImage, setBarImage] = useState("/obahia-webmap/src/assets/images/logo.png");
+  const [stackImage, setStackImage] = useState("/obahia-webmap/src/assets/images/image-loading.png");
+  const [barImage, setBarImage] = useState("/obahia-webmap/src/assets/images/image-loading.png");
 
   const landuse_source = new TileWMS({
     url:

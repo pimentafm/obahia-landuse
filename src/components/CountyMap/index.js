@@ -19,16 +19,24 @@ import CardPlot from "~/components/CardPlot";
 import Stackplot from "~/components/Stackplot/StackplotCounty";
 import Barplot from "~/components/Barplot/BarplotCounty";
 
+import CardReport from "~/components/CardReport";
+import Report from "~/components/Report";
+
+import domtoimage from 'dom-to-image';
+
 const CountyMap = props => {
   const [defaultYear, setYear] = useState(props.defaultYear);
   const [defaultCodeName, setCode] = useState(props.defaultCodeName);
   const [defaultCategory] = useState(props.defaultCategory);
   const [menuIsHidden] = useState(false);
   const [plotsAreHidden] = useState(false);
+  const [reportIsHidden, setReportHidden] = useState(true);
   const [center, setCenter] = useState(props.center);
   const [zoom] = useState(props.zoom);
   const [landuse] = useState(new TileLayer());
   const [landsat] = useState(new TileLayer({ visible: false }));
+  const [stackImage, setStackImage] = useState("/obahia-webmap/src/assets/images/image-loading.png");
+  const [barImage, setBarImage] = useState("/obahia-webmap/src/assets/images/image-loading.png");
 
   const landuse_source = new TileWMS({
     url:
@@ -126,11 +134,41 @@ const CountyMap = props => {
       });
   };
 
+  const handleReport = () => {
+    domtoimage.toPng(document.getElementById('stack-plot'))
+    .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+        setStackImage(img.src);
+    })
+    .catch(function (error) {
+        console.error('oops, something went wrong when generate StackPlot image!', error);
+    });
+
+    domtoimage.toPng(document.getElementById('bar-plot'))
+    .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+        setBarImage(img.src);
+    })
+    .catch(function (error) {
+        console.error('oops, something went wrong when generate BarPlot image!', error);
+    });
+
+    if (reportIsHidden === false) {
+      setReportHidden(true);
+    } else {
+      setReportHidden(false);
+    }
+  };
+
   return (
     <MapContainer id="map">
       <Menu
         key="menu"
         isHidden={menuIsHidden}
+        reportIsHidden={reportIsHidden}
+        handleReport={handleReport}
         defaultYear={defaultYear}
         handleYears={handleYears}
         handleCodeNames={handleCodeNames}
@@ -161,6 +199,22 @@ const CountyMap = props => {
       />
 
       <Footer key="footer" map={map} />
+
+      <CardReport reportIsHidden={reportIsHidden}
+        report={
+          <Report 
+            key="report" 
+            params={{
+              defaultYear, 
+              defaultCategory,
+              defaultCodeName,
+              stackImage,
+              barImage
+            }}
+          />
+        }
+      />
+      
     </MapContainer>
   );
 };

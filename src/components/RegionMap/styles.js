@@ -6,4 +6,11 @@ export const MapContainer = styled.div`
     height: 100%;
     position: fixed;
   }
+
+  #loading {
+        position: fixed;
+        z-index: 3;
+        right: 50%;
+        top: 50%;
+    }
 `;
