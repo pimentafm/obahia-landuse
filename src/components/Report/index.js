@@ -8,7 +8,7 @@ const Report = props => {
   const [params, setParams] = useState(props.params);
 
   useEffect(() => {
-    setParams(props.params)
+    setParams(props.params);
   }, [props.params]);
 
   const styles = StyleSheet.create({
@@ -57,20 +57,47 @@ const Report = props => {
     }
   });
 
-  let region_text = "OK";
+  let cat_text = null;
 
-  if(params.defaultCategory) {
-    // eslint-disable-next-line no-multi-str
-    region_text = `Hechas, pues, estas prevenciones, no quiso aguardar más tiempo\
- a poner en efeto su pensamiento, apretándole a ello la falta que él pensaba que hacía\
- en el mundo su tardanza, según eran los agravios que pensaba deshacer, tuertos que enderezar,\
- sinrazones que emendar y abusos que mejorar y deudas que satisfacer. Y así, sin dar parte\
- a persona alguna de su intención y sin que nadie le viese, una mañana, antes del día,\
- que era uno de los calurosos del mes de Julio, se armó de todas sus armas, subió sobre Rocinante,\
- puesta su mal compuesta celada, embrazó su adarga, tomó su lanza y por la puerta falsa de un corral salió al campo.`;
-  } else {
-    region_text = `OK`;
+  switch (params.defaultCategory) {
+    case 'Região':
+      cat_text = `Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região Região `;
+      break;
+    case 'Bacia hidrográfica':
+      cat_text = `Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text Bacia hidrográfica text `;
+      break;
+    case 'Área de drenagem':
+      cat_text = `Área de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem textÁrea de drenagem text`;
+      break;
+    case 'Municípios':
+      cat_text = `Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text Municípios text `;
+      break;
+    default:
+      cat_text = null;
   }
+
+  let watershed_text = null;
+
+  switch (params.defaultWatershed) {
+    case 'grande':
+      watershed_text = `grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande grande `;
+      break;
+    case 'corrente':
+      watershed_text = `corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente corrente `;
+      break;
+    case 'carinhanha':
+      watershed_text = `carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha carinhanha `;
+      break;
+    default:
+      watershed_text = null;
+  }
+
+  let codename_text = null;
+
+  if (params.defaultCodeName) {
+    codename_text = `codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text `;
+  }
+
 
   return(
     <ReportContainer className="class-report">
@@ -81,12 +108,15 @@ const Report = props => {
               <Image style={styles.imageHeader} src="/obahia-webmap/src/assets/images/logo.png"/>
             </View>
             <Text style={styles.title}>{"Mudanças do uso e cobertura do solo - 1990-2018"}</Text>
-            <Text style={styles.text} >{region_text}</Text>
+            <Text style={styles.text} >{cat_text}</Text>
             <Image style={styles.image} src={params.stackImage}/>
             
             <Text style={styles.title}>{params.defaultCategory +" - "+ params.defaultYear}</Text>
-            <Text style={styles.text} >{region_text}</Text>
+            <Text style={styles.text} >{watershed_text}</Text>
             <Image style={styles.image} src={params.barImage}/>
+
+            { params.defaultCodeName && <Text style={styles.title}>{params.defaultCodeName.name}</Text> }
+            { params.defaultCodeName && <Text style={styles.text} >{codename_text}</Text> }
 
             <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (`${pageNumber} / ${totalPages}`)} fixed />
           </Page>
