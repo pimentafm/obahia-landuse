@@ -56,7 +56,7 @@ const Barplot = props => {
   }, [props.defaultYear, props.defaultWatershed, props.landuse]);
 
   return (
-    <PlotContainer>
+    <PlotContainer id="bar-plot">
       <Plot
         data={[
           {

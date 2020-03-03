@@ -49,7 +49,7 @@ const Stackplot = props => {
   }, [props.defaultYear, props.defaultWatershed]);
 
   return (
-    <PlotContainer>
+    <PlotContainer id="stack-plot">
       <Plot
         data={[
           {

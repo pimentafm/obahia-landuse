@@ -51,7 +51,7 @@ const Barplot = props => {
   }, [props.defaultYear, props.defaultCodeName, props.landuse]);
 
   return (
-    <PlotContainer>
+    <PlotContainer id="bar-plot">
       <Plot
         data={[
           {
