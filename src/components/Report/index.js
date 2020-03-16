@@ -98,7 +98,6 @@ const Report = props => {
     codename_text = `codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text codename text `;
   }
 
-
   return(
     <ReportContainer className="class-report">
       <PDFViewer className="pdf-viewer">

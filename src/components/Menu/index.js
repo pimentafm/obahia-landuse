@@ -165,18 +165,23 @@ const Menu = props => {
         ))}
       </Select>
 
-      <LayerSwitcher
-        name="Uso do Solo"
-        checked={true}
-        legend={true}
-        switcher={() => props.onOffLanduse}
-      />
-      <LayerSwitcher
-        name="Imagens de Satélite (Landsat)"
-        checked={false}
-        legend={false}
-        switcher={() => props.onOffLandsat}
-      />
+      <div id="layer-div">
+        <LayerSwitcher
+          name="landuse"
+          label="Uso do Solo"
+          checked={true}
+          legend={true}
+          switcher={() => props.onOffLayers}
+        />
+        <LayerSwitcher
+          name="landsat"
+          label="Imagens de Satélite (Landsat)"
+          checked={false}
+          legend={false}
+          switcher={() => props.onOffLayers}
+        />
+      </div>
+
       <Button id="report-button"
         title="Gera relatório"
         onClick={props.handleReport}

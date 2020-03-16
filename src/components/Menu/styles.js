@@ -15,6 +15,12 @@ export const MenuContainer = styled.div`
         a {
             color: #000;
         }
+
+        #layer-div {
+            margin-top: 10px;
+            max-height: 800px;
+            overflow-y: auto;
+        }
     }
 
     & {

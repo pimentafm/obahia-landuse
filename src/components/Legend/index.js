@@ -8,7 +8,7 @@ const Legend = props => {
     const [legendHTML, setlegendHTML] = useState([]);
 
     useEffect(() => {
-        ucayali.get(`cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map&mode=legend&year=2018`, {
+        ucayali.get(`cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/`+props.name+`Region.map&mode=legend&year=2018`, {
             responseType: 'text',
         },
         ).then(res => {
@@ -18,7 +18,7 @@ const Legend = props => {
             
             setlegendHTML(html)
         });
-    }, []);
+    }, [props.name]);
 
     return (
         <LegendContainer>

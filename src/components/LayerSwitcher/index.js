@@ -11,7 +11,7 @@ const LayerSwitcher = props => {
     const [legend_is_visible, setLegendVisible] = useState(props.legend);
     const [switcher] = useState(props.switcher);
     const [name] = useState(props.name);
-
+    
     const handleLegend = () => {
         if(legend_is_visible === true) {
             setLegendVisible(false);
@@ -22,8 +22,8 @@ const LayerSwitcher = props => {
 
     let legend;
 
-    if (legend_is_visible && checked) {
-        legend = <Legend />
+    if (legend_is_visible) {
+        legend = <Legend name={name}/>
     } else {
         legend = null;
     }
@@ -31,8 +31,8 @@ const LayerSwitcher = props => {
     return (
         <LayerContainer legend_is_visible={legend_is_visible}>
             <div className="layer-div">
-                <label>{name}</label>
-                <Switch defaultChecked={checked} onClick={handleLegend} onChange={switcher} />
+                <label>{props.label}</label>
+                <Switch name={name} defaultChecked={checked} onClick={handleLegend} onChange={switcher} />
             </div>
                 
             {legend}
