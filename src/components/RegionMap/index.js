@@ -4,6 +4,8 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import TileWMS from "ol/source/TileWMS";
 import OSM from "ol/source/OSM";
+import Graticule from 'ol/layer/Graticule';
+import Stroke from 'ol/style/Stroke';
 import { defaults } from 'ol/interaction';
 
 import "ol/ol.css";
@@ -32,25 +34,29 @@ const RegionMap = props => {
   const [zoom] = useState(8);
   const [landuse] = useState(new TileLayer({ name: "landuse", visible: true }));
   const [landsat] = useState(new TileLayer({ name: "landsat", visible: false }));
-  const [stackImage, setStackImage] = useState("/obahia-webmap/src/assets/images/image-loading.png");
-  const [barImage, setBarImage] = useState("/obahia-webmap/src/assets/images/image-loading.png");
+  const [stackImage, setStackImage] = useState("/obahia-temporal/src/assets/images/image-loading.png");
+  const [barImage, setBarImage] = useState("/obahia-temporal/src/assets/images/image-loading.png"); 
 
   const landuse_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseRegion.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-temporal/mapfiles/landuseRegion.map",
+      //hover: true,
+      //pixelTolerance: 80,
     params: {
       year: defaultYear,
-      LAYERS: "landuse"
+      LAYERS: "landuse",
+      TILED: true
     },
     serverType: "mapserver"
   });
 
   const landsat_source = new TileWMS({
     url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatRegion.map",
+      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-temporal/mapfiles/landsatRegion.map",
     params: {
       year: defaultYear,
-      LAYERS: "landsat"
+      LAYERS: "landsat",
+      TILED: true
     },
     serverType: "mapserver"
   });
@@ -68,12 +74,27 @@ const RegionMap = props => {
     zoom: zoom
   });
 
+  const graticule =  new Graticule({
+    name: 'graticule',
+    visible: false,
+    className: 'graticule-layer',
+    strokeStyle: new Stroke({
+      color: 'rgba(120,120,120,0.9)',
+      width: 2,
+      lineDash: [0.5, 10]
+    }),
+    showLabels: true,
+    lonLabelPosition: 0.065,
+    latLabelPosition: 0.999,
+    wrapX: false
+  });
+
   const osm = new TileLayer({ source: new OSM() });
 
   const map = new OlMap({
     controls: [],
     target: null,
-    layers: [osm, landsat, landuse],
+    layers: [osm, landsat, landuse, graticule],
     view: view,
     interactions: defaults({
       keyboard: false
@@ -125,6 +146,29 @@ const RegionMap = props => {
     });
   };
 
+  map.on('singleclick', evt => {
+
+    let coords = evt.coordinate;
+    let res = view.getResolution();
+    let proj = view.getProjection();
+
+    let url = landuse.getSource().getFeatureInfoUrl(
+      coords, res, proj,
+      {
+        INFO_FORMAT: 'text/html',
+        VERSION: '1.3.0'
+      });
+      
+    if (url) {
+      fetch(url)
+        .then(response => { return response.text(); })
+        .then(html => {
+          console.log(coords);
+          console.log(Number.parseFloat(html));
+        });
+    }
+  });
+
   return (
     <MapContainer id="map">
       <Menu
@@ -148,7 +192,7 @@ const RegionMap = props => {
 
       <Footer key="footer" map={map} />
 
-      <CardReport reportIsHidden={reportIsHidden}
+      <CardReport id="card-report" reportIsHidden={reportIsHidden}
         report={
           <Report 
             key="report" 
@@ -158,6 +202,8 @@ const RegionMap = props => {
               stackImage,
               barImage
             }}
+
+            map={map}
           />
         }
       />
