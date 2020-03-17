@@ -11,8 +11,8 @@ export const ReportContainer = styled.div`
 
       transform: translateX(
             ${({ isHidden }) => (isHidden ? 100 : 0)}pc
-        );
-        transition: 0.3s;
+      );
+      transition: 0.3s;
     }
 
     .class-report {
