@@ -1,7 +1,7 @@
 {
-  "name": "webmap",
+  "name": "temporal",
   "version": "0.1.0",
-  "homepage": "http://ucayali.dea.ufv.br/webmap",
+  "homepage": "http://ucayali.dea.ufv.br/temporal",
   "proxy": "http://ucayali.dea.ufv.br:80",
   "private": true,
   "dependencies": {

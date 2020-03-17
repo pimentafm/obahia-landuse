@@ -33,8 +33,8 @@ const CountyMap = props => {
   const [reportIsHidden, setReportHidden] = useState(true);
   const [center, setCenter] = useState(props.center);
   const [zoom] = useState(props.zoom);
-  const [landuse] = useState(new TileLayer());
-  const [landsat] = useState(new TileLayer({ visible: false }));
+  const [landuse] = useState(new TileLayer({ name: 'landuse', visible: true }));
+  const [landsat] = useState(new TileLayer({ name: 'landsat', visible: false }));
   const [stackImage, setStackImage] = useState("/obahia-webmap/src/assets/images/image-loading.png");
   const [barImage, setBarImage] = useState("/obahia-webmap/src/assets/images/image-loading.png");
 
@@ -91,14 +91,6 @@ const CountyMap = props => {
 
     map.setTarget("map");
   }, [center, zoom, map]);
-
-  const onOffLandsat = evt => {
-    landsat.setVisible(evt);
-  };
-
-  const onOffLanduse = evt => {
-    landuse.setVisible(evt);
-  };
 
   const handleYears = year => {
     setYear(year);
@@ -162,6 +154,15 @@ const CountyMap = props => {
     }
   };
 
+  const onOffLayers = (evt, obj) => {
+    const lyr_name = obj.target.name;
+    map.getLayers().forEach(lyr => {
+      if (lyr.get('name') === lyr_name) {
+        lyr.setVisible(!lyr.get('visible'));
+      }
+    });
+  };
+
   return (
     <MapContainer id="map">
       <Menu
@@ -174,8 +175,7 @@ const CountyMap = props => {
         handleCodeNames={handleCodeNames}
         defaultCodeName={defaultCodeName.name}
         defaultCategory={defaultCategory}
-        onOffLandsat={onOffLandsat}
-        onOffLanduse={onOffLanduse}
+        onOffLayers={onOffLayers}
         map={map}
       />
 
