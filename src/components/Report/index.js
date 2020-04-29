@@ -104,7 +104,7 @@ const Report = props => {
         <Document>
           <Page size="A4" style={styles.body}>
             <View style={styles.header} fixed>
-              <Image style={styles.imageHeader} src="/obahia-webmap/src/assets/images/logo.png"/>
+              <Image style={styles.imageHeader} src="http://obahia.dea.ufv.br/static/geonode/img/loading.png"/>
             </View>
             <Text style={styles.title}>{"Mudanças do uso e cobertura do solo - 1990-2018"}</Text>
             <Text style={styles.text} >{cat_text}</Text>

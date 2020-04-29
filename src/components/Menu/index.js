@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { Select, Icon, Button } from "antd";
 
-import oba from "~/services/api";
+import oba from "~/services/obahiadb";
 
 import { MenuContainer } from "./styles";
 import LayerSwitcher from "~/components/LayerSwitcher";

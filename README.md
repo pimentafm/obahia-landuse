@@ -17,14 +17,14 @@
 [![made-with-Nodejs](https://img.shields.io/badge/Nodejs-green.svg)](https://nodejs.org/)
 [![made-with-Yarn](https://img.shields.io/badge/Yarn-2188b6.svg)](https://yarnpkg.com/)
 [![made-with-React](https://img.shields.io/badge/React-61dafb.svg)](https://https://reactjs.org/)
-[![made-with-Mapserver](https://img.shields.io/badge/Mapserver-33a333.svg)](https://mapserver.org/)
+[![made-with-Mapserver](https://img.shields.io/badge/mapserver-33a333.svg)](https://mapserver.org/)
 [![made-with-PHP](https://img.shields.io/badge/Django-purple.svg)](https://www.php.net/)
 [![made-with-PostgreSQL](https://img.shields.io/badge/PostgreSQL-33658f.svg)](https://www.postgresql.org/)
 [![made-with-PostGIS](https://img.shields.io/badge/PostGIS-5a7a9f.svg)](https://postgis.net/)
 
 *nodejs dependencies can be found in `package.json`.
 
-Set dbconfig.ini in the `/obahia-webmap/api` folder:
+Set dbconfig.ini in the `/obahia-webmap/obahiadb` folder:
 
 ```ini
 host=localhost

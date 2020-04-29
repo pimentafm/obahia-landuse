@@ -10,6 +10,7 @@
 
 # production
 /build
+/landuse
 
 # misc
 .DS_Store

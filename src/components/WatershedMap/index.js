@@ -6,7 +6,7 @@ import TileWMS from "ol/source/TileWMS";
 import OSM from "ol/source/OSM";
 import { defaults } from 'ol/interaction';
 
-import oba from "~/services/api";
+import oba from "~/services/obahiadb";
 
 import "ol/ol.css";
 
@@ -35,12 +35,13 @@ const DrainageMap = props => {
   const [zoom, setZoom] = useState([]);
   const [landuse] = useState(new TileLayer({ name: 'landuse', visible: true }));
   const [landsat] = useState(new TileLayer({ name: 'landsat', visible: false }));
-  const [stackImage, setStackImage] = useState("/obahia-webmap/src/assets/images/image-loading.png");
-  const [barImage, setBarImage] = useState("/obahia-webmap/src/assets/images/image-loading.png");
+  const [stackImage, setStackImage] = useState("http://obahia.dea.ufv.br/static/geonode/img/loading.png");
+  const [barImage, setBarImage] = useState("http://obahia.dea.ufv.br/static/geonode/img/loading.png");
+
+  const base_URL = "http://obahia.dea.ufv.br:8085/";
 
   const landuse_source = new TileWMS({
-    url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landuseWatersheds.map",
+    url: base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/landuseWatersheds.map",
     params: {
       year: defaultYear,
       ws: defaultWatershed,
@@ -50,8 +51,7 @@ const DrainageMap = props => {
   });
 
   const landsat_source = new TileWMS({
-    url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-webmap/mapfiles/landsatWatersheds.map",
+    url: base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/landsatWatersheds.map",
     params: {
       year: defaultYear,
       ws: defaultWatershed,

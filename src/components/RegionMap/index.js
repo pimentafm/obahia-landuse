@@ -34,12 +34,13 @@ const RegionMap = props => {
   const [zoom] = useState(8);
   const [landuse] = useState(new TileLayer({ name: "landuse", visible: true }));
   const [landsat] = useState(new TileLayer({ name: "landsat", visible: false }));
-  const [stackImage, setStackImage] = useState("/obahia-temporal/src/assets/images/image-loading.png");
-  const [barImage, setBarImage] = useState("/obahia-temporal/src/assets/images/image-loading.png"); 
+  const [stackImage, setStackImage] = useState("http://obahia.dea.ufv.br/static/geonode/img/loading.png");
+  const [barImage, setBarImage] = useState("http://obahia.dea.ufv.br/static/geonode/img/loading.png"); 
+
+  const base_URL = "http://obahia.dea.ufv.br:8085/";
 
   const landuse_source = new TileWMS({
-    url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-temporal/mapfiles/landuseRegion.map",
+    url: base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/landuseRegion.map",
       //hover: true,
       //pixelTolerance: 80,
     params: {
@@ -51,8 +52,7 @@ const RegionMap = props => {
   });
 
   const landsat_source = new TileWMS({
-    url:
-      "http://ucayali.dea.ufv.br/cgi-bin/mapserv?map=/var/www/obahia-temporal/mapfiles/landsatRegion.map",
+    url: base_URL + "cgi-bin/mapserv.fcgi?map=/var/www/geodb/mapfiles/landsatRegion.map",
     params: {
       year: defaultYear,
       LAYERS: "landsat",
