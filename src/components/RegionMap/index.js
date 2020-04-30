@@ -7,6 +7,7 @@ import OSM from "ol/source/OSM";
 import Graticule from 'ol/layer/Graticule';
 import Stroke from 'ol/style/Stroke';
 import { defaults } from 'ol/interaction';
+import {createStringXY} from 'ol/coordinate';
 
 import "ol/ol.css";
 
@@ -21,6 +22,8 @@ import Barplot from "~/components/Barplot/BarplotRegion";
 
 import CardReport from "~/components/CardReport";
 import Report from "~/components/Report";
+
+import Popup from "~/components/popup";
 
 import domtoimage from 'dom-to-image';
 
@@ -163,8 +166,27 @@ const RegionMap = props => {
       fetch(url)
         .then(response => { return response.text(); })
         .then(html => {
-          console.log(coords);
-          console.log(Number.parseFloat(html));
+          const stringifyFunc = createStringXY(5);
+
+          const luclass = document.getElementById('popup-class');
+          const pcoords = document.getElementById('popup-coords');
+          const value = document.getElementById('popup-value');
+
+          const luclasses = {
+            '1.0': 'Formações florestais',
+            '2.0': 'Formações savânicas',
+            '3.0': 'Formações campestres',
+            '4.0': 'Mosaico de agricultura ou pastagem',
+            '5.0': 'Agricultura de sequeiro',
+            '6.0': 'Agricultura irrigada',
+            '7.0': 'Pastagem',
+            '8.0': `Corpos d'água`,
+            '9.0': 'Área urbana/Construções rurais'
+          };
+
+          luclass.innerHTML = luclasses[html] ? luclasses[html] : "NaN";
+          pcoords.innerHTML = stringifyFunc(coords);
+          value.innerHTML = html ? html : "NaN";
         });
     }
   });
@@ -182,6 +204,8 @@ const RegionMap = props => {
         onOffLayers={onOffLayers}
         map={map}
       />
+
+      <Popup />
 
       <Scalebar key="scalebar" map={map} />
       
