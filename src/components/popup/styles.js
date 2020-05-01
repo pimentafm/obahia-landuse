@@ -9,10 +9,8 @@ export const PopupContainer = styled.table`
     justify-content: center;
     border: 1px solid #cccccc;
     padding: 5px;
-    left: 600px;
-    bottom: 600px;
     min-width: 280px;
-    z-index: 2;
+    z-index: 3;
   }
 
   tbody {

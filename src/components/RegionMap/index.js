@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import OlMap from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
@@ -8,6 +9,7 @@ import Graticule from 'ol/layer/Graticule';
 import Stroke from 'ol/style/Stroke';
 import { defaults } from 'ol/interaction';
 import {createStringXY} from 'ol/coordinate';
+import Overlay from 'ol/Overlay';
 
 import "ol/ol.css";
 
@@ -168,7 +170,7 @@ const RegionMap = props => {
         .then(html => {
           const stringifyFunc = createStringXY(5);
 
-          const luclass = document.getElementById('popup-class');
+          const luclass = document.getElementById('popup-lulc');
           const pcoords = document.getElementById('popup-coords');
           const value = document.getElementById('popup-value');
 
@@ -187,6 +189,15 @@ const RegionMap = props => {
           luclass.innerHTML = luclasses[html] ? luclasses[html] : "NaN";
           pcoords.innerHTML = stringifyFunc(coords);
           value.innerHTML = html ? html : "NaN";
+
+          const popup = new Overlay({
+            element: document.getElementById('popup'),
+            positioning: 'bottom-left',
+          });
+
+          popup.setPosition(coords);
+          map.addOverlay(popup);
+
         });
     }
   });
@@ -205,7 +216,7 @@ const RegionMap = props => {
         map={map}
       />
 
-      <Popup />
+      <Popup className="popup-class"/>
 
       <Scalebar key="scalebar" map={map} />
       
@@ -231,7 +242,6 @@ const RegionMap = props => {
           />
         }
       />
-
     </MapContainer>
   );
 };
