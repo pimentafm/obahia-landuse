@@ -16,7 +16,7 @@ const Popup = () => {
         boxShadow: `0px 2px 3px rgba(0,0,0,.13) ,1px 2px 2px rgba(0,0,0,.1) , -1px -2px 2px rgba(0,0,0,.05)`,
         }}>
           <tr>
-            <th colSpan="2" style={{textAlign: "right", background: "#1f5582"}}>         
+            <th colSpan="2" style={{textAlign: "right", background: "#1f5582"}}>
               <Icon
                 id="close-popup"
                 type="close"
@@ -26,7 +26,7 @@ const Popup = () => {
             </th>
           </tr>
         <tr style={{padding: "2px", background: "#fff"}}>
-            <td style={{padding: "2px"}}>Class</td>
+            <td style={{padding: "2px"}}>Classe</td>
             <td id="popup-lulc" style={{padding: "2px"}}></td>
         </tr>
         <tr style={{padding: "2px", background: "#fff"}}>

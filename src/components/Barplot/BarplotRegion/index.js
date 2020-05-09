@@ -76,7 +76,7 @@ const Barplot = props => {
             }
           },
           autosize: false,
-          width: 500,
+          width: 400,
           height: 300,
           xaxis: {
             title: {
