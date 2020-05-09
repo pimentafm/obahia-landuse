@@ -190,12 +190,20 @@ const RegionMap = props => {
           pcoords.innerHTML = stringifyFunc(coords);
           value.innerHTML = html ? html : "NaN";
 
+
+          const element = document.getElementById('popup-class');
+          element.style.display = "unset";
+
           const popup = new Overlay({
-            element: document.getElementById('popup'),
+            position: coords,
+            element: element,
             positioning: 'bottom-left',
+            autoPan: true,
+            autoPanAnimation: {
+              duration: 250
+            }
           });
 
-          popup.setPosition(coords);
           map.addOverlay(popup);
 
         });
