@@ -4,7 +4,6 @@ import { Icon } from "antd";
 import { PopupContainer } from './styles';
 
 const Popup = () => {
-
   const closePopup = () => {
     const element = document.getElementById('popup-class');
     element.style.display = "none";
