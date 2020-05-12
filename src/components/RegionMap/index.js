@@ -163,8 +163,6 @@ const RegionMap = props => {
         INFO_FORMAT: 'text/html',
         VERSION: '1.3.0'
       });
-
-      console.log(url)
       
     if (url) {
       fetch(url)

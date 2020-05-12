@@ -5,6 +5,8 @@ import TileLayer from "ol/layer/Tile";
 import TileWMS from "ol/source/TileWMS";
 import OSM from "ol/source/OSM";
 import { defaults } from 'ol/interaction';
+import {createStringXY} from 'ol/coordinate';
+import Overlay from 'ol/Overlay';
 
 import oba from "~/services/obahiadb";
 
@@ -16,11 +18,14 @@ import Scalebar from "~/components/Scalebar";
 import Footer from "~/components/Footer";
 
 import CardPlot from "~/components/CardPlot";
+
 import Stackplot from "~/components/Stackplot/StackplotCounty";
 import Barplot from "~/components/Barplot/BarplotCounty";
 
 import CardReport from "~/components/CardReport";
 import Report from "~/components/Report";
+
+import Popup from "~/components/popup";
 
 import domtoimage from 'dom-to-image';
 
@@ -163,6 +168,65 @@ const CountyMap = props => {
     });
   };
 
+  map.on('singleclick', evt => {
+
+    let coords = evt.coordinate;
+    let res = view.getResolution();
+    let proj = view.getProjection();
+
+    let url = landuse.getSource().getFeatureInfoUrl(
+      coords, res, proj,
+      {
+        INFO_FORMAT: 'text/html',
+        VERSION: '1.3.0'
+      });
+      
+    if (url) {
+      fetch(url)
+        .then(response => { return response.text(); })
+        .then(html => {
+          const stringifyFunc = createStringXY(5);
+
+          const luclass = document.getElementById('popup-lulc');
+          const pcoords = document.getElementById('popup-coords');
+          const value = document.getElementById('popup-value');
+
+          const luclasses = {
+            '1.0': 'Formações florestais',
+            '2.0': 'Formações savânicas',
+            '3.0': 'Formações campestres',
+            '4.0': 'Mosaico de agricultura ou pastagem',
+            '5.0': 'Agricultura de sequeiro',
+            '6.0': 'Agricultura irrigada',
+            '7.0': 'Pastagem',
+            '8.0': `Corpos d'água`,
+            '9.0': 'Área urbana/Construções rurais'
+          };
+
+          luclass.innerHTML = luclasses[html] ? luclasses[html] : "NaN";
+          pcoords.innerHTML = stringifyFunc(coords);
+          value.innerHTML = html ? html : "NaN";
+
+
+          const element = document.getElementById('popup-class');
+          element.style.display = "unset";
+
+          const popup = new Overlay({
+            position: coords,
+            element: element,
+            positioning: 'bottom-left',
+            autoPan: true,
+            autoPanAnimation: {
+              duration: 250
+            }
+          });
+
+          map.addOverlay(popup);
+
+        });
+    }
+  });
+
   return (
     <MapContainer id="map">
       <Menu
@@ -178,6 +242,8 @@ const CountyMap = props => {
         onOffLayers={onOffLayers}
         map={map}
       />
+
+      <Popup className="popup-class"/>
 
       <Scalebar key="scalebar" map={map} />
 
