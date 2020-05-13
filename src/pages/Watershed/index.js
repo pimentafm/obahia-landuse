@@ -10,7 +10,7 @@ export default function Region() {
       defaultYear={2018}
       defaultWatershed="grande"
       defaultCategory="Bacia hidrográfica"
-      center={[-45.25811, -12.652125]}
+      center={[-45.034,-11.68]}
       zoom={8}
       />
     </>
