@@ -37,9 +37,15 @@ const CountyMap = props => {
   const [plotsAreHidden] = useState(false);
   const [reportIsHidden, setReportHidden] = useState(true);
   const [center, setCenter] = useState(props.center);
-  const [zoom] = useState(props.zoom);
+  const [zoom, setZoom] = useState(props.zoom);
   const [landuse] = useState(new TileLayer({ name: 'landuse', visible: true }));
   const [landsat] = useState(new TileLayer({ name: 'landsat', visible: false }));
+  const [view] = useState(new View({
+    projection: "EPSG:4326",
+    center: center,
+    zoom: zoom
+  }));
+
   const [stackImage, setStackImage] = useState("http://obahia.dea.ufv.br/static/geonode/img/loading.png");
   const [barImage, setBarImage] = useState("http://obahia.dea.ufv.br/static/geonode/img/loading.png");
 
@@ -72,12 +78,6 @@ const CountyMap = props => {
   landuse.getSource().updateParams({ time: Date.now() });
   landuse.changed();
 
-  const view = new View({
-    projection: "EPSG:4326",
-    center: center,
-    zoom: zoom
-  });
-
   const osm = new TileLayer({ source: new OSM() });
 
   const map = new OlMap({
@@ -91,20 +91,18 @@ const CountyMap = props => {
   });
 
   useEffect(() => {
-    map.getView().setCenter(center);
-    map.getView().setZoom(zoom);
-
     map.setTarget("map");
-  }, [center, zoom, map]);
+    map.getView().setZoom(zoom);
+  }, [zoom, map]);
 
   const handleYears = year => {
     setYear(year);
   };
 
   const handleCodeNames = codename => {
-    const code = codename.split(" - ")[1];
+    const code = parseInt(codename.split(" - ")[1]);
 
-    setCode({code: parseInt(code), name: codename});
+    setCode({code: code, name: codename});
 
     oba
       .post("geom/", {
@@ -114,17 +112,16 @@ const CountyMap = props => {
         }
       })
       .then(response => {
-        const cxcy = response.data
-          .filter(f => f.code === defaultCodeName.code)
-          .map(c => c.centroid);
+        let cxcy = response.data
+        .filter(f => f.code === code)
+        .map(c => c.centroid);
 
-        /*
-        const extent = response.data
-          .filter(f => f.code === defaultCodeName.code)
-          .map(c => c.extent);
-        */
-        
-        setCenter(JSON.parse(cxcy[0]));
+      cxcy = JSON.parse(cxcy);
+
+      setCenter(cxcy);
+      setZoom(8);
+
+      map.getView().animate({center: cxcy, duration: 1000});
       })
       .catch(e => {
         this.errors.push(e);
