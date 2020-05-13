@@ -8,7 +8,10 @@ export default function Region() {
     <RegionMap 
       id="map" 
       defaultYear={2018} 
-      defaultCategory="Região"/>
+      defaultCategory="Região"
+      center={[-45.25811, -12.652125]}
+      zoom={8}
+    />
     </>
   );
 }
