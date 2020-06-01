@@ -25,6 +25,7 @@ export const Container = styled(animated.div)<ContainerProps>`
 
   .nav {
     svg {
+      cursor: pointer;
       position: relative;
       float: right;
       transform: translateX(${({ ishidden }) => (ishidden ? 35 : 0)}px);

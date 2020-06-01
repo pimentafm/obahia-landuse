@@ -21,12 +21,28 @@ export const Container = styled.div<ContainerProps>`
   transform: translateX(${({ ishidden }) => (ishidden ? 720 : 0)}px);
   transition: 0.3s;
 
+  @media (min-width: 3840px){
+      transform: translateX(${({ ishidden }) => (ishidden ? 1160 : 0)}px);
+      transition: 0.3s;
+    }
+
   #handleCardplot {
     position: fixed;
     z-index: 1;
     left: 5px;
+
     transform: translateX(${({ ishidden }) => (ishidden ? -350 : 0)}px);
     transition: 0.3s;
+
+    @media (min-width: 1920px){
+      transform: translateX(${({ ishidden }) => (ishidden ? -180 : 0)}px);
+      transition: 0.3s;
+    }
+
+    @media (min-width: 3840px){
+      transform: translateX(${({ ishidden }) => (ishidden ? -50 : 0)}px);
+      transition: 0.3s;
+    }
 
     svg {
       margin-top: 5px;
