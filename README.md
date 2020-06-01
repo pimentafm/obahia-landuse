@@ -1,124 +1,44 @@
-# OBahia-webmap
-## Territorial and Inteligence Analysis System
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-<p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/pimentafm/obahia-webmap?color=blue">
+## Available Scripts
 
-  <a href="https://github.com/pimentafm">
-    <img alt="Made by Fernando Pimenta" src="https://img.shields.io/badge/made%20by-Fernando%20Pimenta-blue">
-  </a>
+In the project directory, you can run:
 
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-blue">
-</p>
+### `yarn start`
 
-![alt text](/public/app.png)
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Dependencies:
-[![made-with-Nodejs](https://img.shields.io/badge/Nodejs-green.svg)](https://nodejs.org/)
-[![made-with-Yarn](https://img.shields.io/badge/Yarn-2188b6.svg)](https://yarnpkg.com/)
-[![made-with-React](https://img.shields.io/badge/React-61dafb.svg)](https://https://reactjs.org/)
-[![made-with-Mapserver](https://img.shields.io/badge/mapserver-33a333.svg)](https://mapserver.org/)
-[![made-with-PHP](https://img.shields.io/badge/Django-purple.svg)](https://www.php.net/)
-[![made-with-PostgreSQL](https://img.shields.io/badge/PostgreSQL-33658f.svg)](https://www.postgresql.org/)
-[![made-with-PostGIS](https://img.shields.io/badge/PostGIS-5a7a9f.svg)](https://postgis.net/)
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-*nodejs dependencies can be found in `package.json`.
+### `yarn test`
 
-Set dbconfig.ini in the `/obahia-webmap/obahiadb` folder:
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-```ini
-host=localhost
-port=5432
-database=database
-user=postgres
-password=postgres
-```
+### `yarn build`
 
-Set dbconfig.map in the `/obahia-webmap/mapfiles/includes` folder:
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-```
-CONNECTIONTYPE postgis
-CONNECTION "host=localhost dbname=database user=postgres password=postgres port=5432"
-```
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-See below the project folder structure:
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-```
-├── obahia-site             
-│   ├── api    
-|   |   └── ...
-|   |   ├── dbconfig.ini
-|   |   ├── ...
-|   |   ...
-│   ├── mapfiles
-|       └── fonts
-|       ├── includes
-|           └── ...
-|           ├── dbconfig.map
-|           ...
-|       ...
-│   ├── public       
-│   └── src
-│   ...
-```
+### `yarn eject`
 
-Run `yarn start` to develop the app.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-Run `yarn build` to deploy the app.
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-<hr>
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-## Build App using BrowserRouter in an Apache server:
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-In `package.json` set the proxy and homepage with the `<app-base-name>`:
+## Learn More
 
-```json
-{
-  ...
-  "homepage": "http://yourhost.com/<app-base-name>",
-  "proxy": "http://yourhost.com:80",
-  ...
-}
-```
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-Add the basename in your BrowserRouter component:
-
-```jsx
-
-<!-- A Code Snippet example -->
-import React from 'react';
-import { ToastContainer } from 'react-toastify'
-import { HashRouter } from 'react-router-dom';
-
-import GlobalStyle from './styles/global';
-
-import Header from './components/Header';
-import Routes from './routes';
-
-function App() {
-  return (
-    <HashRouter basename="/<app-base-name>">
-    <Header />
-    <Routes />
-    <GlobalStyle />
-    <ToastContainer className="toast-class" />
-    </HashRouter>
-  );
-}
-
-export default App;
-```
-
-Add the `.htaccess` into public folder or directly into your `<app-base-name>` folder:
-
-```apache
-<IfModule mod_rewrite.c>
-  Options -MultiViews
-	RewriteEngine On
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^ index.html [QSA,L]
-</IfModule>
-```
-<hr>
-
-Fernando Pimenta [My Github!](https://github.com/pimentafm)
+To learn React, check out the [React documentation](https://reactjs.org/).
