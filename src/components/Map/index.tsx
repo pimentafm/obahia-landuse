@@ -30,7 +30,7 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
-  const [landuse] = useState(new TileLayer());
+  const [landuse] = useState(new TileLayer({visible: true}));
   const [year, setYear] = useState(defaultYear);
 
   const [center] = useState([-45.2471, -12.4818]);
@@ -54,6 +54,8 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     },
     serverType: 'mapserver',
   });
+
+  landuse.set('name', 'landuse');
 
   landuse.setSource(landuse_source);
   landuse.getSource().refresh();

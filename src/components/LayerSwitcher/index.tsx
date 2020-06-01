@@ -10,24 +10,23 @@ import { Container } from './styles';
 interface LayerSwitcherProps {
   name: string;
   label: string;
+  handleLayerVisibility(evt: boolean): void;
 }
 
-const LayerSwitcher: React.FC<LayerSwitcherProps> = ({ name, label }) => {
+const LayerSwitcher: React.FC<LayerSwitcherProps> = ({ name, label, handleLayerVisibility }) => {
   const [visible, setVisible] = useState(true);
 
   const handleLegend = useCallback(() => {
-    if (visible === true) {
-      setVisible(false);
-    } else {
-      setVisible(true);
-    }
+    (visible ? setVisible(false) : setVisible(true))
+
   }, [visible]);
+  
 
   return (
     <Container id="layerswitcher">
       <div className="layer-div">
         <label>{label}</label>
-        <Switch defaultChecked={true} onChange={handleLegend} />
+        <Switch defaultChecked={true} onChange={handleLayerVisibility} />
       </div>
 
       <Legend name={name} isvisible={visible}></Legend>
