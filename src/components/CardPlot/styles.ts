@@ -18,31 +18,31 @@ export const Container = styled.div<ContainerProps>`
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.13), 1px 2px 2px rgba(0, 0, 0, 0.1),
     -1px -2px 2px rgba(0, 0, 0, 0.05);
 
-  transform: translateX(${({ ishidden }) => (ishidden ? 720 : 0)}px);
+  transform: translateX(${({ ishidden }) => (ishidden ? 40 : 0)}px);
   transition: 0.3s;
 
-  @media (min-width: 3840px){
-      transform: translateX(${({ ishidden }) => (ishidden ? 1160 : 0)}px);
+  @media screen and (max-width: 3840px) {
+      transform: translateX(${({ ishidden }) => (ishidden ? 30 : 0)}vw);
       transition: 0.3s;
-    }
+  }
+
+  @media screen and (max-width: 1280px){
+      transform: translateX(${({ ishidden }) => (ishidden ? 50 : 0)}vh);
+      transition: 0.3s;
+  }
+
+  @media screen and (max-width: 800px){
+      transform: translateX(${({ ishidden }) => (ishidden ? 68 : 0)}vh);
+      transition: 0.3s;
+  }
 
   #handleCardplot {
-    position: fixed;
+    position: absolute;
     z-index: 1;
     left: 5px;
 
-    transform: translateX(${({ ishidden }) => (ishidden ? -350 : 0)}px);
+    transform: translateX(${({ ishidden }) => (ishidden ? -40 : 0)}px);
     transition: 0.3s;
-
-    @media (min-width: 1920px){
-      transform: translateX(${({ ishidden }) => (ishidden ? -180 : 0)}px);
-      transition: 0.3s;
-    }
-
-    @media (min-width: 3840px){
-      transform: translateX(${({ ishidden }) => (ishidden ? -50 : 0)}px);
-      transition: 0.3s;
-    }
 
     svg {
       margin-top: 5px;
