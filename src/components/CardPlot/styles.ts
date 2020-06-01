@@ -45,6 +45,7 @@ export const Container = styled.div<ContainerProps>`
     transition: 0.3s;
 
     svg {
+      cursor: pointer;
       margin-top: 5px;
       border-radius: 2px;
       background: #fff;
