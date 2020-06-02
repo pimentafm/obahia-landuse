@@ -22,26 +22,36 @@ export const Container = styled.div<ContainerProps>`
   transition: 0.3s;
 
   @media screen and (max-width: 3840px) {
-      transform: translateX(${({ ishidden }) => (ishidden ? 30 : 0)}vw);
-      transition: 0.3s;
+    transform: translateX(${({ ishidden }) => (ishidden ? 30 : 0)}vw);
+    transition: 0.3s;
   }
 
-  @media screen and (max-width: 1280px){
-      transform: translateX(${({ ishidden }) => (ishidden ? 50 : 0)}vh);
-      transition: 0.3s;
+  @media screen and (max-width: 1280px) {
+    transform: translateX(${({ ishidden }) => (ishidden ? 43 : 0)}vh);
+    transition: 0.3s;
   }
 
-  @media screen and (max-width: 800px){
-      transform: translateX(${({ ishidden }) => (ishidden ? 68 : 0)}vh);
-      transition: 0.3s;
+  @media screen and (max-width: 1200px) {
+    transform: translateX(${({ ishidden }) => (ishidden ? 43 : 0)}vh);
+    transition: 0.3s;
   }
+
+  /* @media screen and (max-width: 992px) {
+    transform: translateX(${({ ishidden }) => (ishidden ? 10 : 0)}vh);
+    transition: 0.3s;
+  }
+
+  @media screen and (max-width: 800px) {
+    transform: translateX(${({ ishidden }) => (ishidden ? 68 : 0)}vh);
+    transition: 0.3s;
+  } */
 
   #handleCardplot {
     position: absolute;
     z-index: 1;
     left: 5px;
 
-    transform: translateX(${({ ishidden }) => (ishidden ? -40 : 0)}px);
+    transform: translateX(${({ ishidden }) => (ishidden ? -42 : 0)}px);
     transition: 0.3s;
 
     svg {
