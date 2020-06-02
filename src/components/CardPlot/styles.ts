@@ -21,6 +21,11 @@ export const Container = styled.div<ContainerProps>`
   transform: translateX(${({ ishidden }) => (ishidden ? 40 : 0)}px);
   transition: 0.3s;
 
+  @media screen and (max-width: 4096px) {
+    transform: translateX(${({ ishidden }) => (ishidden ? 30 : 0)}vw);
+    transition: 0.3s;
+  }
+
   @media screen and (max-width: 3840px) {
     transform: translateX(${({ ishidden }) => (ishidden ? 30 : 0)}vw);
     transition: 0.3s;
@@ -36,15 +41,20 @@ export const Container = styled.div<ContainerProps>`
     transition: 0.3s;
   }
 
-  /* @media screen and (max-width: 992px) {
-    transform: translateX(${({ ishidden }) => (ishidden ? 10 : 0)}vh);
+  @media screen and (max-width: 992px) {
+    transform: translateX(${({ ishidden }) => (ishidden ? 43 : 0)}vh);
     transition: 0.3s;
   }
 
   @media screen and (max-width: 800px) {
-    transform: translateX(${({ ishidden }) => (ishidden ? 68 : 0)}vh);
+    transform: translateX(${({ ishidden }) => (ishidden ? 43 : 0)}vh);
     transition: 0.3s;
-  } */
+  }
+
+  @media screen and (max-width: 400px) {
+    transform: translateX(${({ ishidden }) => (ishidden ? 45 : 0)}vh);
+    transition: 0.3s;
+  }
 
   #handleCardplot {
     position: absolute;
