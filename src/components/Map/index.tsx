@@ -30,7 +30,7 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
-  const [landuse] = useState(new TileLayer({visible: true}));
+  const [landuse] = useState(new TileLayer({ visible: true }));
   const [year, setYear] = useState(defaultYear);
 
   const [center] = useState([-45.2471, -12.4818]);
@@ -95,7 +95,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
 
       <Popup map={map} source={landuse_source} />
 
-      <CardPlot />
+      <CardPlot year={year} />
 
       <Footer id="footer" map={map} />
 

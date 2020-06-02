@@ -7,8 +7,11 @@ interface BarPlotData {
   data: Object;
 }
 
-const Barplot: React.FC = () => {
-  const [year, setYear] = useState(2018);
+interface BarplotProps {
+  year: number;
+}
+
+const Barplot: React.FC<BarplotProps> = ({ year }) => {
   const [landuse, setData] = useState([]);
 
   const [colors] = useState([
@@ -118,7 +121,6 @@ const Barplot: React.FC = () => {
         let data = await response.data.map((j: BarPlotData) =>
           Object.values(j),
         );
-        setYear(year);
         setData(data[0]);
       })
       .catch(e => {

@@ -8,7 +8,11 @@ import { Container } from './styles';
 
 import Barplot from './Barplot';
 
-const CardPlot: React.FC = () => {
+interface CardProps {
+  year: number;
+}
+
+const CardPlot: React.FC<CardProps> = ({ year }) => {
   const [hidden, setHidden] = useState(0);
 
   const handleCardPlot = useCallback(() => {
@@ -31,7 +35,7 @@ const CardPlot: React.FC = () => {
         </Tooltip>
       </div>
 
-      <Barplot />
+      <Barplot year={year} />
     </Container>
   );
 };
