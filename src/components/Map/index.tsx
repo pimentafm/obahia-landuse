@@ -45,6 +45,20 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     }),
   );
 
+  const osm = new TileLayer({ source: new OSM() });
+
+  const [map] = useState(
+    new OlMap({
+      controls: [],
+      target: undefined,
+      layers: [osm, landuse],
+      view: view,
+      interactions: defaults({
+        keyboard: false,
+      }),
+    }),
+  );
+
   const landuse_source = new TileWMS({
     url: wms.defaults.baseURL + 'landuseRegion.map',
     params: {
@@ -56,21 +70,8 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   });
 
   landuse.set('name', 'landuse');
-
   landuse.setSource(landuse_source);
   landuse.getSource().refresh();
-
-  const osm = new TileLayer({ source: new OSM() });
-
-  const map = new OlMap({
-    controls: [],
-    target: undefined,
-    layers: [osm, landuse],
-    view: view,
-    interactions: defaults({
-      keyboard: false,
-    }),
-  });
 
   const handleYear = useCallback(
     y => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tooltip } from 'antd';
 
 import OlMap from 'ol/Map';
@@ -14,12 +14,14 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ id, map, ...rest }) => {
-  const mousePosition = new MousePosition({
-    coordinateFormat: createStringXY(5),
-    projection: 'EPSG:4326',
-    className: 'mouse-position',
-    undefinedHTML: '&nbsp;',
-  });
+  const [mousePosition] = useState(
+    new MousePosition({
+      coordinateFormat: createStringXY(5),
+      projection: 'EPSG:4326',
+      className: 'mouse-position',
+      undefinedHTML: '&nbsp;',
+    }),
+  );
 
   useEffect(() => {
     mousePosition.setTarget('mouse-position-coordinates');
