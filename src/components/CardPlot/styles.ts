@@ -32,27 +32,24 @@ export const Container = styled.div<ContainerProps>`
   }
 
   @media screen and (max-width: 1280px) {
-    transform: translateX(${({ ishidden }) => (ishidden ? 43 : 0)}vh);
+    transform: translateX(${({ ishidden }) => (ishidden ? 51 : 0)}vh);
     transition: 0.3s;
   }
 
-  @media screen and (max-width: 1200px) {
-    transform: translateX(${({ ishidden }) => (ishidden ? 43 : 0)}vh);
+  /* IPhone Pro*/
+  @media screen and (max-width: 1024px) {
+    transform: translateX(${({ ishidden }) => (ishidden ? 30 : 0)}vh);
     transition: 0.3s;
   }
 
   @media screen and (max-width: 992px) {
-    transform: translateX(${({ ishidden }) => (ishidden ? 43 : 0)}vh);
+    transform: translateX(${({ ishidden }) => (ishidden ? 41 : 0)}vh);
     transition: 0.3s;
   }
 
-  @media screen and (max-width: 800px) {
-    transform: translateX(${({ ishidden }) => (ishidden ? 43 : 0)}vh);
-    transition: 0.3s;
-  }
-
-  @media screen and (max-width: 400px) {
-    transform: translateX(${({ ishidden }) => (ishidden ? 45 : 0)}vh);
+  /* Pixel 2, IPhone 6/7/8 plus*/
+  @media screen and (max-width: 414px) {
+    transform: translateX(${({ ishidden }) => (ishidden ? 55 : 0)}vh);
     transition: 0.3s;
   }
 
