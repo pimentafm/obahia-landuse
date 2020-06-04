@@ -18,7 +18,6 @@ import { Container } from './styles';
 
 import Menu from '../Menu';
 import Footer from '../Footer';
-import Scalebar from '../ScaleBar';
 
 import CardPlot from '../CardPlot';
 
@@ -99,8 +98,6 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       <CardPlot year={year} />
 
       <Footer id="footer" map={map} />
-
-      <Scalebar id="scalebar" map={map} />
     </Container>
   );
 };

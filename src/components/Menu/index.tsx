@@ -10,6 +10,7 @@ import 'antd/dist/antd.css';
 import { FiMenu } from 'react-icons/fi';
 
 import ZoomControl from './ZoomControl';
+import Scalebar from './ScaleBar';
 
 import LayerSwitcher from '../LayerSwitcher';
 
@@ -38,10 +39,10 @@ const Menu: React.FC<MenuProps> = ({
   const [category, setCategory] = useState(defaultCategory);
 
   const [categories] = useState([
-    ['Região', '/'],
+    ['Regional', '/'],
     ['Bacia hidrográfica', 'watershed'],
     ['Área de drenagem', 'drainage'],
-    ['Municípios', 'county'],
+    ['Municipal', 'county'],
   ]);
 
   const [years] = useState(
@@ -64,8 +65,9 @@ const Menu: React.FC<MenuProps> = ({
     [history],
   );
 
-  const handleLayerVisibility = useCallback((evt) => {
-    const lyr_name = 'landuse'; //obj.target.name;
+  const handleLayerVisibility = useCallback(
+    evt => {
+      const lyr_name = 'landuse'; //obj.target.name;
 
       map.getLayers().forEach(lyr => {
         if (lyr.get('name') === lyr_name) {
@@ -81,6 +83,7 @@ const Menu: React.FC<MenuProps> = ({
   return (
     <Container id="menu" ishidden={hidden}>
       <ZoomControl ishidden={hidden} map={map} />
+      <Scalebar id="scalebar" map={map} />
 
       <div id="nav" className="nav">
         <Tooltip placement="right" title="Esconde/Mostra menu">
@@ -94,7 +97,7 @@ const Menu: React.FC<MenuProps> = ({
         </Tooltip>
       </div>
 
-      <label>Categoria</label>
+      <label>Nível</label>
       <Select
         id="select-category"
         defaultValue={category}
@@ -121,7 +124,11 @@ const Menu: React.FC<MenuProps> = ({
         ))}
       </Select>
 
-      <LayerSwitcher name="landuse" label="Uso do solo" handleLayerVisibility={handleLayerVisibility} />
+      <LayerSwitcher
+        name="landuse"
+        label="Uso do solo"
+        handleLayerVisibility={handleLayerVisibility}
+      />
     </Container>
   );
 };
