@@ -7,6 +7,7 @@ import { FiMenu } from 'react-icons/fi';
 import { Container } from './styles';
 
 import Barplot from './Barplot';
+import StackPlot from './StackPlot';
 
 interface CardProps {
   year: number;
@@ -35,6 +36,10 @@ const CardPlot: React.FC<CardProps> = ({ year }) => {
         </Tooltip>
       </div>
 
+      <label>Cobertura e uso do solo (1990 - 2018)</label>
+      <StackPlot year={year} />
+
+      <label>Cobertura e uso do solo {year}</label>
       <Barplot year={year} />
     </Container>
   );

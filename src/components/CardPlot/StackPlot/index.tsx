@@ -15,7 +15,11 @@ interface StackPlotData {
   urban: Object;
 }
 
-const StackPlot: React.FC = () => {
+interface StackPlotProps {
+  year: number;
+}
+
+const StackPlot: React.FC<StackPlotProps> = ({ year }) => {
   const [forest, setForest] = useState(null);
   const [savanna, setSavanna] = useState(null);
   const [grass, setGrass] = useState(null);
@@ -141,7 +145,7 @@ const StackPlot: React.FC = () => {
   ];
   const layout = {
     title: {
-      text: '<b>Cobertura e uso do solo (1990 - 2018) - Rio</b>',
+      //text: '<b>Cobertura e uso do solo (1990 - 2018)</b>',
       font: {
         family: 'Arial, sans-serif',
         size: 14,
@@ -191,7 +195,7 @@ const StackPlot: React.FC = () => {
       tickcolor: '#000',
     },
     showlegend: false,
-    margin: { l: 60, r: 10, t: 70, b: 30 },
+    margin: { l: 60, r: 10, t: 0, b: 30 },
   };
 
   const config = {

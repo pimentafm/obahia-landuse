@@ -50,7 +50,7 @@ const Barplot: React.FC<BarplotProps> = ({ year }) => {
 
   const layout = {
     title: {
-      text: '<b>Cobertura e uso do solo ' + year + '</b>',
+      // text: '<b>Cobertura e uso do solo ' + year + '</b>',
       font: {
         family: 'Arial, sans-serif',
         size: 14,
@@ -100,7 +100,7 @@ const Barplot: React.FC<BarplotProps> = ({ year }) => {
       tickcolor: '#000',
     },
     showlegend: false,
-    margin: { l: 60, r: 10, t: 70, b: 50 },
+    margin: { l: 60, r: 10, t: 0, b: 50 },
   };
 
   const config = {
