@@ -33,6 +33,8 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
       </div>
 
       <Legend name={name} isvisible={visible}></Legend>
+
+      {/* <Divider style={{ margin: `5px 0px 5px 0px` }} /> */}
     </Container>
   );
 };

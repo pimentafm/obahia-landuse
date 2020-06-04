@@ -19,7 +19,9 @@ import { Container } from './styles';
 interface MenuProps {
   ishidden: number;
   defaultCategory: string;
+  defaultWatershed?: string;
   defaultYear: number;
+  handleWatershed?(year: string): void;
   handleYear(year: number): void;
   map: OlMap;
 }
@@ -29,7 +31,9 @@ const { Option } = Select;
 const Menu: React.FC<MenuProps> = ({
   ishidden,
   defaultCategory,
+  defaultWatershed,
   defaultYear,
+  handleWatershed,
   handleYear,
   map,
   ...rest
@@ -37,6 +41,9 @@ const Menu: React.FC<MenuProps> = ({
   const [hidden, setHidden] = useState(ishidden);
   const history = useHistory();
   const [category, setCategory] = useState(defaultCategory);
+
+  const [watersheds] = useState(['grande', 'corrente', 'carinhanha']);
+  const [watershed, setWatershed] = useState(defaultWatershed);
 
   const [categories] = useState([
     ['Regional', '/'],
@@ -78,6 +85,29 @@ const Menu: React.FC<MenuProps> = ({
     [map],
   );
 
+  let watershedsLabel = null;
+  let watershedSelect = null;
+
+  if (defaultCategory === 'Bacia hidrográfica') {
+    watershedsLabel = <label>Nome</label>;
+    watershedSelect = (
+      <Select
+        id="select"
+        defaultValue={defaultWatershed}
+        onChange={handleWatershed}
+        style={{ color: '#000' }}
+      >
+        {watersheds.map(c => (
+          <Option key={c} value={c} style={{ color: '#000' }}>
+            {c}
+          </Option>
+        ))}
+      </Select>
+    );
+  } else {
+    watershedSelect = null;
+  }
+
   useEffect(() => {}, []);
 
   return (
@@ -109,6 +139,9 @@ const Menu: React.FC<MenuProps> = ({
           </Option>
         ))}
       </Select>
+
+      {watershedsLabel}
+      {watershedSelect}
 
       <label>Ano</label>
       <Select

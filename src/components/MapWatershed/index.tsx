@@ -26,11 +26,17 @@ import Popup from '../../components/Popup';
 interface MapProps {
   defaultYear: number;
   defaultCategory: string;
+  defaultWatershed?: string;
 }
 
-const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
+const Map: React.FC<MapProps> = ({
+  defaultYear,
+  defaultCategory,
+  defaultWatershed,
+}) => {
   const [landuse] = useState(new TileLayer({ visible: true }));
   const [year, setYear] = useState(defaultYear);
+  const [watershed, setWatershed] = useState(defaultWatershed);
 
   const [center] = useState([-45.2471, -12.4818]);
   const [zoom] = useState(7);
@@ -59,9 +65,10 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   );
 
   const landuse_source = new TileWMS({
-    url: wms.defaults.baseURL + 'landuseRegion.map',
+    url: wms.defaults.baseURL + 'landuseWatersheds.map',
     params: {
       year: year,
+      ws: watershed,
       LAYERS: 'landuse',
       TILED: true,
     },
@@ -79,6 +86,10 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     [setYear],
   );
 
+  const handleWatershed = useCallback(ws => {
+    setWatershed(ws);
+  }, []);
+
   useEffect(() => {
     map.setTarget('map');
   });
@@ -88,6 +99,8 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       <Menu
         ishidden={false ? 1 : 0}
         defaultCategory={defaultCategory}
+        defaultWatershed={defaultWatershed}
+        handleWatershed={handleWatershed}
         defaultYear={year}
         handleYear={handleYear}
         map={map}
