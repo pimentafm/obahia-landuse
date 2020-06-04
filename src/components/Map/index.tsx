@@ -87,7 +87,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     <Container id="map">
       <Menu
         ishidden={false ? 1 : 0}
-        defaultCategory="Region"
+        defaultCategory={defaultCategory}
         defaultYear={year}
         handleYear={handleYear}
         map={map}
