@@ -43,7 +43,6 @@ const Menu: React.FC<MenuProps> = ({
   const [category, setCategory] = useState(defaultCategory);
 
   const [watersheds] = useState(['grande', 'corrente', 'carinhanha']);
-  const [watershed, setWatershed] = useState(defaultWatershed);
 
   const [categories] = useState([
     ['Regional', '/'],

@@ -15,11 +15,17 @@ interface StackPlotData {
   urban: Object;
 }
 
+interface StackPlotData {
+  classname: string;
+  areakm2: string;
+}
+
 interface StackPlotProps {
+  watershed: string;
   tableName: string;
 }
 
-const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
+const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
   const [forest, setForest] = useState(null);
   const [savanna, setSavanna] = useState(null);
   const [grass, setGrass] = useState(null);
@@ -36,29 +42,69 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
 
   useEffect(() => {
     oba
-      .post('region/', {
+      .post('gcc/', {
         year1: 1990,
         year2: 2018,
+        gcc: watershed,
         table_name: tableName,
         headers: {
           'Content-type': 'application/json',
         },
       })
-      .then(async response => {
-        setForest(await response.data.map((j: StackPlotData) => j.forest));
-        setSavanna(await response.data.map((j: StackPlotData) => j.savanna));
-        setGrass(await response.data.map((j: StackPlotData) => j.grass));
-        setCroppast(await response.data.map((j: StackPlotData) => j.croppast));
-        setRaincrop(await response.data.map((j: StackPlotData) => j.raincrop));
-        setIrrcrop(await response.data.map((j: StackPlotData) => j.irrcrop));
-        setPast(await response.data.map((j: StackPlotData) => j.past));
-        setWater(await response.data.map((j: StackPlotData) => j.water));
-        setUrban(await response.data.map((j: StackPlotData) => j.urban));
+      .then(response => {
+        setForest(
+          response.data
+            .filter((f: StackPlotData) => f.classname === 'Forest formations')
+            .map((a: StackPlotData) => a.areakm2),
+        );
+        setSavanna(
+          response.data
+            .filter((f: StackPlotData) => f.classname === 'Savanna formations')
+            .map((a: StackPlotData) => a.areakm2),
+        );
+        setGrass(
+          response.data
+            .filter((f: StackPlotData) => f.classname === 'Grasslands')
+            .map((a: StackPlotData) => a.areakm2),
+        );
+        setCroppast(
+          response.data
+            .filter(
+              (f: StackPlotData) =>
+                f.classname === 'Mosaic of crop and pasture',
+            )
+            .map((a: StackPlotData) => a.areakm2),
+        );
+        setRaincrop(
+          response.data
+            .filter((f: StackPlotData) => f.classname === 'Rainfed crop')
+            .map((a: StackPlotData) => a.areakm2),
+        );
+        setIrrcrop(
+          response.data
+            .filter((f: StackPlotData) => f.classname === 'Irrigated crop')
+            .map((a: StackPlotData) => a.areakm2),
+        );
+        setPast(
+          response.data
+            .filter((f: StackPlotData) => f.classname === 'Pasturelands')
+            .map((a: StackPlotData) => a.areakm2),
+        );
+        setWater(
+          response.data
+            .filter((f: StackPlotData) => f.classname === 'Water bodies')
+            .map((a: StackPlotData) => a.areakm2),
+        );
+        setUrban(
+          response.data
+            .filter((f: StackPlotData) => f.classname === 'Urban areas')
+            .map((a: StackPlotData) => a.areakm2),
+        );
       })
       .catch(e => {
         throw new Error('Do not load StackPlot data');
       });
-  }, [tableName]);
+  }, [watershed, tableName]);
 
   const data = [
     {
@@ -189,7 +235,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       autotick: false,
       ticks: 'outside',
       tick0: 0,
-      dtick: 20,
+      dtick: 8,
       ticklen: 8,
       tickwidth: 2,
       tickcolor: '#000',

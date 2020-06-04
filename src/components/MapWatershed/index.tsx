@@ -12,21 +12,26 @@ import { defaults } from 'ol/interaction';
 
 import 'ol/ol.css';
 
-import { wms } from '../../services';
+import { oba, wms } from '../../services';
 
 import { Container } from './styles';
 
 import Menu from '../Menu';
 import Footer from '../Footer';
 
-import CardPlot from '../CardPlot';
+import CardPlot from '../CardPlotWatershed';
 
 import Popup from '../../components/Popup';
 
 interface MapProps {
   defaultYear: number;
   defaultCategory: string;
-  defaultWatershed?: string;
+  defaultWatershed: string;
+}
+
+interface WatershedsData {
+  name: string;
+  centroid: Object;
 }
 
 const Map: React.FC<MapProps> = ({
@@ -38,8 +43,8 @@ const Map: React.FC<MapProps> = ({
   const [year, setYear] = useState(defaultYear);
   const [watershed, setWatershed] = useState(defaultWatershed);
 
-  const [center] = useState([-45.2471, -12.4818]);
-  const [zoom] = useState(7);
+  const [center, setCenter] = useState([-45.2471, -12.4818]);
+  const [zoom, setZoom] = useState(7);
 
   const [view] = useState(
     new View({
@@ -86,9 +91,35 @@ const Map: React.FC<MapProps> = ({
     [setYear],
   );
 
-  const handleWatershed = useCallback(ws => {
-    setWatershed(ws);
-  }, []);
+  const handleWatershed = useCallback(
+    ws => {
+      setWatershed(ws);
+
+      oba
+        .post('geom/', {
+          table_name: 'gcc',
+          headers: {
+            'Content-type': 'application/json',
+          },
+        })
+        .then(response => {
+          let cxcy = response.data
+            .filter((f: WatershedsData) => f.name === ws.toUpperCase())
+            .map((c: WatershedsData) => c.centroid);
+
+          cxcy = JSON.parse(cxcy);
+
+          setCenter(cxcy);
+          setZoom(8);
+
+          map.getView().animate({ center: cxcy, duration: 1000 });
+        })
+        .catch(e => {
+          throw new Error('Do not load watersheds data');
+        });
+    },
+    [map],
+  );
 
   useEffect(() => {
     map.setTarget('map');
@@ -108,7 +139,7 @@ const Map: React.FC<MapProps> = ({
 
       <Popup map={map} source={landuse_source} />
 
-      <CardPlot year={year} />
+      <CardPlot year={year} watershed={watershed} />
 
       <Footer id="footer" map={map} />
     </Container>

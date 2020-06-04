@@ -4,15 +4,17 @@ import PlotlyChart from 'react-plotlyjs-ts';
 import { oba } from '../../../services';
 
 interface BarPlotData {
-  data: Object;
+  classname: string;
+  areakm2: string;
 }
 
 interface BarplotProps {
   year: number;
+  watershed: string;
   tableName: string;
 }
 
-const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
+const Barplot: React.FC<BarplotProps> = ({ year, watershed, tableName }) => {
   const [landuse, setData] = useState([]);
 
   const [colors] = useState([
@@ -95,13 +97,13 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
       autotick: false,
       ticks: 'outside',
       tick0: 0,
-      dtick: 6,
+      dtick: 3,
       ticklen: 8,
       tickwidth: 2,
       tickcolor: '#000',
     },
     showlegend: false,
-    margin: { l: 60, r: 10, t: 0, b: 50 },
+    margin: { l: 60, r: 10, t: 10, b: 50 },
   };
 
   const config = {
@@ -110,24 +112,26 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
 
   useEffect(() => {
     oba
-      .post('region/', {
+      .post('gcc/', {
         year1: year,
         year2: year,
+        gcc: watershed,
         table_name: tableName,
         headers: {
           'Content-type': 'application/json',
         },
       })
       .then(async response => {
-        let data = await response.data.map((j: BarPlotData) =>
-          Object.values(j),
-        );
-        setData(data[0]);
+        const data = await response.data
+          .filter((f: BarPlotData) => f.classname)
+          .map((a: BarPlotData) => a.areakm2);
+
+        setData(data);
       })
       .catch(e => {
         throw new Error('Do not load Barplot data');
       });
-  }, [year, tableName]);
+  }, [year, watershed, tableName]);
 
   return <PlotlyChart data={data} layout={layout} config={config} />;
 };

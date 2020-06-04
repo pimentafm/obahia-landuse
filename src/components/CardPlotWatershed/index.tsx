@@ -11,9 +11,10 @@ import StackPlot from './StackPlot';
 
 interface CardProps {
   year: number;
+  watershed: string;
 }
 
-const CardPlot: React.FC<CardProps> = ({ year }) => {
+const CardPlot: React.FC<CardProps> = ({ year, watershed }) => {
   const [hidden, setHidden] = useState(0);
 
   const handleCardPlot = useCallback(() => {
@@ -37,10 +38,10 @@ const CardPlot: React.FC<CardProps> = ({ year }) => {
       </div>
 
       <label>Cobertura e uso do solo (1990 - 2018)</label>
-      <StackPlot tableName="landuse" />
+      <StackPlot watershed={watershed} tableName="landuse" />
 
       <label>Cobertura e uso do solo {year}</label>
-      <Barplot year={year} tableName="landuse" />
+      <Barplot year={year} watershed={watershed} tableName="landuse" />
     </Container>
   );
 };
