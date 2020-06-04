@@ -112,6 +112,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
                 fontSize: '25px',
                 padding: '2px',
                 float: 'right',
+                cursor: 'pointer',
               }}
             />
           </th>
