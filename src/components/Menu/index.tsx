@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { oba } from '../../services';
+
 import { Tooltip } from 'antd';
 
 import OlMap from 'ol/Map';
@@ -16,12 +18,19 @@ import LayerSwitcher from '../LayerSwitcher';
 
 import { Container } from './styles';
 
+interface DrainageData {
+  code: number;
+  name: string;
+}
+
 interface MenuProps {
   ishidden: number;
   defaultCategory: string;
+  defaultCodeName?: DrainageData;
   defaultWatershed?: string;
   defaultYear: number;
   handleWatershed?(year: string): void;
+  handleCodeName?(codename: string): void;
   handleYear(year: number): void;
   map: OlMap;
 }
@@ -31,8 +40,10 @@ const { Option } = Select;
 const Menu: React.FC<MenuProps> = ({
   ishidden,
   defaultCategory,
+  defaultCodeName,
   defaultWatershed,
   defaultYear,
+  handleCodeName,
   handleWatershed,
   handleYear,
   map,
@@ -42,6 +53,7 @@ const Menu: React.FC<MenuProps> = ({
   const history = useHistory();
   const [category, setCategory] = useState(defaultCategory);
 
+  const [codenames, setCodenames] = useState([]);
   const [watersheds] = useState(['grande', 'corrente', 'carinhanha']);
 
   const [categories] = useState([
@@ -107,6 +119,54 @@ const Menu: React.FC<MenuProps> = ({
     watershedSelect = null;
   }
 
+  let codeNameLabel = null;
+  let codeNameSelect = null;
+
+  if (
+    defaultCategory === 'Área de drenagem' ||
+    defaultCategory === 'Municipal'
+  ) {
+    oba
+      .post('geom/', {
+        table_name: defaultCategory === 'Municipal' ? 'counties' : 'drainage',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(async response => {
+        const data = response.data;
+
+        const names = await data.map((n: DrainageData) => n.name);
+        const codes = await data.map((c: DrainageData) => c.code);
+
+        const codenames = names.map(
+          (n: string, c: number) => n + ' - ' + codes[c],
+        );
+
+        setCodenames(codenames);
+      })
+      .catch(e => {
+        throw new Error('Do not load codenames');
+      });
+
+    codeNameLabel = <label>Nome</label>;
+    codeNameSelect = (
+      <Select
+        id="select"
+        defaultValue={defaultCodeName?.name}
+        onChange={handleCodeName}
+      >
+        {codenames.map(c => (
+          <Option key={c} value={c} style={{ color: '#000' }}>
+            {c}
+          </Option>
+        ))}
+      </Select>
+    );
+  } else {
+    codeNameSelect = null;
+  }
+
   useEffect(() => {}, []);
 
   return (
@@ -141,6 +201,9 @@ const Menu: React.FC<MenuProps> = ({
 
       {watershedsLabel}
       {watershedSelect}
+
+      {codeNameLabel}
+      {codeNameSelect}
 
       <label>Ano</label>
       <Select
