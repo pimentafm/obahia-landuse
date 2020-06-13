@@ -113,15 +113,15 @@ const Map: React.FC<MapProps> = ({
           cxcy = JSON.parse(cxcy);
 
           setCenter(cxcy);
-          setZoom(7);
+          setZoom(8);
 
-          map.getView().animate({ center: cxcy, duration: 1000 });
+          map.getView().animate({ center: cxcy, duration: 1000, zoom });
         })
         .catch(e => {
           throw new Error('Do not load drainage data');
         });
     },
-    [map],
+    [map, zoom],
   );
 
   useEffect(() => {
