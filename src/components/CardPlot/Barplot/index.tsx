@@ -118,10 +118,8 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
           'Content-type': 'application/json',
         },
       })
-      .then(async response => {
-        let data = await response.data.map((j: BarPlotData) =>
-          Object.values(j),
-        );
+      .then(response => {
+        let data = response.data.map((j: BarPlotData) => Object.values(j));
         setData(data[0]);
       })
       .catch(e => {

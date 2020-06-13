@@ -133,11 +133,11 @@ const Menu: React.FC<MenuProps> = ({
           'Content-type': 'application/json',
         },
       })
-      .then(async response => {
+      .then(response => {
         const data = response.data;
 
-        const names = await data.map((n: DrainageData) => n.name);
-        const codes = await data.map((c: DrainageData) => c.code);
+        const names = data.map((n: DrainageData) => n.name);
+        const codes = data.map((c: DrainageData) => c.code);
 
         const codenames = names.map(
           (n: string, c: number) => n + ' - ' + codes[c],

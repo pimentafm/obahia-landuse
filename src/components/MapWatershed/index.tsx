@@ -112,13 +112,13 @@ const Map: React.FC<MapProps> = ({
           setCenter(cxcy);
           setZoom(8);
 
-          map.getView().animate({ center: cxcy, duration: 1000 });
+          map.getView().animate({ center: cxcy, duration: 1000, zoom });
         })
         .catch(e => {
           throw new Error('Do not load watersheds data');
         });
     },
-    [map],
+    [map, zoom],
   );
 
   useEffect(() => {

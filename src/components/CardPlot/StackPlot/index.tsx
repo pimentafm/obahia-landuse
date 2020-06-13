@@ -44,16 +44,16 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
           'Content-type': 'application/json',
         },
       })
-      .then(async response => {
-        setForest(await response.data.map((j: StackPlotData) => j.forest));
-        setSavanna(await response.data.map((j: StackPlotData) => j.savanna));
-        setGrass(await response.data.map((j: StackPlotData) => j.grass));
-        setCroppast(await response.data.map((j: StackPlotData) => j.croppast));
-        setRaincrop(await response.data.map((j: StackPlotData) => j.raincrop));
-        setIrrcrop(await response.data.map((j: StackPlotData) => j.irrcrop));
-        setPast(await response.data.map((j: StackPlotData) => j.past));
-        setWater(await response.data.map((j: StackPlotData) => j.water));
-        setUrban(await response.data.map((j: StackPlotData) => j.urban));
+      .then(response => {
+        setForest(response.data.map((j: StackPlotData) => j.forest));
+        setSavanna(response.data.map((j: StackPlotData) => j.savanna));
+        setGrass(response.data.map((j: StackPlotData) => j.grass));
+        setCroppast(response.data.map((j: StackPlotData) => j.croppast));
+        setRaincrop(response.data.map((j: StackPlotData) => j.raincrop));
+        setIrrcrop(response.data.map((j: StackPlotData) => j.irrcrop));
+        setPast(response.data.map((j: StackPlotData) => j.past));
+        setWater(response.data.map((j: StackPlotData) => j.water));
+        setUrban(response.data.map((j: StackPlotData) => j.urban));
       })
       .catch(e => {
         throw new Error('Do not load StackPlot data');

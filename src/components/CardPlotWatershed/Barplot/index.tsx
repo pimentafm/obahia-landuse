@@ -121,8 +121,8 @@ const Barplot: React.FC<BarplotProps> = ({ year, watershed, tableName }) => {
           'Content-type': 'application/json',
         },
       })
-      .then(async response => {
-        const data = await response.data
+      .then(response => {
+        const data = response.data
           .filter((f: BarPlotData) => f.classname)
           .map((a: BarPlotData) => a.areakm2);
 

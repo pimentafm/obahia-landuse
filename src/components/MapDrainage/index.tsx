@@ -105,8 +105,8 @@ const Map: React.FC<MapProps> = ({
             'Content-type': 'application/json',
           },
         })
-        .then(async response => {
-          let cxcy = await response.data
+        .then(response => {
+          let cxcy = response.data
             .filter((f: DrainageData) => f.code === code)
             .map((c: DrainageData) => c.centroid);
 

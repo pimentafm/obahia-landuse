@@ -26,7 +26,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
       'popup-class',
     ) as HTMLElement;
 
-    console.log((element.style.display = 'none'));
+    element.style.display = 'none';
   }, []);
 
   const getData = useCallback((url, coordinate) => {
