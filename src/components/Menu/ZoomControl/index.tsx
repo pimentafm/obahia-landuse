@@ -12,16 +12,16 @@ interface ZoomControlProps {
 }
 
 const ZoomControl: React.FC<ZoomControlProps> = ({ ishidden, map }) => {
-  const zoomControl = new Zoom({
-    className: 'zoom-controls',
-    zoomInTipLabel: '',
-    zoomOutTipLabel: '',
-  });
-
   useEffect(() => {
-    zoomControl.setTarget('zoomcontrols');
+    const zoomControl = new Zoom({
+      className: 'zoom-controls',
+      target: 'zoomcontrols',
+      zoomInTipLabel: '',
+      zoomOutTipLabel: '',
+    });
+
     map.addControl(zoomControl);
-  }, [map, zoomControl]);
+  }, [map]);
 
   return (
     <Container>
