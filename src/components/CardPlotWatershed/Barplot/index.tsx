@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PlotlyChart from 'react-plotlyjs-ts';
+import Plot from 'react-plotlyjs-ts';
 
 import { oba } from '../../../services';
 
@@ -104,6 +104,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, watershed, tableName }) => {
     },
     showlegend: false,
     margin: { l: 60, r: 10, t: 10, b: 50 },
+    transition: { duration: 2000, easing: 'linear-in-out' },
   };
 
   const config = {
@@ -133,7 +134,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, watershed, tableName }) => {
       });
   }, [year, watershed, tableName]);
 
-  return <PlotlyChart data={data} layout={layout} config={config} />;
+  return <Plot data={data} layout={layout} config={config} />;
 };
 
 export default Barplot;

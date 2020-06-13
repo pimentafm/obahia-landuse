@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PlotlyChart from 'react-plotlyjs-ts';
+import Plot from 'react-plotlyjs-ts';
 
 import { oba } from '../../../services';
 
@@ -248,7 +248,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
     displaylogo: false,
   };
 
-  return <PlotlyChart data={data} layout={layout} config={config} />;
+  return <Plot data={data} layout={layout} config={config} />;
 };
 
 export default StackPlot;
