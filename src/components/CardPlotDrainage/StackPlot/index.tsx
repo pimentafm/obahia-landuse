@@ -242,6 +242,11 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
     },
     showlegend: false,
     margin: { l: 60, r: 10, t: 10, b: 30 },
+    transition: {
+      duration: 1000,
+      easing: 'back-out',
+      ordering: 'traces first',
+    },
   };
 
   const config = {
