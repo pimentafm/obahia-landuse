@@ -40,6 +40,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/helper-call-delegate": "^7.10.1",
     "@types/antd": "^1.0.0",
     "@types/axios": "^0.14.0",
     "@types/jest": "^24.0.0",

@@ -14,4 +14,15 @@ export const Container = styled.div`
     flex-direction: row;
     justify-content: space-between;
   }
+
+  .layer-info {
+    display: flex;
+    flex-direction: row;
+
+    align-content: center;
+
+    > svg {
+      margin-right: 10px;
+    }
+  }
 `;
