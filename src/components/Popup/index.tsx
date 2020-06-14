@@ -120,13 +120,13 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
         <tr style={{ background: '#fff' }}>
           <td style={{ padding: `2px 5px` }}>Classe</td>
           <td id="popup-lulc" style={{ padding: `2px 5px` }}>
-            {popclass ? popclass : 'Fora da camada de informação'}
+            {popclass ? popclass : 'Fora da camada'}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
           <td style={{ padding: `2px 5px` }}>Valor</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
-            {popvalue ? popvalue : 'Fora da camada de informação'}
+            {popvalue ? popvalue : 'Fora da camada'}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
