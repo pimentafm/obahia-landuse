@@ -18,7 +18,7 @@ import LayerSwitcher from '../LayerSwitcher';
 
 import { Container } from './styles';
 
-interface DrainageData {
+interface CodeNameData {
   code: number;
   name: string;
 }
@@ -26,7 +26,7 @@ interface DrainageData {
 interface MenuProps {
   ishidden: number;
   defaultCategory: string;
-  defaultCodeName?: DrainageData;
+  defaultCodeName?: CodeNameData;
   defaultWatershed?: string;
   defaultYear: number;
   handleWatershed?(year: string): void;
@@ -136,8 +136,8 @@ const Menu: React.FC<MenuProps> = ({
       .then(response => {
         const data = response.data;
 
-        const names = data.map((n: DrainageData) => n.name);
-        const codes = data.map((c: DrainageData) => c.code);
+        const names = data.map((n: CodeNameData) => n.name);
+        const codes = data.map((c: CodeNameData) => c.code);
 
         const codenames = names.map(
           (n: string, c: number) => n + ' - ' + codes[c],
