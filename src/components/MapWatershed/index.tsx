@@ -44,7 +44,7 @@ const Map: React.FC<MapProps> = ({
   const [watershed, setWatershed] = useState(defaultWatershed);
 
   const [center, setCenter] = useState([-45.2471, -12.4818]);
-  const [zoom, setZoom] = useState(7);
+  const [zoom, setZoom] = useState<number>(7);
 
   const [view] = useState(
     new View({
@@ -110,7 +110,7 @@ const Map: React.FC<MapProps> = ({
           cxcy = JSON.parse(cxcy);
 
           setCenter(cxcy);
-          setZoom(8);
+          setZoom(7);
 
           map.getView().animate({ center: cxcy, duration: 1000, zoom });
         })

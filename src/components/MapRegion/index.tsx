@@ -33,7 +33,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   const [year, setYear] = useState(defaultYear);
 
   const [center] = useState([-45.2471, -12.4818]);
-  const [zoom] = useState(7);
+  const [zoom] = useState<number>(7);
 
   const [view] = useState(
     new View({
