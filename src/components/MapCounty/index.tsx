@@ -19,7 +19,7 @@ import { Container } from './styles';
 import Menu from '../Menu';
 import Footer from '../Footer';
 
-// import CardPlot from '../CardPlotDrainage';
+import CardPlot from '../CardPlotCounty';
 
 import Popup from '../../components/Popup';
 
@@ -142,7 +142,7 @@ const Map: React.FC<MapProps> = ({
 
       <Popup map={map} source={landuse_source} />
 
-      {/* <CardPlot year={year} code={codeName.code} /> */}
+      <CardPlot year={year} code={codeName.code} />
 
       <Footer id="footer" map={map} />
     </Container>
