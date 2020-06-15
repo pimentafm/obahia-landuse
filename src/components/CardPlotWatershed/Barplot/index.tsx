@@ -107,7 +107,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, watershed, tableName }) => {
     margin: { l: 60, r: 10, t: 10, b: 50 },
     transition: {
       duration: 1000,
-      easing: 'back-out',
+      easing: 'quad-in-out',
       ordering: 'traces first',
     },
   };
