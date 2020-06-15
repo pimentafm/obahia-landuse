@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
 import { IconContext } from 'react-icons';
-import { FaInfoCircle, FaArrowAltCircleDown } from 'react-icons/fa';
+import { FaInfoCircle, FaArrowAltCircleDown, FaDatabase } from 'react-icons/fa';
 
 import { Switch, Divider } from 'antd';
 import { Tooltip } from 'antd';
@@ -53,10 +53,21 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
             />
           </Tooltip>
 
-          <Tooltip placement="right" title="Download">
+          <Tooltip placement="right" title="Download da camada">
             <FaArrowAltCircleDown
               id="close-popup"
               onClick={() => alert('Layer download')}
+              style={{
+                fontSize: '20px',
+                cursor: 'pointer',
+              }}
+            />
+          </Tooltip>
+
+          <Tooltip placement="right" title="Download da série temporal">
+            <FaDatabase
+              id="close-popup"
+              onClick={() => alert('Download FTP')}
               style={{
                 fontSize: '20px',
                 cursor: 'pointer',

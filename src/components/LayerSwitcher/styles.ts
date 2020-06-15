@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -23,6 +24,11 @@ export const Container = styled.div`
 
     > svg {
       margin-right: 10px;
+    }
+
+    > svg:hover {
+      transition: fill 0.3s ease;
+      fill: ${lighten(0.1, '#1f5582')};
     }
   }
 `;

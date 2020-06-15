@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Plot from 'react-plotlyjs-ts';
+import PlotlyChart from 'react-plotlyjs-ts';
 
 import { oba } from '../../../services';
 
@@ -98,8 +98,8 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
       ticks: 'outside',
       tick0: 0,
       dtick: 1,
-      ticklen: 8,
-      tickwidth: 2,
+      ticklen: 6,
+      tickwidth: 1,
       tickcolor: '#000',
     },
     showlegend: false,
@@ -112,7 +112,9 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
   };
 
   const config = {
+    responsive: true,
     displaylogo: false,
+    modeBarButtonsToRemove: ['zoom2d', 'select2d', 'lasso2d'],
   };
 
   useEffect(() => {
@@ -138,7 +140,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
       });
   }, [year, code, tableName]);
 
-  return <Plot data={data} layout={layout} config={config} />;
+  return <PlotlyChart data={data} layout={layout} config={config} />;
 };
 
 export default Barplot;
