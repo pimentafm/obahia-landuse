@@ -30,6 +30,7 @@ interface MapProps {
 
 const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   const [landuse] = useState(new TileLayer({ visible: true }));
+  const [hidrography] = useState(new TileLayer({ visible: false }));
   const [year, setYear] = useState(defaultYear);
 
   const [center] = useState([-45.2471, -12.4818]);
@@ -50,13 +51,23 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, landuse],
+      layers: [osm, landuse, hidrography],
       view: view,
       interactions: defaults({
         keyboard: false,
       }),
     }),
   );
+
+  const hidrography_source = new TileWMS({
+    url: wms.defaults.baseURL + 'hidrographyRegion.map',
+    params: {
+      year: year,
+      LAYERS: 'hidrografia',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+  });
 
   const landuse_source = new TileWMS({
     url: wms.defaults.baseURL + 'landuseRegion.map',
@@ -67,6 +78,10 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     },
     serverType: 'mapserver',
   });
+
+  hidrography.set('name', 'hidrography');
+  hidrography.setSource(hidrography_source);
+  hidrography.getSource().refresh();
 
   landuse.set('name', 'landuse');
   landuse.setSource(landuse_source);
