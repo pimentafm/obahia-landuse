@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from 'react';
+import Switch from 'react-switch';
 
 import { IconContext } from 'react-icons';
 import { FaInfoCircle, FaArrowAltCircleDown, FaDatabase } from 'react-icons/fa';
 
-import { Switch, Divider } from 'antd';
+import { Divider } from 'antd';
 import { Tooltip } from 'antd';
 import 'antd/dist/antd.css';
 
@@ -14,68 +15,113 @@ import { Container } from './styles';
 interface LayerSwitcherProps {
   name: string;
   label: string;
-  handleLayerVisibility(evt: boolean): void;
+  layerIsVisible: boolean;
+  legendIsVisible: boolean;
+  layerInfoIsVisible: boolean;
+  switchColor: string;
+  handleLayerVisibility(e: boolean, obj: Object): void;
 }
 
 const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
   name,
   label,
+  layerIsVisible,
+  legendIsVisible,
+  layerInfoIsVisible,
+  switchColor,
   handleLayerVisibility,
 }) => {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(layerIsVisible);
 
-  const handleVisibility = useCallback(() => {
-    visible ? setVisible(false) : setVisible(true);
-    handleLayerVisibility(!visible);
-  }, [visible, handleLayerVisibility]);
+  const handleVisibility = useCallback(
+    (_e, _obj, id) => {
+      visible ? setVisible(false) : setVisible(true);
+      handleLayerVisibility(!visible, id);
+    },
+    [visible, handleLayerVisibility],
+  );
+
+  let legend = undefined;
+
+  if (legendIsVisible) {
+    legend = <Legend name={name} isvisible={visible}></Legend>;
+  }
+
+  let layerInfo = undefined;
+
+  if (layerInfoIsVisible) {
+    layerInfo = (
+      <>
+        <Divider style={{ margin: `5px 0px 5px 0px` }} />
+
+        <IconContext.Provider value={{ color: '#1f5582' }}>
+          <div className="layer-info">
+            <Tooltip placement="right" title="Informações sobre a camada">
+              <FaInfoCircle
+                id="close-popup"
+                onClick={() => alert('Metadados')}
+                style={{
+                  fontSize: '20px',
+                  cursor: 'pointer',
+                }}
+              />
+            </Tooltip>
+
+            <Tooltip placement="right" title="Download da camada">
+              <FaArrowAltCircleDown
+                id="close-popup"
+                onClick={() =>
+                  window.open(
+                    'ftp://madeira.dea.ufv.br/fernando/bhalu_BA_animation_milho19902014.gif',
+                    '_self',
+                  )
+                }
+                style={{
+                  fontSize: '20px',
+                  cursor: 'pointer',
+                }}
+              />
+            </Tooltip>
+
+            <Tooltip placement="right" title="Download da série temporal">
+              <FaDatabase
+                id="close-popup"
+                onClick={() =>
+                  window.open('ftp://madeira.dea.ufv.br/fernando/', '_blank')
+                }
+                style={{
+                  fontSize: '20px',
+                  cursor: 'pointer',
+                }}
+              />
+            </Tooltip>
+          </div>
+        </IconContext.Provider>
+      </>
+    );
+  }
 
   return (
     <Container id="layerswitcher">
       <div className="layer-div">
         <label>{label}</label>
-        <Switch defaultChecked={true} onChange={handleVisibility} />
+
+        <Switch
+          id={name}
+          checked={visible}
+          handleDiameter={16}
+          onChange={handleVisibility}
+          onColor={switchColor}
+          checkedIcon={false}
+          uncheckedIcon={false}
+          height={22}
+          width={44}
+        />
       </div>
 
-      <Legend name={name} isvisible={visible}></Legend>
+      {legend}
 
-      <Divider style={{ margin: `5px 0px 5px 0px` }} />
-
-      <IconContext.Provider value={{ color: '#1f5582' }}>
-        <div className="layer-info">
-          <Tooltip placement="right" title="Informações sobre a camada">
-            <FaInfoCircle
-              id="close-popup"
-              onClick={() => alert('Layer info')}
-              style={{
-                fontSize: '20px',
-                cursor: 'pointer',
-              }}
-            />
-          </Tooltip>
-
-          <Tooltip placement="right" title="Download da camada">
-            <FaArrowAltCircleDown
-              id="close-popup"
-              onClick={() => alert('Layer download')}
-              style={{
-                fontSize: '20px',
-                cursor: 'pointer',
-              }}
-            />
-          </Tooltip>
-
-          <Tooltip placement="right" title="Download da série temporal">
-            <FaDatabase
-              id="close-popup"
-              onClick={() => alert('Download FTP')}
-              style={{
-                fontSize: '20px',
-                cursor: 'pointer',
-              }}
-            />
-          </Tooltip>
-        </div>
-      </IconContext.Provider>
+      {layerInfo}
     </Container>
   );
 };

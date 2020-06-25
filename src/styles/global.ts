@@ -43,8 +43,4 @@ export default createGlobalStyle`
     color: fff;
     background-color: #1f5582;
   }
-
-  .ant-switch-checked {
-    background-color: #1f5582;
-  }
 `;

@@ -84,12 +84,12 @@ const Menu: React.FC<MenuProps> = ({
   );
 
   const handleLayerVisibility = useCallback(
-    evt => {
-      const lyr_name = 'landuse'; //obj.target.name;
+    (e, id) => {
+      const lyr_name = id; //obj.target.name;
 
       map.getLayers().forEach(lyr => {
         if (lyr.get('name') === lyr_name) {
-          lyr.setVisible(evt);
+          lyr.setVisible(e);
         }
       });
     },
@@ -220,9 +220,23 @@ const Menu: React.FC<MenuProps> = ({
       </Select>
 
       <LayerSwitcher
+        name="hidrography"
+        label="Hidrografia"
+        handleLayerVisibility={handleLayerVisibility}
+        layerIsVisible={false}
+        legendIsVisible={false}
+        layerInfoIsVisible={false}
+        switchColor="#0000ff"
+      />
+
+      <LayerSwitcher
         name="landuse"
         label="Uso do solo"
         handleLayerVisibility={handleLayerVisibility}
+        layerIsVisible={true}
+        legendIsVisible={true}
+        layerInfoIsVisible={true}
+        switchColor="#1f5582"
       />
     </Container>
   );
