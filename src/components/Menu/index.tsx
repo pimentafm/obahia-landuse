@@ -16,7 +16,7 @@ import Scalebar from './ScaleBar';
 
 import LayerSwitcher from '../LayerSwitcher';
 
-import { Container } from './styles';
+import { Container, Header, Content } from './styles';
 
 interface CodeNameData {
   code: number;
@@ -51,10 +51,16 @@ const Menu: React.FC<MenuProps> = ({
 }) => {
   const [hidden, setHidden] = useState(ishidden);
   const history = useHistory();
+  const [variable] = useState('landuse');
   const [category, setCategory] = useState(defaultCategory);
 
   const [codenames, setCodenames] = useState([]);
   const [watersheds] = useState(['grande', 'corrente', 'carinhanha']);
+
+  const [variables] = useState([
+    ['Uso do Solo', 'landuse'],
+    ['Biomassa', 'biomass'],
+  ]);
 
   const [categories] = useState([
     ['Regional', '/'],
@@ -174,70 +180,94 @@ const Menu: React.FC<MenuProps> = ({
       <ZoomControl ishidden={hidden} map={map} />
       <Scalebar id="scalebar" map={map} />
 
-      <div id="nav" className="nav">
-        <Tooltip placement="right" title="Esconde/Mostra menu">
-          <FiMenu
-            id="handleMenu"
-            type="menu"
-            className="nav_icon"
-            style={{ fontSize: '20px', color: '#000' }}
-            onClick={handleMenu}
-          />
-        </Tooltip>
-      </div>
+      <Header ishidden={hidden}>
+        <div id="nav" className="nav">
+          <a href="http://obahia.dea.ufv.br">
+            <img
+              src="http://obahia.dea.ufv.br/static/geonode/img/logo.png"
+              alt="Obahia"
+            />
+          </a>
 
-      <label>Nível</label>
-      <Select
-        id="select-category"
-        defaultValue={category}
-        onChange={handleCategory}
-      >
-        {categories.map(c => (
-          <Option key={c[1]} value={c[1]}>
-            {c[0]}
-          </Option>
-        ))}
-      </Select>
+          <Tooltip placement="right" title="Esconde/Mostra menu">
+            <FiMenu
+              id="handleMenu"
+              type="menu"
+              className="nav_icon"
+              style={{ fontSize: '20px', color: '#000' }}
+              onClick={handleMenu}
+            />
+          </Tooltip>
+        </div>
+      </Header>
 
-      {watershedsLabel}
-      {watershedSelect}
+      <Content>
+        <label>Variável</label>
+        <Select
+          id="select-variable"
+          defaultValue={variable}
+          //onChange={handleCategory}
+        >
+          {variables.map(v => (
+            <Option key={v[1]} value={v[1]}>
+              {v[0]}
+            </Option>
+          ))}
+        </Select>
 
-      {codeNameLabel}
-      {codeNameSelect}
+        <label>Nível</label>
+        <Select
+          id="select-category"
+          defaultValue={category}
+          onChange={handleCategory}
+        >
+          {categories.map(c => (
+            <Option key={c[1]} value={c[1]}>
+              {c[0]}
+            </Option>
+          ))}
+        </Select>
 
-      <label>Ano</label>
-      <Select
-        id="select-year"
-        defaultValue={defaultYear}
-        onChange={handleYear}
-        style={{ color: '#000' }}
-      >
-        {years.map(y => (
-          <Option key={y} value={y} style={{ color: '#000' }}>
-            {y}
-          </Option>
-        ))}
-      </Select>
+        {watershedsLabel}
+        {watershedSelect}
 
-      <LayerSwitcher
-        name="hidrography"
-        label="Hidrografia"
-        handleLayerVisibility={handleLayerVisibility}
-        layerIsVisible={false}
-        legendIsVisible={false}
-        layerInfoIsVisible={false}
-        switchColor="#0000ff"
-      />
+        {codeNameLabel}
+        {codeNameSelect}
 
-      <LayerSwitcher
-        name="landuse"
-        label="Uso do solo"
-        handleLayerVisibility={handleLayerVisibility}
-        layerIsVisible={true}
-        legendIsVisible={true}
-        layerInfoIsVisible={true}
-        switchColor="#1f5582"
-      />
+        <label>Ano</label>
+        <Select
+          id="select-year"
+          defaultValue={defaultYear}
+          onChange={handleYear}
+          style={{ color: '#000' }}
+        >
+          {years.map(y => (
+            <Option key={y} value={y} style={{ color: '#000' }}>
+              {y}
+            </Option>
+          ))}
+        </Select>
+
+        <LayerSwitcher
+          name="hidrography"
+          label="Hidrografia"
+          handleLayerVisibility={handleLayerVisibility}
+          layerIsVisible={false}
+          legendIsVisible={false}
+          layerInfoIsVisible={false}
+          switchColor="#0000ff"
+        />
+
+        <LayerSwitcher
+          name="landuse"
+          label="Uso do solo"
+          handleLayerVisibility={handleLayerVisibility}
+          layerIsVisible={true}
+          legendIsVisible={true}
+          layerInfoIsVisible={true}
+          switchColor="#1f5582"
+        />
+      </Content>
     </Container>
   );
 };
