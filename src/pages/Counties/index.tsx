@@ -6,7 +6,7 @@ const Counties: React.FC = () => {
   return (
     <Map
       defaultYear={2018}
-      defaultCategory="counties"
+      defaultCategory="Municipal"
       defaultCodeName={{ code: 2903201, name: 'BARREIRAS - 2903201' }}
     />
   );
