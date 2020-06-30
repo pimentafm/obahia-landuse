@@ -63,10 +63,10 @@ const Menu: React.FC<MenuProps> = ({
   ]);
 
   const [categories] = useState([
-    ['Regional', '/'],
-    ['Bacia hidrográfica', 'watershed'],
+    ['Regional', 'region'],
+    ['Bacia hidrográfica', 'gcc'],
     ['Área de drenagem', 'drainage'],
-    ['Municipal', 'county'],
+    ['Municipal', 'counties'],
   ]);
 
   const [years] = useState(
@@ -173,7 +173,7 @@ const Menu: React.FC<MenuProps> = ({
     codeNameSelect = null;
   }
 
-  useEffect(() => {}, []);
+  useEffect(() => {});
 
   return (
     <Container id="menu" ishidden={hidden}>
@@ -202,19 +202,6 @@ const Menu: React.FC<MenuProps> = ({
       </Header>
 
       <Content>
-        <label>Variável</label>
-        <Select
-          id="select-variable"
-          defaultValue={variable}
-          //onChange={handleCategory}
-        >
-          {variables.map(v => (
-            <Option key={v[1]} value={v[1]}>
-              {v[0]}
-            </Option>
-          ))}
-        </Select>
-
         <label>Nível</label>
         <Select
           id="select-category"
@@ -224,6 +211,19 @@ const Menu: React.FC<MenuProps> = ({
           {categories.map(c => (
             <Option key={c[1]} value={c[1]}>
               {c[0]}
+            </Option>
+          ))}
+        </Select>
+
+        <label>Variável</label>
+        <Select
+          id="select-variable"
+          defaultValue={variable}
+          //onChange={handleCategory}
+        >
+          {variables.map(v => (
+            <Option key={v[1]} value={v[1]}>
+              {v[0]}
             </Option>
           ))}
         </Select>
