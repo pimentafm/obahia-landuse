@@ -131,6 +131,7 @@ const Map: React.FC<MapProps> = ({
         ishidden={false ? 1 : 0}
         defaultCategory={defaultCategory}
         defaultWatershed={defaultWatershed}
+        defaultVariable="landuse"
         handleWatershed={handleWatershed}
         defaultYear={year}
         handleYear={handleYear}

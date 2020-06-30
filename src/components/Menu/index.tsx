@@ -28,6 +28,7 @@ interface MenuProps {
   defaultCategory: string;
   defaultCodeName?: CodeNameData;
   defaultWatershed?: string;
+  defaultVariable?: string;
   defaultYear: number;
   handleWatershed?(year: string): void;
   handleCodeName?(codename: string): void;
@@ -42,6 +43,7 @@ const Menu: React.FC<MenuProps> = ({
   defaultCategory,
   defaultCodeName,
   defaultWatershed,
+  defaultVariable,
   defaultYear,
   handleCodeName,
   handleWatershed,
@@ -51,11 +53,14 @@ const Menu: React.FC<MenuProps> = ({
 }) => {
   const [hidden, setHidden] = useState(ishidden);
   const history = useHistory();
-  const [variable] = useState('landuse');
+  const [variable, setVariable] = useState(defaultVariable);
   const [category, setCategory] = useState(defaultCategory);
 
   const [codenames, setCodenames] = useState([]);
   const [watersheds] = useState(['grande', 'corrente', 'carinhanha']);
+  const [downloadURL, setDownloadURL] = useState(
+    'ftp://obahia.dea.ufv.br/landuse/region/landuse2018.tif',
+  );
 
   const [variables] = useState([
     ['Uso do Solo', 'landuse'],
@@ -80,6 +85,10 @@ const Menu: React.FC<MenuProps> = ({
       setHidden(0);
     }
   }, [hidden]);
+
+  const handleVariable = useCallback(e => {
+    setVariable(e);
+  }, []);
 
   const handleCategory = useCallback(
     e => {
@@ -173,7 +182,38 @@ const Menu: React.FC<MenuProps> = ({
     codeNameSelect = null;
   }
 
-  useEffect(() => {});
+  let cat = '';
+  let layerName = '';
+
+  switch (category) {
+    case 'Regional':
+      cat = 'region';
+      layerName = `${variable}/${cat}/${variable}${defaultYear}.tif`;
+      break;
+    case 'Bacia hidrográfica':
+      cat = 'gcc';
+      layerName = `${defaultVariable}/${cat}/${defaultWatershed}/${defaultVariable}${defaultYear}.tif`;
+      break;
+    case 'Área de drenagem':
+      cat = 'drainage';
+      layerName = `${defaultVariable}/${cat}/${defaultYear}/${defaultVariable}_${defaultCodeName?.code}.tif`;
+      break;
+    case 'Municipal':
+      cat = 'counties';
+      layerName = `${defaultVariable}/${cat}/${defaultVariable}_${defaultCodeName?.code}_${defaultYear}.tif`;
+      break;
+  }
+
+  useEffect(() => {
+    setDownloadURL(`ftp://obahia.dea.ufv.br/${layerName}`);
+  }, [
+    category,
+    variable,
+    layerName,
+    defaultWatershed,
+    defaultCodeName,
+    defaultYear,
+  ]);
 
   return (
     <Container id="menu" ishidden={hidden}>
@@ -219,7 +259,7 @@ const Menu: React.FC<MenuProps> = ({
         <Select
           id="select-variable"
           defaultValue={variable}
-          //onChange={handleCategory}
+          onChange={handleVariable}
         >
           {variables.map(v => (
             <Option key={v[1]} value={v[1]}>
@@ -256,6 +296,7 @@ const Menu: React.FC<MenuProps> = ({
           legendIsVisible={false}
           layerInfoIsVisible={false}
           switchColor="#0000ff"
+          downloadURL={downloadURL}
         />
 
         <LayerSwitcher
@@ -266,6 +307,7 @@ const Menu: React.FC<MenuProps> = ({
           legendIsVisible={true}
           layerInfoIsVisible={true}
           switchColor="#1f5582"
+          downloadURL={downloadURL}
         />
       </Content>
     </Container>

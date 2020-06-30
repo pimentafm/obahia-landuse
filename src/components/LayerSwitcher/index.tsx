@@ -15,6 +15,7 @@ import { Container } from './styles';
 interface LayerSwitcherProps {
   name: string;
   label: string;
+  downloadURL?: string;
   layerIsVisible: boolean;
   legendIsVisible: boolean;
   layerInfoIsVisible: boolean;
@@ -25,6 +26,7 @@ interface LayerSwitcherProps {
 const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
   name,
   label,
+  downloadURL,
   layerIsVisible,
   legendIsVisible,
   layerInfoIsVisible,
@@ -70,12 +72,7 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
             <Tooltip placement="right" title="Download da camada">
               <FaArrowAltCircleDown
                 id="close-popup"
-                onClick={() =>
-                  window.open(
-                    'ftp://madeira.dea.ufv.br/fernando/bhalu_BA_animation_milho19902014.gif',
-                    '_self',
-                  )
-                }
+                onClick={() => window.open(downloadURL, '_self')}
                 style={{
                   fontSize: '20px',
                   cursor: 'pointer',
@@ -87,7 +84,7 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
               <FaDatabase
                 id="close-popup"
                 onClick={() =>
-                  window.open('ftp://madeira.dea.ufv.br/fernando/', '_blank')
+                  window.open(`ftp://obahia.dea.ufv.br/${name}`, '_blank')
                 }
                 style={{
                   fontSize: '20px',
