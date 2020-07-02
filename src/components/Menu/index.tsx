@@ -14,6 +14,7 @@ import { FiMenu } from 'react-icons/fi';
 import ZoomControl from './ZoomControl';
 import Scalebar from './ScaleBar';
 
+import StaticLayerSwitcher from '../StaticLayerSwitcher';
 import LayerSwitcher from '../LayerSwitcher';
 
 import { Container, Header, Content } from './styles';
@@ -229,24 +230,26 @@ const Menu: React.FC<MenuProps> = ({
           ))}
         </Select>
 
-        <LayerSwitcher
-          name="hidrography"
-          label="Hidrografia"
-          handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={false}
-          legendIsVisible={false}
-          layerInfoIsVisible={false}
-          switchColor="#0000ff"
-        />
-        <LayerSwitcher
-          name="highways"
-          label="Rodovias"
-          handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={false}
-          legendIsVisible={false}
-          layerInfoIsVisible={false}
-          switchColor="#FABE57"
-        />
+        <div className="static-layers">
+          <StaticLayerSwitcher
+            name="hidrography"
+            label="Hidrografia"
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={false}
+            layerInfoIsVisible={false}
+            switchColor="#0000ff"
+          />
+          <StaticLayerSwitcher
+            name="highways"
+            label="Rodovias"
+            handleLayerVisibility={handleLayerVisibility}
+            layerIsVisible={false}
+            legendIsVisible={false}
+            layerInfoIsVisible={false}
+            switchColor="#FABE57"
+          />
+        </div>
 
         <LayerSwitcher
           name="landuse"

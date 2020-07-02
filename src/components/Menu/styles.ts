@@ -60,4 +60,14 @@ export const Content = styled.div`
   > label {
     padding-top: 5px;
   }
+
+  .static-layers {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    border-radius: 2px;
+    border-color: #d9d9d9;
+    padding: 5px;
+    margin-top: 10px;
+  }
 `;
