@@ -40,8 +40,11 @@ const Map: React.FC<MapProps> = ({
   defaultWatershed,
 }) => {
   const [landuse] = useState(new TileLayer({ visible: true }));
-  const [year, setYear] = useState(defaultYear);
+  const [highways] = useState(new TileLayer({ visible: false }));
+  const [hidrography] = useState(new TileLayer({ visible: false }));
+
   const [watershed, setWatershed] = useState(defaultWatershed);
+  const [year, setYear] = useState(defaultYear);
 
   const [center, setCenter] = useState([-45.2471, -12.4818]);
   const [zoom, setZoom] = useState<number>(7);
@@ -61,13 +64,33 @@ const Map: React.FC<MapProps> = ({
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, landuse],
+      layers: [osm, landuse, highways, hidrography],
       view: view,
       interactions: defaults({
         keyboard: false,
       }),
     }),
   );
+
+  const highways_source = new TileWMS({
+    url: wms.defaults.baseURL + 'highwaysWatersheds.map',
+    params: {
+      ws: watershed,
+      LAYERS: 'Rodovias',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+  });
+
+  const hidrography_source = new TileWMS({
+    url: wms.defaults.baseURL + 'hidrographyWatersheds.map',
+    params: {
+      ws: watershed,
+      LAYERS: 'hidrografia',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+  });
 
   const landuse_source = new TileWMS({
     url: wms.defaults.baseURL + 'landuseWatersheds.map',
@@ -79,6 +102,14 @@ const Map: React.FC<MapProps> = ({
     },
     serverType: 'mapserver',
   });
+
+  highways.set('name', 'highways');
+  highways.setSource(highways_source);
+  highways.getSource().refresh();
+
+  hidrography.set('name', 'hidrography');
+  hidrography.setSource(hidrography_source);
+  hidrography.getSource().refresh();
 
   landuse.set('name', 'landuse');
   landuse.setSource(landuse_source);

@@ -30,8 +30,8 @@ interface MapProps {
 
 const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   const [landuse] = useState(new TileLayer({ visible: true }));
-  const [hidrography] = useState(new TileLayer({ visible: false }));
   const [highways] = useState(new TileLayer({ visible: false }));
+  const [hidrography] = useState(new TileLayer({ visible: false }));
 
   const [year, setYear] = useState(defaultYear);
 
