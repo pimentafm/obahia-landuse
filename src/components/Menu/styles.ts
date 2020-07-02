@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-
+import { lighten } from 'polished';
 interface ContainerProps {
   ishidden: number;
 }
@@ -12,7 +12,7 @@ export const Container = styled(animated.div)<ContainerProps>`
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.13), 1px 0px 2px rgba(0, 0, 0, 0.1),
     -1px 0px 2px rgba(0, 0, 0, 0.05);
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   height: 100%;
   width: 300px;
   text-decoration: none;
@@ -24,30 +24,51 @@ export const Container = styled(animated.div)<ContainerProps>`
 `;
 
 export const Header = styled.div<ContainerProps>`
-  .nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
-    background: #1f5582;
+  background: #1f5582;
 
-    img {
-      height: 40px;
-      padding: 2px;
-    }
+  img {
+    height: 40px;
+    padding: 2px;
+  }
 
-    svg {
-      cursor: pointer;
-      position: relative;
-      right: 5px;
-      transform: translateX(${({ ishidden }) => (ishidden ? 35 : 0)}px);
-      transition: 0.3s;
-      background: #fff;
-      border-radius: 2px;
-      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.13),
-        1px 2px 2px rgba(0, 0, 0, 0.1), -1px -2px 2px rgba(0, 0, 0, 0.05);
-    }
+  svg {
+    cursor: pointer;
+    position: relative;
+    right: 5px;
+    transform: translateX(${({ ishidden }) => (ishidden ? 35 : 0)}px);
+    transition: 0.3s;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.13), 1px 2px 2px rgba(0, 0, 0, 0.1),
+      -1px -2px 2px rgba(0, 0, 0, 0.05);
+  }
+`;
+
+export const Footer = styled.div<ContainerProps>`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+  height: 30px;
+
+  background: #1f5582;
+
+  svg {
+    margin-left: 5px;
+  }
+
+  svg:hover {
+    transition: fill 0.3s ease;
+    fill: ${lighten(0.5, '#1f5582')};
   }
 `;
 

@@ -10,6 +10,7 @@ import OlMap from 'ol/Map';
 import { Select } from 'antd';
 import 'antd/dist/antd.css';
 import { FiMenu } from 'react-icons/fi';
+import { FaInfoCircle } from 'react-icons/fa';
 
 import ZoomControl from './ZoomControl';
 import Scalebar from './ScaleBar';
@@ -17,7 +18,7 @@ import Scalebar from './ScaleBar';
 import StaticLayerSwitcher from '../StaticLayerSwitcher';
 import LayerSwitcher from '../LayerSwitcher';
 
-import { Container, Header, Content } from './styles';
+import { Container, Header, Footer, Content } from './styles';
 
 interface CodeNameData {
   code: number;
@@ -176,24 +177,22 @@ const Menu: React.FC<MenuProps> = ({
       <Scalebar id="scalebar" map={map} />
 
       <Header ishidden={hidden}>
-        <div id="nav" className="nav">
-          <a href="http://obahia.dea.ufv.br">
-            <img
-              src="http://obahia.dea.ufv.br/static/geonode/img/logo.png"
-              alt="Obahia"
-            />
-          </a>
+        <a href="http://obahia.dea.ufv.br">
+          <img
+            src="http://obahia.dea.ufv.br/static/geonode/img/logo.png"
+            alt="Obahia"
+          />
+        </a>
 
-          <Tooltip placement="right" title="Esconde/Mostra menu">
-            <FiMenu
-              id="handleMenu"
-              type="menu"
-              className="nav_icon"
-              style={{ fontSize: '20px', color: '#000' }}
-              onClick={handleMenu}
-            />
-          </Tooltip>
-        </div>
+        <Tooltip placement="right" title="Esconde/Mostra menu">
+          <FiMenu
+            id="handleMenu"
+            type="menu"
+            className="nav_icon"
+            style={{ fontSize: '20px', color: '#000' }}
+            onClick={handleMenu}
+          />
+        </Tooltip>
       </Header>
 
       <Content>
@@ -261,6 +260,19 @@ const Menu: React.FC<MenuProps> = ({
           switchColor="#1f5582"
         />
       </Content>
+
+      <Footer ishidden={hidden}>
+        <Tooltip placement="right" title="Sobre">
+          <FaInfoCircle
+            id="about"
+            className="nav_icon"
+            style={{ fontSize: '20px', color: '#fff', cursor: 'pointer' }}
+            onClick={() =>
+              window.open(`http://obahia.dea.ufv.br/about/`, '_blank')
+            }
+          />
+        </Tooltip>
+      </Footer>
     </Container>
   );
 };
