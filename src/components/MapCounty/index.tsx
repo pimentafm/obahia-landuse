@@ -134,7 +134,6 @@ const Map: React.FC<MapProps> = ({
         ishidden={false ? 1 : 0}
         defaultCategory={defaultCategory}
         defaultCodeName={defaultCodeName}
-        defaultVariable="landuse"
         handleCodeName={handleCodeName}
         defaultYear={year}
         handleYear={handleYear}

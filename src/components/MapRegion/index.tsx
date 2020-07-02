@@ -31,6 +31,8 @@ interface MapProps {
 const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   const [landuse] = useState(new TileLayer({ visible: true }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
+  const [highways] = useState(new TileLayer({ visible: false }));
+
   const [year, setYear] = useState(defaultYear);
 
   const [center] = useState([-45.2471, -12.4818]);
@@ -51,7 +53,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, landuse, hidrography],
+      layers: [osm, landuse, highways, hidrography],
       view: view,
       interactions: defaults({
         keyboard: false,
@@ -59,10 +61,18 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     }),
   );
 
+  const highways_source = new TileWMS({
+    url: wms.defaults.baseURL + 'highwaysRegion.map',
+    params: {
+      LAYERS: 'Rodovias',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+  });
+
   const hidrography_source = new TileWMS({
     url: wms.defaults.baseURL + 'hidrographyRegion.map',
     params: {
-      year: year,
       LAYERS: 'hidrografia',
       TILED: true,
     },
@@ -78,6 +88,10 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     },
     serverType: 'mapserver',
   });
+
+  highways.set('name', 'highways');
+  highways.setSource(highways_source);
+  highways.getSource().refresh();
 
   hidrography.set('name', 'hidrography');
   hidrography.setSource(hidrography_source);
@@ -103,7 +117,6 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       <Menu
         ishidden={false ? 1 : 0}
         defaultCategory={defaultCategory}
-        defaultVariable="landuse"
         defaultYear={year}
         handleYear={handleYear}
         map={map}
