@@ -56,7 +56,9 @@ const Menu: React.FC<MenuProps> = ({
   const [category, setCategory] = useState(defaultCategory);
 
   const [codenames, setCodenames] = useState([]);
-  const [watersheds] = useState(['grande', 'corrente', 'carinhanha']);
+  const [watersheds_list] = useState(['grande', 'corrente', 'carinhanha']);
+
+  const [downloadURL, setDownloadURL] = useState('');
 
   const [categories] = useState([
     ['Regional', 'region'],
@@ -110,7 +112,7 @@ const Menu: React.FC<MenuProps> = ({
         onChange={handleWatershed}
         style={{ color: '#000' }}
       >
-        {watersheds.map(c => (
+        {watersheds_list.map(c => (
           <Option key={c} value={c} style={{ color: '#000' }}>
             {c}
           </Option>
@@ -169,7 +171,30 @@ const Menu: React.FC<MenuProps> = ({
     codeNameSelect = null;
   }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    switch (defaultCategory) {
+      case 'Regional':
+        setDownloadURL(
+          `ftp://obahia.dea.ufv.br/landuse/region/landuse${defaultYear}.tif`,
+        );
+        break;
+      case 'Bacia hidrográfica':
+        setDownloadURL(
+          `ftp://obahia.dea.ufv.br/landuse/gcc/${defaultWatershed}/landuse${defaultYear}.tif`,
+        );
+        break;
+      case 'Área de drenagem':
+        setDownloadURL(
+          `ftp://obahia.dea.ufv.br/landuse/drainage/${defaultYear}/landuse_${defaultCodeName?.code}.tif`,
+        );
+        break;
+      case 'Municipal':
+        setDownloadURL(
+          `ftp://obahia.dea.ufv.br/landuse/counties/landuse_${defaultCodeName?.code}_${defaultYear}.tif`,
+        );
+        break;
+    }
+  }, [defaultYear, defaultCategory, defaultWatershed, defaultCodeName]);
 
   return (
     <Container id="menu" ishidden={hidden}>
@@ -258,6 +283,7 @@ const Menu: React.FC<MenuProps> = ({
           legendIsVisible={true}
           layerInfoIsVisible={true}
           switchColor="#1f5582"
+          downloadURL={downloadURL}
         />
       </Content>
 

@@ -161,7 +161,7 @@ const Map: React.FC<MapProps> = ({
       <Menu
         ishidden={false ? 1 : 0}
         defaultCategory={defaultCategory}
-        defaultWatershed={defaultWatershed}
+        defaultWatershed={watershed}
         handleWatershed={handleWatershed}
         defaultYear={year}
         handleYear={handleYear}

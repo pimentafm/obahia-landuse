@@ -5,7 +5,6 @@ import { IconContext } from 'react-icons';
 import { FaInfoCircle, FaArrowAltCircleDown, FaDatabase } from 'react-icons/fa';
 
 import { Divider, Tooltip } from 'antd';
-
 import 'antd/dist/antd.css';
 
 import Legend from './Legend';

@@ -164,7 +164,7 @@ const Map: React.FC<MapProps> = ({
       <Menu
         ishidden={false ? 1 : 0}
         defaultCategory={defaultCategory}
-        defaultCodeName={defaultCodeName}
+        defaultCodeName={codeName}
         handleCodeName={handleCodeName}
         defaultYear={year}
         handleYear={handleYear}
