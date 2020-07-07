@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { oba } from '../../services';
 
-import { Tooltip } from 'antd';
+import { Modal, Tooltip, Button } from 'antd';
 
 import OlMap from 'ol/Map';
 
@@ -11,6 +11,7 @@ import { Select } from 'antd';
 import 'antd/dist/antd.css';
 import { FiMenu } from 'react-icons/fi';
 import { FaInfoCircle } from 'react-icons/fa';
+import { GoAlert } from 'react-icons/go';
 
 import ZoomControl from './ZoomControl';
 import Scalebar from './ScaleBar';
@@ -52,6 +53,9 @@ const Menu: React.FC<MenuProps> = ({
   ...rest
 }) => {
   const [hidden, setHidden] = useState(ishidden);
+  const [termsOfUseModal, setTermsOfUseModal] = useState<boolean>(false);
+  const [metadataModal, setMetadataModal] = useState<boolean>(false);
+
   const history = useHistory();
   const [category, setCategory] = useState(defaultCategory);
 
@@ -70,6 +74,24 @@ const Menu: React.FC<MenuProps> = ({
   const [years] = useState(
     Array.from(new Array(29), (val, index) => index + 1990),
   );
+
+  const showTermsOfUseModal = () => {
+    setTermsOfUseModal(true);
+  };
+
+  const showMetadataModal = () => {
+    setMetadataModal(true);
+  };
+
+  const handleOk = () => {
+    setTermsOfUseModal(false);
+    setMetadataModal(false);
+  };
+
+  const handleCancel = () => {
+    setTermsOfUseModal(false);
+    setMetadataModal(false);
+  };
 
   const handleMenu = useCallback(() => {
     if (hidden === 0) {
@@ -221,6 +243,9 @@ const Menu: React.FC<MenuProps> = ({
       </Header>
 
       <Content>
+        <div className="card-menu">
+          <span>Análise de Séries Temporais</span>
+        </div>
         <label>Nível</label>
         <Select
           id="select-category"
@@ -254,6 +279,17 @@ const Menu: React.FC<MenuProps> = ({
           ))}
         </Select>
 
+        <LayerSwitcher
+          name="landuse"
+          label="Uso do solo"
+          handleLayerVisibility={handleLayerVisibility}
+          layerIsVisible={true}
+          legendIsVisible={true}
+          layerInfoIsVisible={true}
+          switchColor="#1f5582"
+          downloadURL={downloadURL}
+        />
+
         <div className="static-layers">
           <StaticLayerSwitcher
             name="hidrography"
@@ -274,31 +310,91 @@ const Menu: React.FC<MenuProps> = ({
             switchColor="#FABE57"
           />
         </div>
-
-        <LayerSwitcher
-          name="landuse"
-          label="Uso do solo"
-          handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={true}
-          legendIsVisible={true}
-          layerInfoIsVisible={true}
-          switchColor="#1f5582"
-          downloadURL={downloadURL}
-        />
       </Content>
 
       <Footer ishidden={hidden}>
-        <Tooltip placement="right" title="Sobre">
-          <FaInfoCircle
-            id="about"
-            className="nav_icon"
+        <Tooltip placement="right" title="Termos de uso">
+          <GoAlert
+            className="footer_icon"
             style={{ fontSize: '20px', color: '#fff', cursor: 'pointer' }}
-            onClick={() =>
-              window.open(`http://obahia.dea.ufv.br/about/`, '_blank')
-            }
+            onClick={showTermsOfUseModal}
+          />
+        </Tooltip>
+        <Tooltip placement="right" title="Informações adicionais">
+          <FaInfoCircle
+            className="footer_icon"
+            style={{ fontSize: '20px', color: '#fff', cursor: 'pointer' }}
+            onClick={showMetadataModal}
           />
         </Tooltip>
       </Footer>
+
+      <Modal
+        title="Obahia - Termos de uso"
+        style={{ top: 20 }}
+        visible={termsOfUseModal}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[
+          <Button
+            key="submit"
+            style={{
+              background: '#1f5582',
+              color: '#fff',
+              borderColor: '#fff',
+            }}
+            onClick={handleOk}
+          >
+            Continue
+          </Button>,
+        ]}
+      >
+        <p style={{ textAlign: 'justify' }}>
+          O usuário assume todo o risco relacionado ao uso de informações nas
+          páginas Web deste servidor. A UFV fornece essas informações "como
+          estão", e a UFV se isenta de todas e quaisquer garantias, expressas ou
+          implícitas, incluindo (mas não se limitando a) quaisquer garantias
+          implícitas de adequação a uma finalidade específica. Em nenhum caso a
+          UFV será responsável perante usuários ou terceiros por quaisquer danos
+          diretos, indiretos, incidentais, conseqüenciais, especiais ou perda de
+          lucro resultante de qualquer uso ou uso indevido desses dados.
+        </p>
+      </Modal>
+
+      <Modal
+        title="Obahia - Informações adicionais"
+        width={800}
+        style={{ top: 20 }}
+        visible={metadataModal}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[
+          <Button
+            key="submit"
+            style={{
+              background: '#1f5582',
+              color: '#fff',
+              borderColor: '#fff',
+            }}
+            onClick={handleOk}
+          >
+            Continue
+          </Button>,
+        ]}
+      >
+        <p style={{ textAlign: 'justify' }}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem labore
+          omnis iusto officia eligendi minima corrupti culpa dolorum nesciunt?
+          Accusantium repellat, nulla est tenetur labore nihil quae minus
+          corrupti assumenda!
+        </p>
+        <p style={{ textAlign: 'justify' }}>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Necessitatibus culpa voluptatibus illo aspernatur porro ex quidem id
+          in vel praesentium, dignissimos eligendi dolorum eum reprehenderit
+          fugiat autem neque corrupti maxime.
+        </p>
+      </Modal>
     </Container>
   );
 };

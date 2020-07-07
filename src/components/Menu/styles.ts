@@ -16,7 +16,6 @@ export const Container = styled(animated.div)<ContainerProps>`
   height: 100%;
   width: 300px;
   text-decoration: none;
-
   & {
     transform: translateX(${({ ishidden }) => (ishidden ? -300 : 0)}px);
     transition: 0.3s;
@@ -28,14 +27,11 @@ export const Header = styled.div<ContainerProps>`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
   background: #1f5582;
-
   img {
     height: 40px;
     padding: 2px;
   }
-
   svg {
     cursor: pointer;
     position: relative;
@@ -52,20 +48,19 @@ export const Header = styled.div<ContainerProps>`
 export const Footer = styled.div<ContainerProps>`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   position: absolute;
   bottom: 0;
-
   width: 100%;
   height: 30px;
-
   background: #1f5582;
-
   svg {
     margin-left: 5px;
   }
-
+  svg + * {
+    margin-left: 10px;
+  }
   svg:hover {
     transition: fill 0.3s ease;
     fill: ${lighten(0.5, '#1f5582')};
@@ -77,11 +72,21 @@ export const Content = styled.div`
   flex-direction: column;
   padding: 5px;
   text-decoration: none;
-
   > label {
     padding-top: 5px;
   }
-
+  .card-menu {
+    text-align: center;
+    justify-content: center;
+    border: 1px solid;
+    border-radius: 2px;
+    border-color: #d9d9d9;
+    span {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1f5582;
+    }
+  }
   .static-layers {
     display: flex;
     flex-direction: column;
@@ -90,5 +95,8 @@ export const Content = styled.div`
     border-color: #d9d9d9;
     padding: 5px;
     margin-top: 10px;
+  }
+  .span-text {
+    text-align: justify;
   }
 `;
