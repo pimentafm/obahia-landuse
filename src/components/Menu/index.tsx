@@ -15,6 +15,7 @@ import { FiMenu } from 'react-icons/fi';
 import { FaInfoCircle } from 'react-icons/fa';
 import { GoAlert } from 'react-icons/go';
 
+import ToolsMenu from './ToolsMenu';
 import ZoomControl from './ZoomControl';
 import Scalebar from './ScaleBar';
 
@@ -75,7 +76,7 @@ const Menu: React.FC<MenuProps> = ({
   );
 
   const [categories] = useState([
-    ['Regional', 'region'],
+    ['Regional', '/'],
     ['Bacia hidrográfica', 'gcc'],
     ['Área de drenagem', 'drainage'],
     ['Municipal', 'counties'],
@@ -230,6 +231,7 @@ const Menu: React.FC<MenuProps> = ({
 
   return (
     <Container id="menu" ishidden={hidden}>
+      <ToolsMenu ishidden={hidden} />
       <ZoomControl ishidden={hidden} map={map} />
       <Scalebar id="scalebar" map={map} />
 
@@ -254,7 +256,7 @@ const Menu: React.FC<MenuProps> = ({
 
       <Content>
         <div className="card-menu">
-          <span>Análise de Séries Temporais</span>
+          <span>Série Temporal de Uso e Cobertura do Solo</span>
         </div>
         <label>Nível</label>
         <Select
@@ -319,6 +321,29 @@ const Menu: React.FC<MenuProps> = ({
             layerInfoIsVisible={false}
             switchColor="#800000"
           />
+
+          {defaultCategory === 'Regional' && (
+            <>
+              <StaticLayerSwitcher
+                name="watersheds"
+                label="Bacias hidrográficas"
+                handleLayerVisibility={handleLayerVisibility}
+                layerIsVisible={true}
+                legendIsVisible={false}
+                layerInfoIsVisible={false}
+                switchColor="#000000"
+              />
+              <StaticLayerSwitcher
+                name="counties"
+                label="Municípios"
+                handleLayerVisibility={handleLayerVisibility}
+                layerIsVisible={false}
+                legendIsVisible={false}
+                layerInfoIsVisible={false}
+                switchColor="#696969"
+              />
+            </>
+          )}
         </div>
       </Content>
 

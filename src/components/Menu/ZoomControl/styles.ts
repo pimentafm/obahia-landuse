@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  margin-top: 35px;
-  left: 305px;
+  margin-top: 40px;
+  left: 306px;
   position: fixed;
 
   button {
