@@ -1,6 +1,6 @@
 <div align="center">
 <h1>OBahia - Intelligent Territorial Strategy System</h1>
-<h2>Time Series Analysis</h2>
+<h2>LULCC Time Series Analysis</h2>
 <br>
 <img width="600" src="assets/print.png" alt="OBahia - Análise de séries temporais">
 <br>
@@ -8,7 +8,7 @@
 </div>
 
 <div align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/pimentafm/obahia-temporal?color=blue&style=for-the-badge">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/pimentafm/obahia-landuse?color=blue&style=for-the-badge">
 
   <a href="https://github.com/pimentafm">
     <img alt="Made by Fernando Pimenta" src="https://img.shields.io/badge/made%20by-Fernando%20Pimenta-blue?style=for-the-badge">
