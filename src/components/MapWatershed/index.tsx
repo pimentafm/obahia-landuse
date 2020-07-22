@@ -75,8 +75,8 @@ const Map: React.FC<MapProps> = ({
   const highways_source = new TileWMS({
     url: wms.defaults.baseURL + 'highwaysWatersheds.map',
     params: {
-      ws: watershed,
       LAYERS: 'Rodovias',
+      ws: watershed,
       TILED: true,
     },
     serverType: 'mapserver',

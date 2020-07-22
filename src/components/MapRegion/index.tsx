@@ -32,8 +32,6 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   const [landuse] = useState(new TileLayer({ visible: true }));
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
-  const [watersheds] = useState(new TileLayer({ visible: true }));
-  const [counties] = useState(new TileLayer({ visible: false }));
 
   const [year, setYear] = useState(defaultYear);
 
@@ -55,31 +53,13 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, landuse, watersheds, counties, highways, hidrography],
+      layers: [osm, landuse, highways, hidrography],
       view: view,
       interactions: defaults({
         keyboard: false,
       }),
     }),
   );
-
-  const watersheds_source = new TileWMS({
-    url: wms.defaults.baseURL + 'watersheds.map',
-    params: {
-      LAYERS: 'watersheds',
-      TILED: true,
-    },
-    serverType: 'mapserver',
-  });
-
-  const counties_source = new TileWMS({
-    url: wms.defaults.baseURL + 'counties.map',
-    params: {
-      LAYERS: 'counties',
-      TILED: true,
-    },
-    serverType: 'mapserver',
-  });
 
   const highways_source = new TileWMS({
     url: wms.defaults.baseURL + 'highwaysRegion.map',
@@ -108,14 +88,6 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     },
     serverType: 'mapserver',
   });
-
-  watersheds.set('name', 'watersheds');
-  watersheds.setSource(watersheds_source);
-  watersheds.getSource().refresh();
-
-  counties.set('name', 'counties');
-  counties.setSource(counties_source);
-  counties.getSource().refresh();
 
   highways.set('name', 'highways');
   highways.setSource(highways_source);
