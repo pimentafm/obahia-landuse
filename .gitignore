@@ -10,7 +10,7 @@
 
 # production
 /build
-/landuse
+/temporal
 
 # misc
 .DS_Store
