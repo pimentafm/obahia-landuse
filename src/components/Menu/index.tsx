@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import HtmlParser from 'react-html-parser';
+
 import { oba } from '../../services';
 
 import { Modal, Tooltip, Button } from 'antd';
@@ -63,6 +65,14 @@ const Menu: React.FC<MenuProps> = ({
   const [watersheds_list] = useState(['grande', 'corrente', 'carinhanha']);
 
   const [downloadURL, setDownloadURL] = useState('');
+
+  const termsOfUse = HtmlParser(
+    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Series Temporais de Mapas - Termos de uso</span>`,
+  );
+
+  const additionalInformation = HtmlParser(
+    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Series Temporais de Mapas - Informações adicionais</span>`,
+  );
 
   const [categories] = useState([
     ['Regional', 'region'],
@@ -330,7 +340,7 @@ const Menu: React.FC<MenuProps> = ({
       </Footer>
 
       <Modal
-        title="Obahia - Termos de uso"
+        title={termsOfUse}
         style={{ top: 20 }}
         visible={termsOfUseModal}
         onOk={handleOk}
@@ -362,7 +372,7 @@ const Menu: React.FC<MenuProps> = ({
       </Modal>
 
       <Modal
-        title="Obahia - Informações adicionais"
+        title={additionalInformation}
         width={800}
         style={{ top: 20 }}
         visible={metadataModal}
