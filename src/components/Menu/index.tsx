@@ -68,11 +68,11 @@ const Menu: React.FC<MenuProps> = ({
   const [downloadURL, setDownloadURL] = useState('');
 
   const termsOfUse = HtmlParser(
-    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Series Temporais de Mapas - Termos de uso</span>`,
+    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Serie Temporal de Uso e Cobertura do Solo - Termos de uso</span>`,
   );
 
   const additionalInformation = HtmlParser(
-    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Series Temporais de Mapas - Informações adicionais</span>`,
+    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Serie Temporal de Uso e Cobertura do Solo - Informações adicionais</span>`,
   );
 
   const [categories] = useState([
