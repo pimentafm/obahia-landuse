@@ -27,11 +27,14 @@ export const Header = styled.div<ContainerProps>`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
   background: #1f5582;
+
   img {
     height: 40px;
     padding: 2px;
   }
+
   svg {
     cursor: pointer;
     position: relative;
@@ -52,15 +55,20 @@ export const Footer = styled.div<ContainerProps>`
   align-items: center;
   position: absolute;
   bottom: 0;
+
   width: 100%;
   height: 30px;
+
   background: #1f5582;
+
   svg {
     margin-left: 5px;
   }
+
   svg + * {
     margin-left: 10px;
   }
+
   svg:hover {
     transition: fill 0.3s ease;
     fill: ${lighten(0.5, '#1f5582')};
@@ -72,15 +80,18 @@ export const Content = styled.div`
   flex-direction: column;
   padding: 5px;
   text-decoration: none;
+
   > label {
     padding-top: 5px;
   }
+
   .card-menu {
     text-align: center;
     justify-content: center;
     border: 1px solid;
     border-radius: 2px;
     border-color: #d9d9d9;
+
     span {
       font-size: 16px;
       font-weight: bold;

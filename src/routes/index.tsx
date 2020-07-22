@@ -8,7 +8,7 @@ import Counties from '../pages/Counties';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/region" component={Region} />
+    <Route exact path="/" component={Region} />
     <Route path="/gcc" component={Watershed} />
     <Route path="/drainage" component={Drainage} />
     <Route path="/counties" component={Counties} />
