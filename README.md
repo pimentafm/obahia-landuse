@@ -1,124 +1,39 @@
-# OBahia-webmap
-## Territorial and Inteligence Analysis System
+<div align="center">
+<h1>OBahia - Intelligent Territorial Strategy System</h1>
+<h2>LULCC Time Series Analysis</h2>
+<br>
+<img width="600" src="assets/print.png" alt="OBahia - Análise de séries temporais">
+<br>
+<br>
+</div>
 
-<p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/pimentafm/obahia-webmap?color=blue">
+<div align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/pimentafm/obahia-landuse?color=blue&style=for-the-badge">
 
   <a href="https://github.com/pimentafm">
-    <img alt="Made by Fernando Pimenta" src="https://img.shields.io/badge/made%20by-Fernando%20Pimenta-blue">
+    <img alt="Made by Fernando Pimenta" src="https://img.shields.io/badge/made%20by-Fernando%20Pimenta-blue?style=for-the-badge">
   </a>
 
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-blue">
-</p>
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge">
+</div>
 
-![alt text](/public/app.png)
+<div align="center">
 
-## Dependencies:
-[![made-with-Nodejs](https://img.shields.io/badge/Nodejs-green.svg)](https://nodejs.org/)
-[![made-with-Yarn](https://img.shields.io/badge/Yarn-2188b6.svg)](https://yarnpkg.com/)
-[![made-with-React](https://img.shields.io/badge/React-61dafb.svg)](https://https://reactjs.org/)
-[![made-with-Mapserver](https://img.shields.io/badge/mapserver-33a333.svg)](https://mapserver.org/)
-[![made-with-PHP](https://img.shields.io/badge/Django-purple.svg)](https://www.php.net/)
-[![made-with-PostgreSQL](https://img.shields.io/badge/PostgreSQL-33658f.svg)](https://www.postgresql.org/)
-[![made-with-PostGIS](https://img.shields.io/badge/PostGIS-5a7a9f.svg)](https://postgis.net/)
+[![made-with-TypeScript](https://img.shields.io/badge/TypeScript-294E80?style=for-the-badge)](https://www.typescriptlang.org/)
+[![made-with-Nodejs](https://img.shields.io/badge/Node-green?style=for-the-badge)](https://nodejs.org/)
+[![made-with-Yarn](https://img.shields.io/badge/Yarn-2188b6?style=for-the-badge)](https://yarnpkg.com/)
+[![made-with-React](https://img.shields.io/badge/React-61dafb?style=for-the-badge)](https://reactjs.org/)
+[![made-with-Mapserver](https://img.shields.io/badge/mapserver-33a333?style=for-the-badge)](https://mapserver.org/)
+[![made-with-PHP](https://img.shields.io/badge/Django-purple?style=for-the-badge)](https://www.php.net/)
+[![made-with-PostgreSQL](https://img.shields.io/badge/PostgreSQL-33658f?style=for-the-badge)](https://www.postgresql.org/)
+[![made-with-PostGIS](https://img.shields.io/badge/PostGIS-5a7a9f?style=for-the-badge)](https://postgis.net/)
 
-*nodejs dependencies can be found in `package.json`.
+</div>
 
-Set dbconfig.ini in the `/obahia-webmap/obahiadb` folder:
+### Termos de uso
+<div align="justify">
+O usuário assume todo o risco relacionado ao uso de informações nas páginas Web deste servidor. A UFV fornece essas informações "como estão", e a UFV se isenta de todas e quaisquer garantias, expressas ou implícitas, incluindo (mas não se limitando a) quaisquer garantias implícitas de adequação a uma finalidade específica. Em nenhum caso a UFV será responsável perante usuários ou terceiros por quaisquer danos diretos, indiretos, incidentais, conseqüenciais, especiais ou perda de lucro resultante de qualquer uso ou uso indevido desses dados.
+</div>
 
-```ini
-host=localhost
-port=5432
-database=database
-user=postgres
-password=postgres
-```
+Developed by Fernando Pimenta [My Github!](https://github.com/pimentafm) :bird: :sunglasses:
 
-Set dbconfig.map in the `/obahia-webmap/mapfiles/includes` folder:
-
-```
-CONNECTIONTYPE postgis
-CONNECTION "host=localhost dbname=database user=postgres password=postgres port=5432"
-```
-
-See below the project folder structure:
-
-```
-├── obahia-site             
-│   ├── api    
-|   |   └── ...
-|   |   ├── dbconfig.ini
-|   |   ├── ...
-|   |   ...
-│   ├── mapfiles
-|       └── fonts
-|       ├── includes
-|           └── ...
-|           ├── dbconfig.map
-|           ...
-|       ...
-│   ├── public       
-│   └── src
-│   ...
-```
-
-Run `yarn start` to develop the app.
-
-Run `yarn build` to deploy the app.
-
-<hr>
-
-## Build App using BrowserRouter in an Apache server:
-
-In `package.json` set the proxy and homepage with the `<app-base-name>`:
-
-```json
-{
-  ...
-  "homepage": "http://yourhost.com/<app-base-name>",
-  "proxy": "http://yourhost.com:80",
-  ...
-}
-```
-
-Add the basename in your BrowserRouter component:
-
-```jsx
-
-<!-- A Code Snippet example -->
-import React from 'react';
-import { ToastContainer } from 'react-toastify'
-import { HashRouter } from 'react-router-dom';
-
-import GlobalStyle from './styles/global';
-
-import Header from './components/Header';
-import Routes from './routes';
-
-function App() {
-  return (
-    <HashRouter basename="/<app-base-name>">
-    <Header />
-    <Routes />
-    <GlobalStyle />
-    <ToastContainer className="toast-class" />
-    </HashRouter>
-  );
-}
-
-export default App;
-```
-
-Add the `.htaccess` into public folder or directly into your `<app-base-name>` folder:
-
-```apache
-<IfModule mod_rewrite.c>
-  Options -MultiViews
-	RewriteEngine On
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^ index.html [QSA,L]
-</IfModule>
-```
-<hr>
-
-Fernando Pimenta [My Github!](https://github.com/pimentafm)

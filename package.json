@@ -1,34 +1,35 @@
 {
-  "name": "temporal",
+  "name": "obahia-landuse",
   "version": "0.1.0",
-  "homepage": "http://obahia.dea.ufv.br",
-  "proxy": "http://obahia.dea.ufv.br:8085",
   "private": true,
   "dependencies": {
-    "@react-pdf/renderer": "^1.6.8",
-    "antd": "^3.25.2",
-    "axios": "^0.19.1",
-    "dom-to-image": "^2.6.0",
-    "ol": "^6.1.1",
-    "plotly.js": "^1.52.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "antd": "^4.2.5",
+    "axios": "^0.19.2",
+    "ol": "^6.3.1",
+    "plotly.js": "^1.54.1",
+    "polished": "^3.6.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-html-parser": "^2.0.2",
-    "react-plotly.js": "^2.4.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
-    "react-toastify": "^5.5.0",
-    "styled-components": "^4.4.1"
+    "react-icons": "^3.10.0",
+    "react-loading": "^2.0.3",
+    "react-plotlyjs-ts": "^2.2.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "react-spring": "^8.0.27",
+    "react-switch": "^5.0.1",
+    "styled-components": "^5.1.1",
+    "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-app-rewired --max_old_space_size=8192 start",
-    "build": "react-app-rewired --max_old_space_size=8192 build",
-    "postbuild": "./postbuild.sh -f temporal",
-    "test": "react-app-rewired test",
+    "start": "react-scripts start",
+    "build": "react-scripts --max_old_space_size=8192 build",
+    "postbuild": "./postbuild.sh -f landuse",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -43,8 +44,30 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-root-import": "^6.4.1",
-    "customize-cra": "^0.9.1",
-    "react-app-rewired": "^2.1.5"
+    "@babel/helper-call-delegate": "^7.10.1",
+    "@types/antd": "^1.0.0",
+    "@types/axios": "^0.14.0",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/ol": "^6.3.1",
+    "@types/plotly.js": "^1.50.12",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-html-parser": "^2.0.1",
+    "@types/react-icons": "^3.0.0",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^3.0.1",
+    "@typescript-eslint/parser": "^3.0.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "prettier": "^2.0.5"
   }
 }

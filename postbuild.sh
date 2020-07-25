@@ -29,14 +29,5 @@ echo "Create application folder: $folder_name"
 mkdir -p $folder_name
 cp -rf build/* $folder_name
 
-#Change favicon url
-find $folder_name"/index.html" -type f | xargs sed -i 's/\/favicon.ico/{{ STATIC_URL }}temporal\/favicon.ico/g'
-find $folder_name"/index.html" -type f | xargs sed -i 's/\/static\/js/{{ STATIC_URL }}temporal\/static\/js/g'
-find $folder_name"/index.html" -type f | xargs sed -i 's/\/static\/css/{{ STATIC_URL }}temporal\/static\/css/g'
-
-find temporal/static/js/ -type f | xargs sed -i 's/static\/media/static\/temporal\/static\/media/g'
-find temporal/static/css/ -type f | xargs sed -i 's/static\/media/static\/temporal\/static\/media/g'
-
-find temporal/static/js/ -type f | xargs sed -i 's/logo.753248ba.png/logo.png/g'
-
-cp src/assets/images/*.png temporal/static/media/
+find $folder_name"/index.html" -type f | xargs sed -i 's/\/static\/js/{{ STATIC_URL }}'$folder_name'\/static\/js/g'
+find $folder_name"/index.html" -type f | xargs sed -i 's/\/static\/css/{{ STATIC_URL }}'$folder_name'\/static\/css/g'
