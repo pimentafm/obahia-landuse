@@ -357,6 +357,7 @@ const Menu: React.FC<MenuProps> = ({
             </>
           )}
         </div>
+        <div className="final-space"></div>
       </Content>
 
       <Footer ishidden={hidden}>
