@@ -16,6 +16,10 @@ export const Container = styled.div`
     justify-content: space-between;
   }
 
+  .slider-switcher {
+    display: flex;
+  }
+
   .layer-info {
     display: flex;
     flex-direction: row;

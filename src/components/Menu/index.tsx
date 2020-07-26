@@ -133,6 +133,17 @@ const Menu: React.FC<MenuProps> = ({
     [map],
   );
 
+  const handleLayerOpacity = useCallback(
+    (opacity, lyr_name) => {
+      map.getLayers().forEach(lyr => {
+        if (lyr.get('name') === lyr_name) {
+          lyr.setOpacity(opacity);
+        }
+      });
+    },
+    [map],
+  );
+
   let watershedsLabel = null;
   let watershedSelect = null;
 
@@ -294,6 +305,7 @@ const Menu: React.FC<MenuProps> = ({
         <LayerSwitcher
           name="landuse"
           label="Uso do solo"
+          handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={true}
           legendIsVisible={true}

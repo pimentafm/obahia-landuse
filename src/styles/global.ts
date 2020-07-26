@@ -39,12 +39,12 @@ export default createGlobalStyle`
     font-weight: 500;
   }
 
-  a {
-    color: #1f5582;
+  .ant-slider-track {
+    background-color: #1f5582;
   }
 
-  .ant-slider-step {
-    background-color: #1f5582;
+  .ant-slider-rail {
+    background-color: #888;
   }
   .ant-slider-handle{
     border-color: #1f5582;
