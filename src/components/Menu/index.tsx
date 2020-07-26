@@ -269,6 +269,30 @@ const Menu: React.FC<MenuProps> = ({
         <div className="card-menu">
           <span>Série Temporal de Uso e Cobertura do Solo</span>
         </div>
+
+        <div className="static-layers">
+          <span className="span-text">
+            <label>Descrição:</label> Esta ferramenta permite a visualização
+            customizada da série temporal de uso e cobertura do solo, a nível
+            regional, de bacia, de áreas de drenagem e a nível municipal.
+            Maiores informações sobre a metodologia de desenvolvimento podem ser
+            acessadas em pode ser encontradas em{' '}
+            <FaInfoCircle
+              className="text-icon"
+              style={{ fontSize: '12px', color: '#1f5582', cursor: 'pointer' }}
+              onClick={showMetadataModal}
+            />
+            . O uso dessas informações implica no aceite dos termos de uso
+            especificados em{' '}
+            <GoAlert
+              className="text-icon"
+              style={{ fontSize: '12px', color: '#1f5582', cursor: 'pointer' }}
+              onClick={showTermsOfUseModal}
+            />
+            .
+          </span>
+        </div>
+
         <label>Nível</label>
         <Select
           id="select-category"
