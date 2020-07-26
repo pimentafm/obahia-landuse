@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import { Popover } from 'antd';
 
 import { FiMenu } from 'react-icons/fi';
 
-import { Container } from './styles';
+import { Container, Content } from './styles';
 
 import Barplot from './Barplot';
 import StackPlot from './StackPlot';
@@ -36,11 +36,14 @@ const CardPlot: React.FC<CardProps> = ({ year }) => {
         </Popover>
       </div>
 
-      <label>Cobertura e uso do solo (1990 - 2018)</label>
-      <StackPlot tableName="landuse" />
+      <Content>
+        <label>Cobertura e uso do solo (1990 - 2018)</label>
+        <StackPlot tableName="landuse" />
 
-      <label>Cobertura e uso do solo {year}</label>
-      <Barplot year={year} tableName="landuse" />
+        <label>Cobertura e uso do solo {year}</label>
+        <Barplot year={year} tableName="landuse" />
+        <div className="final-space"></div>
+      </Content>
     </Container>
   );
 };

@@ -12,6 +12,7 @@ export const Container = styled.div<ContainerProps>`
   text-align: center;
 
   width: 30vw;
+  height: 100%;
   position: absolute;
   z-index: 1;
 
@@ -45,5 +46,13 @@ export const Container = styled.div<ContainerProps>`
       box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.13),
         1px 2px 2px rgba(0, 0, 0, 0.1), -1px -2px 2px rgba(0, 0, 0, 0.05);
     }
+  }
+`;
+
+export const Content = styled.div`
+  overflow-y: auto;
+
+  .final-space {
+    padding-top: 40px;
   }
 `;
