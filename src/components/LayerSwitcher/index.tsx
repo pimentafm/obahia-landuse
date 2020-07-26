@@ -2,9 +2,9 @@ import React, { useState, useCallback } from 'react';
 import Switch from 'react-switch';
 
 import { IconContext } from 'react-icons';
-import { FaInfoCircle, FaArrowAltCircleDown, FaDatabase } from 'react-icons/fa';
+import { FaArrowAltCircleDown, FaDatabase } from 'react-icons/fa';
 
-import { Divider, Tooltip } from 'antd';
+import { Divider, Popover } from 'antd';
 import 'antd/dist/antd.css';
 
 import Legend from './Legend';
@@ -57,7 +57,7 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
 
         <IconContext.Provider value={{ color: '#1f5582' }}>
           <div className="layer-info">
-            <Tooltip placement="right" title="Informações sobre a camada">
+            {/* <Popover placement="right" content="Informações sobre a camada">
               <FaInfoCircle
                 id="close-popup"
                 onClick={() => alert('Metadados')}
@@ -66,9 +66,9 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
                   cursor: 'pointer',
                 }}
               />
-            </Tooltip>
+            </Popover> */}
 
-            <Tooltip placement="right" title="Download da camada">
+            <Popover placement="right" content="Download da camada">
               <FaArrowAltCircleDown
                 id="close-popup"
                 onClick={() => window.open(downloadURL, '_self')}
@@ -77,9 +77,9 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
                   cursor: 'pointer',
                 }}
               />
-            </Tooltip>
+            </Popover>
 
-            <Tooltip placement="right" title="Download da série temporal">
+            <Popover placement="right" content="Download da série temporal">
               <FaDatabase
                 id="close-popup"
                 onClick={() =>
@@ -90,7 +90,7 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
                   cursor: 'pointer',
                 }}
               />
-            </Tooltip>
+            </Popover>
           </div>
         </IconContext.Provider>
       </>

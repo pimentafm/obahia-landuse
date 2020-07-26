@@ -39,8 +39,17 @@ export default createGlobalStyle`
     font-weight: 500;
   }
 
-  .ant-tooltip-inner {
-    color: fff;
+  a {
+    color: #1f5582;
+  }
+
+  .ant-slider-step {
     background-color: #1f5582;
+  }
+  .ant-slider-handle{
+    border-color: #1f5582;
+  }
+  .ant-popover-title, .ant-popover-inner-content{
+    color: #1f5582;
   }
 `;

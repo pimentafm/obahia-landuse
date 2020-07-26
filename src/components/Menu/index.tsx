@@ -5,7 +5,7 @@ import HtmlParser from 'react-html-parser';
 
 import { oba } from '../../services';
 
-import { Modal, Tooltip, Button } from 'antd';
+import { Modal, Popover, Button } from 'antd';
 
 import OlMap from 'ol/Map';
 
@@ -243,7 +243,7 @@ const Menu: React.FC<MenuProps> = ({
           />
         </a>
 
-        <Tooltip placement="right" title="Esconde/Mostra menu">
+        <Popover placement="right" content="Esconde/Mostra menu">
           <FiMenu
             id="handleMenu"
             type="menu"
@@ -251,7 +251,7 @@ const Menu: React.FC<MenuProps> = ({
             style={{ fontSize: '20px', color: '#000' }}
             onClick={handleMenu}
           />
-        </Tooltip>
+        </Popover>
       </Header>
 
       <Content>
@@ -348,20 +348,20 @@ const Menu: React.FC<MenuProps> = ({
       </Content>
 
       <Footer ishidden={hidden}>
-        <Tooltip placement="right" title="Termos de uso">
+        <Popover placement="right" content="Termos de uso">
           <GoAlert
             className="footer_icon"
             style={{ fontSize: '20px', color: '#fff', cursor: 'pointer' }}
             onClick={showTermsOfUseModal}
           />
-        </Tooltip>
-        <Tooltip placement="right" title="Informações adicionais">
+        </Popover>
+        <Popover placement="right" content="Informações adicionais">
           <FaInfoCircle
             className="footer_icon"
             style={{ fontSize: '20px', color: '#fff', cursor: 'pointer' }}
             onClick={showMetadataModal}
           />
-        </Tooltip>
+        </Popover>
       </Footer>
 
       <Modal

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
-import { Tooltip } from 'antd';
+import { Popover } from 'antd';
 
 import { FiMenu } from 'react-icons/fi';
 
@@ -28,13 +28,13 @@ const CardPlot: React.FC<CardProps> = ({ year, code }) => {
   return (
     <Container id="cardplot" ishidden={hidden}>
       <div id="handleCardplot">
-        <Tooltip placement="leftTop" title="Esconde/Mostra gráficos">
+        <Popover placement="leftTop" content="Esconde/Mostra gráficos">
           <FiMenu
             type="menu"
             style={{ fontSize: '20px', color: '#000' }}
             onClick={handleCardPlot}
           />
-        </Tooltip>
+        </Popover>
       </div>
 
       <label>Cobertura e uso do solo (1990 - 2018)</label>

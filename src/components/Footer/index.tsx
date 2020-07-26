@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Tooltip } from 'antd';
+import { Popover } from 'antd';
 
 import OlMap from 'ol/Map';
 
@@ -31,9 +31,9 @@ const Footer: React.FC<FooterProps> = ({ id, map, ...rest }) => {
   return (
     <Container id={id}>
       <div id="mouse-position-coordinates" className="mouse-position" />
-      <Tooltip placement="leftTop" title="Sistema de coordenadas">
+      <Popover placement="leftTop" content="Sistema de coordenadas">
         <label>EPSG: 4326</label>
-      </Tooltip>
+      </Popover>
     </Container>
   );
 };

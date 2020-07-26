@@ -24,7 +24,7 @@ const ZoomControl: React.FC<ZoomControlProps> = ({ ishidden, map }) => {
   }, [map]);
 
   return (
-    <Container>
+    <Container ishidden={ishidden}>
       <div id="zoomcontrols" />
     </Container>
   );
