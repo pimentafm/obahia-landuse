@@ -76,7 +76,7 @@ const Map: React.FC<MapProps> = ({
     url: wms.defaults.baseURL + 'highwaysWatersheds.map',
     params: {
       LAYERS: 'Rodovias',
-      ws: watershed,
+      ws: watershed.toLowerCase(),
       TILED: true,
     },
     serverType: 'mapserver',
@@ -85,7 +85,7 @@ const Map: React.FC<MapProps> = ({
   const hidrography_source = new TileWMS({
     url: wms.defaults.baseURL + 'hidrographyWatersheds.map',
     params: {
-      ws: watershed,
+      ws: watershed.toLowerCase(),
       LAYERS: 'hidrografia',
       TILED: true,
     },
@@ -96,7 +96,7 @@ const Map: React.FC<MapProps> = ({
     url: wms.defaults.baseURL + 'landuseWatersheds.map',
     params: {
       year: year,
-      ws: watershed,
+      ws: watershed.toLowerCase(),
       LAYERS: 'landuse',
       TILED: true,
     },
@@ -124,7 +124,7 @@ const Map: React.FC<MapProps> = ({
 
   const handleWatershed = useCallback(
     ws => {
-      setWatershed(ws);
+      setWatershed(ws.toLowerCase());
 
       oba
         .post('geom/', {
@@ -170,7 +170,7 @@ const Map: React.FC<MapProps> = ({
 
       <Popup map={map} source={landuse_source} />
 
-      <CardPlot year={year} watershed={watershed} />
+      <CardPlot year={year} watershed={watershed.toLowerCase()} />
 
       <Footer id="footer" map={map} />
     </Container>

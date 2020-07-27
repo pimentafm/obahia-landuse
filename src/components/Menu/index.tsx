@@ -63,7 +63,7 @@ const Menu: React.FC<MenuProps> = ({
   const [category, setCategory] = useState(defaultCategory);
 
   const [codenames, setCodenames] = useState([]);
-  const [watersheds_list] = useState(['grande', 'corrente', 'carinhanha']);
+  const [watersheds_list] = useState(['Grande', 'Corrente', 'Carinhanha']);
 
   const [downloadURL, setDownloadURL] = useState('');
 

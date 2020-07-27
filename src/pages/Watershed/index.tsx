@@ -7,7 +7,7 @@ const Watershed: React.FC = () => {
     <Map
       defaultYear={2018}
       defaultCategory="Bacia hidrográfica"
-      defaultWatershed="grande"
+      defaultWatershed="Grande"
     />
   );
 };
