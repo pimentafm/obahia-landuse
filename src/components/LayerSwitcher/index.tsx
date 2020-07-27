@@ -92,7 +92,10 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
               <FaDatabase
                 id="close-popup"
                 onClick={() =>
-                  window.open(`ftp://obahia.dea.ufv.br/${name}`, '_blank')
+                  window.open(
+                    downloadURL?.substring(0, downloadURL.lastIndexOf('/')),
+                    '_blank',
+                  )
                 }
                 style={{
                   fontSize: '20px',

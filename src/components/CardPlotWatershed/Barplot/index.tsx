@@ -47,6 +47,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, watershed, tableName }) => {
       y: landuse,
       stackgroup: 'one',
       type: 'bar',
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       marker: { color: colors },
     },
   ];

@@ -224,7 +224,7 @@ const Menu: React.FC<MenuProps> = ({
         break;
       case 'Bacia hidrográfica':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/landuse/gcc/${defaultWatershed}/landuse${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/landuse/gcc/${defaultWatershed?.toLowerCase()}/landuse${defaultYear}.tif`,
         );
         break;
       case 'Área de drenagem':
