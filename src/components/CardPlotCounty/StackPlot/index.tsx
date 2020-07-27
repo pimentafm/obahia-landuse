@@ -113,7 +113,8 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#ff0000',
       type: 'scatter',
-      name: 'Área urbana',
+      //text: Array(29).fill('Área urbana'),
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#ff0000' },
     },
     {
@@ -122,7 +123,8 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#0000ff',
       type: 'scatter',
-      name: `Córpos d'água`,
+      //text: Array(29).fill(`Córpos d'água`),
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#0000ff' },
     },
     {
@@ -131,7 +133,8 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#f4f286',
       type: 'scatter',
-      name: 'Pastagem',
+      //text: Array(29).fill('Pastagem'),
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#f4f286' },
     },
     {
@@ -140,7 +143,8 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#ff42f9',
       type: 'scatter',
-      name: 'Agricultura irrigada',
+      //text: Array(29).fill('Agricultura irrigada'),
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#ff42f9' },
     },
     {
@@ -149,7 +153,8 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#ffcaff',
       type: 'scatter',
-      name: 'Agricultura de sequeiro',
+      //text: Array(29).fill('Agricultura de sequeiro'),
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#ffcaff' },
     },
     {
@@ -158,7 +163,8 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#f6e6db',
       type: 'scatter',
-      name: 'Mosáico de agricultura ou pastagem',
+      //text: Array(29).fill('Mosáico de agricultura ou pastagem'),
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#f6e6db' },
     },
     {
@@ -167,7 +173,8 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#b8af4f',
       type: 'scatter',
-      name: 'Formações campestres',
+      //text: Array(29).fill('Formações campestres'),
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#b8af4f' },
     },
     {
@@ -176,7 +183,8 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#77a605',
       type: 'scatter',
-      name: 'Formações savânicas',
+      //text: Array(29).fill('Formações savânicas'),
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#77a605' },
     },
     {
@@ -185,7 +193,8 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#004000',
       type: 'scatter',
-      name: 'Formações florestais',
+      //text: Array(29).fill('Formações florestais'),
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#004000' },
     },
   ];
