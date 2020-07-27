@@ -423,13 +423,14 @@ const Menu: React.FC<MenuProps> = ({
       >
         <p style={{ textAlign: 'justify' }}>
           O usuário assume todo o risco relacionado ao uso de informações nas
-          páginas Web deste servidor. A UFV fornece essas informações "como
-          estão", e a UFV se isenta de todas e quaisquer garantias, expressas ou
-          implícitas, incluindo (mas não se limitando a) quaisquer garantias
-          implícitas de adequação a uma finalidade específica. Em nenhum caso a
-          UFV será responsável perante usuários ou terceiros por quaisquer danos
-          diretos, indiretos, incidentais, conseqüenciais, especiais ou perda de
-          lucro resultante de qualquer uso ou uso indevido desses dados.
+          páginas Web desta plataforma. A UFV fornece essas informações da
+          maneira como estão apresentadas, e a UFV se isenta de todas e
+          quaisquer garantias, expressas ou implícitas, incluindo (mas não se
+          limitando a) quaisquer garantias implícitas de adequação a uma
+          finalidade específica. Em nenhum caso a UFV será responsável perante
+          usuários ou terceiros por quaisquer danos diretos, indiretos,
+          incidentais, conseqüenciais, especiais ou perda de lucro resultante de
+          qualquer uso ou uso indevido desses dados.
         </p>
       </Modal>
 
