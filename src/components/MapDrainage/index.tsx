@@ -43,6 +43,7 @@ const Map: React.FC<MapProps> = ({
   const [landuse] = useState(new TileLayer({ visible: true }));
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
+  const [flowStations] = useState(new TileLayer({ visible: true }));
 
   const [codeName, setCodeName] = useState<DrainageData>(defaultCodeName);
   const [year, setYear] = useState(defaultYear);
@@ -65,7 +66,7 @@ const Map: React.FC<MapProps> = ({
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, landuse, highways, hidrography],
+      layers: [osm, landuse, highways, hidrography, flowStations],
       view: view,
       interactions: defaults({
         keyboard: false,
@@ -93,6 +94,16 @@ const Map: React.FC<MapProps> = ({
     serverType: 'mapserver',
   });
 
+  const flowStations_source = new TileWMS({
+    url: wms.defaults.baseURL + 'estacoesFluviometricas.map',
+    params: {
+      code: codeName.code,
+      LAYERS: 'estacoes',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+  });
+
   const landuse_source = new TileWMS({
     url: wms.defaults.baseURL + 'landuseDrainage.map',
     params: {
@@ -111,6 +122,10 @@ const Map: React.FC<MapProps> = ({
   hidrography.set('name', 'hidrography');
   hidrography.setSource(hidrography_source);
   hidrography.getSource().refresh();
+
+  flowStations.set('name', 'estacoes');
+  flowStations.setSource(flowStations_source);
+  flowStations.getSource().refresh();
 
   landuse.set('name', 'landuse');
   landuse.setSource(landuse_source);
