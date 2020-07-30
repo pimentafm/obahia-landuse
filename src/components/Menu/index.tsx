@@ -276,7 +276,7 @@ const Menu: React.FC<MenuProps> = ({
             customizada da série temporal de uso e cobertura do solo, a nível
             regional, de bacia, de áreas de drenagem e a nível municipal.
             Maiores informações sobre a metodologia de desenvolvimento podem ser
-            acessadas em pode ser encontradas em{' '}
+            encontradas em{' '}
             <FaInfoCircle
               className="text-icon"
               style={{ fontSize: '12px', color: '#1f5582', cursor: 'pointer' }}
