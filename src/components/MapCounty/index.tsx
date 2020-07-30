@@ -163,7 +163,7 @@ const Map: React.FC<MapProps> = ({
   return (
     <Container id="map">
       <Menu
-        ishidden={false ? 1 : 0}
+        ishidden={window.innerWidth <= 760 ? 1 : 0}
         defaultCategory={defaultCategory}
         defaultCodeName={codeName}
         handleCodeName={handleCodeName}
@@ -174,7 +174,7 @@ const Map: React.FC<MapProps> = ({
 
       <Popup map={map} source={landuse_source} />
 
-      <CardPlot year={year} code={codeName.code} ishidden={false ? 1 : 0}/>
+      <CardPlot year={year} code={codeName.code} ishidden={window.innerWidth <= 760 ? 1 : 0}/>
 
       <Footer id="footer" map={map} />
     </Container>
