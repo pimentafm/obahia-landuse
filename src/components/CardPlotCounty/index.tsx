@@ -10,12 +10,13 @@ import Barplot from './Barplot';
 import StackPlot from './StackPlot';
 
 interface CardProps {
+  ishidden: number;
   year: number;
   code: number;
 }
 
-const CardPlot: React.FC<CardProps> = ({ year, code }) => {
-  const [hidden, setHidden] = useState(0);
+const CardPlot: React.FC<CardProps> = ({ year, code, ishidden }) => {
+  const [hidden, setHidden] = useState(ishidden);
 
   const handleCardPlot = useCallback(() => {
     if (hidden === 0) {

@@ -171,7 +171,7 @@ const Map: React.FC<MapProps> = ({
 
       <Popup map={map} source={landuse_source} />
 
-      <CardPlot year={year} watershed={watershed.toLowerCase()} />
+      <CardPlot year={year} watershed={watershed.toLowerCase()} ishidden={false ? 1 : 0}/>
 
       <Footer id="footer" map={map} />
     </Container>

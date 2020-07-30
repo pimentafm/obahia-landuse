@@ -174,7 +174,7 @@ const Map: React.FC<MapProps> = ({
 
       <Popup map={map} source={landuse_source} />
 
-      <CardPlot year={year} code={codeName.code} />
+      <CardPlot year={year} code={codeName.code} ishidden={false ? 1 : 0}/>
 
       <Footer id="footer" map={map} />
     </Container>
