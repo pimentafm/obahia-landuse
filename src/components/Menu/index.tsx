@@ -275,8 +275,8 @@ const Menu: React.FC<MenuProps> = ({
             <label>Descrição:</label> Esta ferramenta permite a visualização
             customizada da série temporal de uso e cobertura do solo, a nível
             regional, de bacia, de áreas de drenagem e a nível municipal.
-            Maiores informações sobre a metodologia de desenvolvimento podem ser
-            encontradas em{' '}
+            Maiores informações sobre os dados de cobertura e uso do solo podem 
+            ser acessadas em{' '}
             <FaInfoCircle
               className="text-icon"
               style={{ fontSize: '12px', color: '#1f5582', cursor: 'pointer' }}

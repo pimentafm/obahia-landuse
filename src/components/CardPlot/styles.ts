@@ -19,6 +19,14 @@ export const Container = styled.div<ContainerProps>`
   transform: translateX(${({ ishidden }) => (ishidden ? 30 : 0)}vw);
   transition: 0.3s;
 
+
+  @media only screen and (max-width: 600px) {
+    width: 80vw;
+
+  transform: translateX(${({ ishidden }) => (ishidden ? 80 : 0)}vw);
+  transition: 0.3s;
+  }
+
   label {
     margin-top: 5px;
 
