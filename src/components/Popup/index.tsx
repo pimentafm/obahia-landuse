@@ -54,6 +54,22 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
   }, []);
 
   useEffect(() => {
+    map.on('pointermove', function (evt) {
+      if (evt.dragging) {
+        return;
+      }
+
+      let hit = map.forEachLayerAtPixel(
+        evt.pixel,
+        (_, rgba) => {
+          return true;
+        },
+        { layerFilter: layer => layer.getClassName() !== 'ol-layer' },
+      );
+
+      map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+    });
+    
     map.on('singleclick', evt => {
       let res = map.getView().getResolution();
       let proj = map.getView().getProjection();

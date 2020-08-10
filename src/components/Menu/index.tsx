@@ -174,29 +174,6 @@ const Menu: React.FC<MenuProps> = ({
     defaultCategory === 'Área de drenagem' ||
     defaultCategory === 'Municipal'
   ) {
-    oba
-      .post('geom/', {
-        table_name: defaultCategory === 'Municipal' ? 'counties' : 'drainage',
-        headers: {
-          'Content-type': 'application/json',
-        },
-      })
-      .then(response => {
-        const data = response.data;
-
-        const names = data.map((n: CodeNameData) => n.name);
-        const codes = data.map((c: CodeNameData) => c.code);
-
-        const codenames = names.map(
-          (n: string, c: number) => n + ' - ' + codes[c],
-        );
-
-        setCodenames(codenames);
-      })
-      .catch(e => {
-        throw new Error('Do not load codenames');
-      });
-
     codeNameLabel = <label>Nome</label>;
     codeNameSelect = (
       <Select
@@ -216,6 +193,29 @@ const Menu: React.FC<MenuProps> = ({
   }
 
   useEffect(() => {
+    oba
+    .post('geom/', {
+      table_name: defaultCategory === 'Municipal' ? 'counties' : 'drainage',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+    .then(response => {
+      const data = response.data;
+
+      const names = data.map((n: CodeNameData) => n.name);
+      const codes = data.map((c: CodeNameData) => c.code);
+
+      const codenames = names.map(
+        (n: string, c: number) => n + ' - ' + codes[c],
+      );
+
+      setCodenames(codenames);
+    })
+    .catch(e => {
+      throw new Error('Do not load codenames');
+    });
+
     switch (defaultCategory) {
       case 'Regional':
         setDownloadURL(

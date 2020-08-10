@@ -30,6 +30,6 @@ export const Container = styled.div<ContainerProps>`
   }
   svg:hover {
     transition: fill 0.3s ease;
-    fill: ${lighten(0.5, '#1f5582')};
+    fill: ${lighten(0, '#1f5582')};
   }
 `;

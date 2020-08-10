@@ -29,7 +29,7 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
-  const [landuse] = useState(new TileLayer({ visible: true }));
+  const [landuse] = useState(new TileLayer({ visible: true, className: 'landuse-layer' }));
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
   const [watersheds] = useState(new TileLayer({ visible: true }));
@@ -50,7 +50,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     }),
   );
 
-  const osm = new TileLayer({ source: new OSM() });
+  const osm = new TileLayer({ source: new OSM({crossOrigin: 'anonymous'}) });
 
   const [map] = useState(
     new OlMap({
@@ -71,6 +71,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const counties_source = new TileWMS({
@@ -80,6 +81,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const highways_source = new TileWMS({
@@ -89,6 +91,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const hidrography_source = new TileWMS({
@@ -98,6 +101,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const landuse_source = new TileWMS({
@@ -108,6 +112,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   watersheds.set('name', 'watersheds');
