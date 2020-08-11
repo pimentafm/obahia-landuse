@@ -209,7 +209,6 @@ const Menu: React.FC<MenuProps> = ({
         const codenames = names.map(
           (n: string, c: number) => n + ' - ' + codes[c],
         );
-
         setCodenames(codenames);
       })
       .catch(e => {
