@@ -194,27 +194,27 @@ const Menu: React.FC<MenuProps> = ({
 
   useEffect(() => {
     oba
-    .post('geom/', {
-      table_name: defaultCategory === 'Municipal' ? 'counties' : 'drainage',
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
-    .then(response => {
-      const data = response.data;
+      .post('geom/', {
+        table_name: defaultCategory === 'Municipal' ? 'counties' : 'drainage',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(response => {
+        const data = response.data;
 
-      const names = data.map((n: CodeNameData) => n.name);
-      const codes = data.map((c: CodeNameData) => c.code);
+        const names = data.map((n: CodeNameData) => n.name);
+        const codes = data.map((c: CodeNameData) => c.code);
 
-      const codenames = names.map(
-        (n: string, c: number) => n + ' - ' + codes[c],
-      );
+        const codenames = names.map(
+          (n: string, c: number) => n + ' - ' + codes[c],
+        );
 
-      setCodenames(codenames);
-    })
-    .catch(e => {
-      throw new Error('Do not load codenames');
-    });
+        setCodenames(codenames);
+      })
+      .catch(e => {
+        throw new Error('Do not load codenames');
+      });
 
     switch (defaultCategory) {
       case 'Regional':
@@ -275,7 +275,7 @@ const Menu: React.FC<MenuProps> = ({
             <label>Descrição:</label> Esta ferramenta permite a visualização
             customizada da série temporal de uso e cobertura do solo, a nível
             regional, de bacia, de áreas de drenagem e a nível municipal.
-            Maiores informações sobre os dados de cobertura e uso do solo podem 
+            Maiores informações sobre os dados de cobertura e uso do solo podem
             ser acessadas em{' '}
             <FaInfoCircle
               className="text-icon"
