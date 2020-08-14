@@ -8,12 +8,16 @@ import { createStringXY } from 'ol/coordinate';
 
 import { Container } from './styles';
 
+import { useTranslation } from 'react-i18next';
+
 interface FooterProps {
   id: string;
   map: OlMap;
 }
 
 const Footer: React.FC<FooterProps> = ({ id, map, ...rest }) => {
+  const { t } = useTranslation();
+
   const [mousePosition] = useState(
     new MousePosition({
       coordinateFormat: createStringXY(5),
@@ -31,7 +35,7 @@ const Footer: React.FC<FooterProps> = ({ id, map, ...rest }) => {
   return (
     <Container id={id}>
       <div id="mouse-position-coordinates" className="mouse-position" />
-      <Popover placement="leftTop" content="Sistema de coordenadas">
+      <Popover placement="leftTop" content={t('tooltip_coords')}>
         <label>EPSG: 4326</label>
       </Popover>
     </Container>

@@ -3,6 +3,8 @@ import PlotlyChart from 'react-plotlyjs-ts';
 
 import { oba } from '../../../services';
 
+import { useTranslation } from 'react-i18next';
+
 interface BarPlotData {
   data: Object;
 }
@@ -13,6 +15,8 @@ interface BarplotProps {
 }
 
 const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
+  const { t } = useTranslation();
+  
   const [landuse, setData] = useState([]);
 
   const [colors] = useState([
@@ -27,16 +31,16 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
     '#ff0000',
   ]);
 
-  const [xaxis] = useState([
-    'Formações florestais',
-    'Formações savânicas',
-    'Formações campestres',
-    'Mosaico Agricultura/Pastagem',
-    'Agricultura de sequeiro',
-    'Agricultura irrigada',
-    'Pastagem',
-    'Corpos dágua',
-    'Área urbana/Construções rurais',
+  const [xaxis, setXAxis] = useState([
+    t('label_forest'),
+    t('label_savanna'),
+    t('label_grasslands'),
+    t('label_mosaic'),
+    t('label_rainfed'),
+    t('label_irrigated'),
+    t('label_pasture'),
+    t('label_water'),
+    t('label_urban'),
   ]);
 
   const data = [
@@ -133,7 +137,19 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
       .catch(e => {
         throw new Error('Do not load Barplot data');
       });
-  }, [year, tableName]);
+
+      setXAxis([
+        t('label_forest'),
+        t('label_savanna'),
+        t('label_grasslands'),
+        t('label_mosaic'),
+        t('label_rainfed'),
+        t('label_irrigated'),
+        t('label_pasture'),
+        t('label_water'),
+        t('label_urban'),
+      ]);
+  }, [year, tableName, t]);
 
   return <PlotlyChart data={data} layout={layout} config={config} />;
 };

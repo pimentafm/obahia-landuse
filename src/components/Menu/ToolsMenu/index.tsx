@@ -5,7 +5,6 @@ import {
   GiStack,
   GiRaining,
   GiNetworkBars,
-  GiPieChart,
 } from 'react-icons/gi';
 import { Popover } from 'antd';
 
@@ -67,14 +66,6 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
           onClick={() =>
             window.open('http://corrente.dea.ufv.br/mfview', '_self')
           }
-        />
-      </Popover>
-
-      <Popover placement="right" content="outro">
-        <GiPieChart
-          className="text-icon"
-          style={{ fontSize: 25, color: '#AAD3DF', cursor: 'pointer' }}
-          onClick={() => window.open('http://corrente.dea.ufv.br', '_self')}
         />
       </Popover>
     </Container>

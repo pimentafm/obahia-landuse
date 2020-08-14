@@ -11,6 +11,8 @@ import Legend from './Legend';
 
 import { Container } from './styles';
 
+import { useTranslation } from 'react-i18next';
+
 interface LayerSwitcherProps {
   name: string;
   label: string;
@@ -34,6 +36,8 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
   handleLayerOpacity,
   handleLayerVisibility,
 }) => {
+  const { t } = useTranslation();
+
   const [visible, setVisible] = useState(layerIsVisible);
 
   const handleVisibility = useCallback(
@@ -77,7 +81,7 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
               />
             </Popover> */}
 
-            <Popover placement="right" content="Download da camada">
+            <Popover placement="right" content={t('tooltip_download')}>
               <FaArrowAltCircleDown
                 id="close-popup"
                 onClick={() => window.open(downloadURL, '_self')}
@@ -88,7 +92,7 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
               />
             </Popover>
 
-            <Popover placement="right" content="Download da série temporal">
+            <Popover placement="right" content={t('tooltip_ftp')}>
               <FaDatabase
                 id="close-popup"
                 onClick={() =>
