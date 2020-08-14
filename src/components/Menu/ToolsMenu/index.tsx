@@ -10,20 +10,24 @@ import { Popover } from 'antd';
 
 import { Container } from './styles';
 
+import { useTranslation } from 'react-i18next';
+
 interface ToolsMenuProps {
   ishidden: number;
 }
 
 const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
+  const { t } = useTranslation();
+
   return (
     <Container ishidden={ishidden}>
       <Popover
         placement="right"
-        title="Séries temporais de mapas"
+        title={t('toolsmenu_maps')}
         content={
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span>Uso do Solo</span>
-            <a href="http://corrente.dea.ufv.br/biomass">Biomassa</a>
+            <span>{t('toolsmenu_landuse')}</span>
+            <a href="http://corrente.dea.ufv.br/biomass">{t('toolsmenu_biomass')}</a>
           </div>
         }
       >
@@ -35,7 +39,7 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
 
       <Popover
         placement="right"
-        content="Previsão do início da estação chuvosa"
+        content={t('toolsmenu_onset')}
       >
         <GiRaining
           className="text-icon"
@@ -46,7 +50,7 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
         />
       </Popover>
 
-      <Popover placement="right" content="Previsão de vazões">
+      <Popover placement="right" content={t('toolsmenu_hidro')}>
         <GiNetworkBars
           className="text-icon"
           style={{ fontSize: 25, color: '#AAD3DF', cursor: 'pointer' }}
@@ -58,7 +62,7 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
 
       <Popover
         placement="right"
-        content="Visualizador do modelo de águas subterrâneas"
+        content={t('toolsmenu_mfview')}
       >
         <GiMeshBall
           className="text-icon"

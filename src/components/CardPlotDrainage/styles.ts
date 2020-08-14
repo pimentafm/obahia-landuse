@@ -12,7 +12,6 @@ export const Container = styled.div<ContainerProps>`
   text-align: center;
 
   width: 30vw;
-  height: 100%;
   position: absolute;
   z-index: 1;
 
