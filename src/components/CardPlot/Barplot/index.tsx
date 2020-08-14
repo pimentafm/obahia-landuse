@@ -56,7 +56,6 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
 
   const layout = {
     title: {
-      // text: '<b>Cobertura e uso do solo ' + year + '</b>',
       font: {
         family: 'Arial, sans-serif',
         size: 14,
@@ -84,7 +83,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
     },
     yaxis: {
       title: {
-        text: 'Uso e Cobertura do solo (1000 km²)',
+        text: t('label_plot_xaxis'),
       },
       titlefont: {
         family: 'Arial, sans-serif',

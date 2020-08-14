@@ -3,6 +3,8 @@ import PlotlyChart from 'react-plotlyjs-ts';
 
 import { oba } from '../../../services';
 
+import { useTranslation } from 'react-i18next';
+
 interface StackPlotData {
   forest: Object;
   savanna: Object;
@@ -20,6 +22,8 @@ interface StackPlotProps {
 }
 
 const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
+  const { t } = useTranslation();
+
   const [forest, setForest] = useState(null);
   const [savanna, setSavanna] = useState(null);
   const [grass, setGrass] = useState(null);
@@ -31,7 +35,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
   const [urban, setUrban] = useState(null);
 
   const [xaxis] = useState(
-    Array.from(new Array(29), (val, index) => index + 1990),
+    Array.from(new Array(29), (_, index) => index + 1990),
   );
 
   useEffect(() => {
@@ -58,7 +62,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       .catch(e => {
         throw new Error('Do not load StackPlot data');
       });
-  }, [tableName]);
+  }, [tableName, t]);
 
   const data = [
     {
@@ -67,7 +71,6 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       stackgroup: 'one',
       fillcolor: '#ff0000',
       type: 'scatter',
-      //text: Array(29).fill('Área urbana'),
       hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#ff0000' },
     },
@@ -77,7 +80,6 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       stackgroup: 'one',
       fillcolor: '#0000ff',
       type: 'scatter',
-      //text: Array(29).fill(`Córpos d'água`),
       hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#0000ff' },
     },
@@ -87,7 +89,6 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       stackgroup: 'one',
       fillcolor: '#f4f286',
       type: 'scatter',
-      //text: Array(29).fill('Pastagem'),
       hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#f4f286' },
     },
@@ -97,7 +98,6 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       stackgroup: 'one',
       fillcolor: '#ff42f9',
       type: 'scatter',
-      //text: Array(29).fill('Agricultura irrigada'),
       hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#ff42f9' },
     },
@@ -107,7 +107,6 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       stackgroup: 'one',
       fillcolor: '#ffcaff',
       type: 'scatter',
-      //text: Array(29).fill('Agricultura de sequeiro'),
       hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#ffcaff' },
     },
@@ -117,7 +116,6 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       stackgroup: 'one',
       fillcolor: '#f6e6db',
       type: 'scatter',
-      //text: Array(29).fill('Mosáico de agricultura ou pastagem'),
       hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#f6e6db' },
     },
@@ -127,7 +125,6 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       stackgroup: 'one',
       fillcolor: '#b8af4f',
       type: 'scatter',
-      //text: Array(29).fill('Formações campestres'),
       hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#b8af4f' },
     },
@@ -137,7 +134,6 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       stackgroup: 'one',
       fillcolor: '#77a605',
       type: 'scatter',
-      //text: Array(29).fill('Formações savânicas'),
       hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#77a605' },
     },
@@ -147,14 +143,12 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       stackgroup: 'one',
       fillcolor: '#004000',
       type: 'scatter',
-      //text: Array(29).fill('Formações florestais'),
       hovertemplate: '%{y:.5f} x 10<sup>3</sup> km<sup>2</sup><extra></extra>',
       line: { color: '#004000' },
     },
   ];
   const layout = {
     title: {
-      //text: '<b>Cobertura e uso do solo (1990 - 2018)</b>',
       font: {
         family: 'Arial, sans-serif',
         size: 14,
@@ -182,7 +176,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
     },
     yaxis: {
       title: {
-        text: 'Uso e Cobertura do solo (1000 km²)',
+        text: t('label_plot_xaxis'),
       },
       titlefont: {
         family: 'Arial, sans-serif',

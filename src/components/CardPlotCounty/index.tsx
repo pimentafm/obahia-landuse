@@ -9,6 +9,8 @@ import { Container, Content } from './styles';
 import Barplot from './Barplot';
 import StackPlot from './StackPlot';
 
+import { useTranslation } from 'react-i18next';
+
 interface CardProps {
   ishidden: number;
   year: number;
@@ -16,6 +18,8 @@ interface CardProps {
 }
 
 const CardPlot: React.FC<CardProps> = ({ year, code, ishidden }) => {
+  const { t } = useTranslation();
+
   const [hidden, setHidden] = useState(ishidden);
 
   const handleCardPlot = useCallback(() => {
@@ -29,7 +33,7 @@ const CardPlot: React.FC<CardProps> = ({ year, code, ishidden }) => {
   return (
     <Container id="cardplot" ishidden={hidden}>
       <div id="handleCardplot">
-        <Popover placement="leftTop" content="Esconde/Mostra gráficos">
+        <Popover placement="leftTop" content={t('tooltip_menu_plot')}>
           <FiMenu
             type="menu"
             style={{ fontSize: '20px', color: '#000' }}
@@ -39,10 +43,10 @@ const CardPlot: React.FC<CardProps> = ({ year, code, ishidden }) => {
       </div>
 
       <Content>
-        <label>Cobertura e uso do solo (1990 - 2018)</label>
+        <label>{t('stackplot_title')}</label>
         <StackPlot code={code} tableName="landuse" />
 
-        <label>Cobertura e uso do solo {year}</label>
+        <label>{t('barplot_title')} {year}</label>
         <Barplot year={year} code={code} tableName="landuse" />
         <div className="final-space"></div>
       </Content>

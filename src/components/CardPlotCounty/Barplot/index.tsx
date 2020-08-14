@@ -3,6 +3,8 @@ import PlotlyChart from 'react-plotlyjs-ts';
 
 import { oba } from '../../../services';
 
+import { useTranslation } from 'react-i18next';
+
 interface BarPlotData {
   classname: string;
   areakm2: string;
@@ -15,6 +17,8 @@ interface BarplotProps {
 }
 
 const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
+  const { t } = useTranslation();
+
   const [landuse, setData] = useState([]);
 
   const [colors] = useState([
@@ -29,16 +33,16 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
     '#ff0000',
   ]);
 
-  const [xaxis] = useState([
-    'Formações florestais',
-    'Formações savânicas',
-    'Formações campestres',
-    'Mosaico Agricultura/Pastagem',
-    'Agricultura de sequeiro',
-    'Agricultura irrigada',
-    'Pastagem',
-    'Corpos dágua',
-    'Área urbana/Construções rurais',
+  const [xaxis, setXAxis] = useState([
+    t('label_forest'),
+    t('label_savanna'),
+    t('label_grasslands'),
+    t('label_mosaic'),
+    t('label_rainfed'),
+    t('label_irrigated'),
+    t('label_pasture'),
+    t('label_water'),
+    t('label_urban'),
   ]);
 
   const data = [
@@ -54,7 +58,6 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
 
   const layout = {
     title: {
-      // text: '<b>Cobertura e uso do solo ' + year + '</b>',
       font: {
         family: 'Arial, sans-serif',
         size: 14,
@@ -82,7 +85,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
     },
     yaxis: {
       title: {
-        text: 'Uso e Cobertura do solo (1000 km²)',
+        text: t('label_plot_xaxis'),
       },
       titlefont: {
         family: 'Arial, sans-serif',
@@ -139,7 +142,19 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
       .catch(e => {
         throw new Error('Do not load Barplot data');
       });
-  }, [year, code, tableName]);
+
+      setXAxis([
+        t('label_forest'),
+        t('label_savanna'),
+        t('label_grasslands'),
+        t('label_mosaic'),
+        t('label_rainfed'),
+        t('label_irrigated'),
+        t('label_pasture'),
+        t('label_water'),
+        t('label_urban'),
+      ]);
+  }, [year, code, tableName, t]);
 
   return <PlotlyChart data={data} layout={layout} config={config} />;
 };
