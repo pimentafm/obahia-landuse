@@ -176,7 +176,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
     },
     yaxis: {
       title: {
-        text: t('label_plot_xaxis'),
+        text: t('label_plot_yaxis'),
       },
       titlefont: {
         family: 'Arial, sans-serif',

@@ -83,7 +83,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
     },
     yaxis: {
       title: {
-        text: t('label_plot_xaxis'),
+        text: t('label_plot_yaxis'),
       },
       titlefont: {
         family: 'Arial, sans-serif',
