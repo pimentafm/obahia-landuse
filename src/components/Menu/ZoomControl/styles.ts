@@ -6,6 +6,7 @@ interface ContainerProps {
 
 export const Container = styled.div<ContainerProps>`
   left: 306px;
+  top: 40px;
   position: fixed;
   button {
     background: #1f5582;

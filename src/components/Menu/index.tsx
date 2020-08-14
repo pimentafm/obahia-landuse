@@ -15,6 +15,8 @@ import { FiMenu } from 'react-icons/fi';
 import { FaInfoCircle } from 'react-icons/fa';
 import { GoAlert } from 'react-icons/go';
 
+import ChangeLanguage from './ChangeLanguage';
+
 import ToolsMenu from './ToolsMenu';
 import ZoomControl from './ZoomControl';
 import Scalebar from './ScaleBar';
@@ -23,6 +25,8 @@ import StaticLayerSwitcher from '../StaticLayerSwitcher';
 import LayerSwitcher from '../LayerSwitcher';
 
 import { Container, Header, Footer, Content } from './styles';
+
+import { useTranslation } from 'react-i18next';
 
 interface CodeNameData {
   code: number;
@@ -55,6 +59,9 @@ const Menu: React.FC<MenuProps> = ({
   map,
   ...rest
 }) => {
+  const { t } = useTranslation();
+  document.title = t('appname');
+
   const [hidden, setHidden] = useState(ishidden);
   const [termsOfUseModal, setTermsOfUseModal] = useState<boolean>(false);
   const [metadataModal, setMetadataModal] = useState<boolean>(false);
@@ -241,6 +248,7 @@ const Menu: React.FC<MenuProps> = ({
 
   return (
     <Container id="menu" ishidden={hidden}>
+      <ChangeLanguage ishidden={hidden} />
       <ToolsMenu ishidden={hidden} />
       <ZoomControl ishidden={hidden} map={map} />
       <Scalebar id="scalebar" map={map} />
