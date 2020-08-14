@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { Popover } from 'antd';
 
@@ -16,10 +16,20 @@ interface ChangeLanguageProps {
 
 const ChangeLanguage: React.FC<ChangeLanguageProps> = ({ ishidden }) => {
   const { t } = useTranslation();
-  const [flag, setFlag] = useState('US');
+  const [flag, setFlag] = useState('');
 
   const handleLanguage = useCallback(locale => {
     i18n.changeLanguage(locale);
+  }, []);
+
+  useEffect(() => {
+    const language = window.navigator.language.split('-')[0];
+
+    if(language === 'en') {
+      setFlag('BR');
+    } else {
+      setFlag('US');
+    }
   }, []);
 
   const handleFlag = useCallback(() => {
