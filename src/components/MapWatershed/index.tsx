@@ -39,7 +39,9 @@ const Map: React.FC<MapProps> = ({
   defaultCategory,
   defaultWatershed,
 }) => {
-  const [landuse] = useState(new TileLayer({ visible: true, className: 'landuse-layer' }));
+  const [landuse] = useState(
+    new TileLayer({ visible: true, className: 'landuse-layer' }),
+  );
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
 
@@ -53,6 +55,7 @@ const Map: React.FC<MapProps> = ({
     new View({
       projection: 'EPSG:4326',
       maxZoom: 12,
+      minZoom: 7,
       center: center,
       extent: [-56.0, -20.0, -33.0, -6.0],
       zoom: zoom,
@@ -174,7 +177,11 @@ const Map: React.FC<MapProps> = ({
 
       <Popup map={map} source={landuse_source} />
 
-      <CardPlot year={year} watershed={watershed.toLowerCase()} ishidden={window.innerWidth <= 760 ? 1 : 0}/>
+      <CardPlot
+        year={year}
+        watershed={watershed.toLowerCase()}
+        ishidden={window.innerWidth <= 760 ? 1 : 0}
+      />
 
       <Footer id="footer" map={map} />
     </Container>

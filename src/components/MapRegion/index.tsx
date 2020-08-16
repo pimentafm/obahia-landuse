@@ -29,7 +29,9 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
-  const [landuse] = useState(new TileLayer({ visible: true, className: 'landuse-layer' }));
+  const [landuse] = useState(
+    new TileLayer({ visible: true, className: 'landuse-layer' }),
+  );
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
   const [watersheds] = useState(new TileLayer({ visible: true }));
@@ -44,13 +46,14 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     new View({
       projection: 'EPSG:4326',
       maxZoom: 12,
+      minZoom: 7,
       center: center,
       extent: [-56.0, -20.0, -33.0, -6.0],
       zoom: zoom,
     }),
   );
 
-  const osm = new TileLayer({ source: new OSM({crossOrigin: 'anonymous'}) });
+  const osm = new TileLayer({ source: new OSM({ crossOrigin: 'anonymous' }) });
 
   const [map] = useState(
     new OlMap({
@@ -122,7 +125,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   counties.set('name', 'counties');
   counties.setSource(counties_source);
   counties.getSource().refresh();
-  
+
   highways.set('name', 'highways');
   highways.setSource(highways_source);
   highways.getSource().refresh();
@@ -158,7 +161,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
 
       <Popup map={map} source={landuse_source} />
 
-      <CardPlot year={year} ishidden={window.innerWidth <= 760 ? 1 : 0}/>
+      <CardPlot year={year} ishidden={window.innerWidth <= 760 ? 1 : 0} />
 
       <Footer id="footer" map={map} />
     </Container>

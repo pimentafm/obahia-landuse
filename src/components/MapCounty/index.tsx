@@ -56,6 +56,7 @@ const Map: React.FC<MapProps> = ({
     new View({
       projection: 'EPSG:4326',
       maxZoom: 12,
+      minZoom: 7,
       center: center,
       extent: [-56.0, -20.0, -33.0, -6.0],
       zoom: zoom,
