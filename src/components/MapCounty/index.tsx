@@ -40,7 +40,9 @@ const Map: React.FC<MapProps> = ({
   defaultCategory,
   defaultCodeName,
 }) => {
-  const [landuse] = useState(new TileLayer({ visible: true, className: 'landuse-layer' }));
+  const [landuse] = useState(
+    new TileLayer({ visible: true, className: 'landuse-layer' }),
+  );
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
 
@@ -177,7 +179,11 @@ const Map: React.FC<MapProps> = ({
 
       <Popup map={map} source={landuse_source} />
 
-      <CardPlot year={year} code={codeName.code} ishidden={window.innerWidth <= 760 ? 1 : 0}/>
+      <CardPlot
+        year={year}
+        code={codeName.code}
+        ishidden={window.innerWidth <= 760 ? 1 : 0}
+      />
 
       <Footer id="footer" map={map} />
     </Container>

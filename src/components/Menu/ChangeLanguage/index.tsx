@@ -16,7 +16,7 @@ interface ChangeLanguageProps {
 
 const ChangeLanguage: React.FC<ChangeLanguageProps> = ({ ishidden }) => {
   const { t } = useTranslation();
-  const [flag, setFlag] = useState('');
+  const [flag, setFlag] = useState('BR');
 
   const handleLanguage = useCallback(locale => {
     i18n.changeLanguage(locale);
@@ -25,7 +25,7 @@ const ChangeLanguage: React.FC<ChangeLanguageProps> = ({ ishidden }) => {
   useEffect(() => {
     const language = window.navigator.language.split('-')[0];
 
-    if(language === 'en') {
+    if (language === 'en') {
       setFlag('BR');
     } else {
       setFlag('US');

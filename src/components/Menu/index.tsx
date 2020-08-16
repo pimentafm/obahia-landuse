@@ -181,10 +181,7 @@ const Menu: React.FC<MenuProps> = ({
   let codeNameLabel = null;
   let codeNameSelect = null;
 
-  if (
-    category === 'drainage' ||
-    category === 'counties'
-  ) {
+  if (category === 'drainage' || category === 'counties') {
     codeNameLabel = <label>{t('label_name')}</label>;
     codeNameSelect = (
       <Select
@@ -206,7 +203,7 @@ const Menu: React.FC<MenuProps> = ({
   useEffect(() => {
     oba
       .post('geom/', {
-        table_name: defaultCategory === t('select_municipal') ? 'counties' : 'drainage',
+        table_name: category === 'counties' ? 'counties' : 'drainage',
         headers: {
           'Content-type': 'application/json',
         },
@@ -255,8 +252,14 @@ const Menu: React.FC<MenuProps> = ({
       [t('select_drainage'), 'drainage'],
       [t('select_municipal'), 'counties'],
     ]);
-
-  }, [category, defaultYear, defaultCategory, defaultWatershed, defaultCodeName, t]);
+  }, [
+    category,
+    defaultYear,
+    defaultCategory,
+    defaultWatershed,
+    defaultCodeName,
+    t,
+  ]);
 
   return (
     <Container id="menu" ishidden={hidden}>
