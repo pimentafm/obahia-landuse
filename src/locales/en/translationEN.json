@@ -1,7 +1,7 @@
 {
   "appname": "Land Cover and Land Use Time Series",
   "description_title": "Description:",
-  "description_content": "This tool allows the customized visualization and analyze of the time series of aboveground, belowground and soil carbon stocks at regional, municipal and basin levels. Methodology details are available in",
+  "description_content": "This tool allows the customized visualization and analyze Western Bahia land cover and land use time series at regional, basin, drainage areas and at municipal level. Methodology details are available in",
   "description_terms": "The use of this information implies acceptance of the terms of use specified in",
   "label_level": "Level",
   "label_year": "Year",
