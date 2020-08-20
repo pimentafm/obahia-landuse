@@ -12,7 +12,7 @@ export const Container = styled.div<ContainerProps>`
   align-items: center;
   padding: 2px;
   left: 306px;
-  top: 95px;
+  top: 97px;
   border-radius: 5px;
   background: #ffffff;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.13), 1px 0px 2px rgba(0, 0, 0, 0.1),
