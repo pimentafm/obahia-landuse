@@ -29,7 +29,10 @@ echo "Create application folder: $folder_name"
 mkdir -p $folder_name
 cp -rf build/* $folder_name
 
-find $folder_name"/index.html" -type f | xargs sed -i 's/\/static\/js/{{ STATIC_URL }}'$folder_name'\/static\/js/g'
-find $folder_name"/index.html" -type f | xargs sed -i 's/\/static\/css/{{ STATIC_URL }}'$folder_name'\/static\/css/g'
+find $folder_name"/index.html" -type f | xargs sed -i "s/\/static\/js/{{ STATIC_URL }}$folder_name\/static\/js/g"
+find $folder_name"/index.html" -type f | xargs sed -i "s/\/static\/css/{{ STATIC_URL }}$folder_name\/static\/css/g"
 find $folder_name"/index.html" -type f | xargs sed -i "s/images\/favicons/{{ STATIC_URL }}$folder_name\/images\/favicons/g"
-find $folder_name"/index.html" -type f | xargs sed -i "s/http:\/\/localhost:3000/{{ STATIC_URL }}$folder_name\/images/g"
+find $folder_name"/index.html" -type f | xargs sed -i "s/http:\/\/localhost:3000\/images/http:\/\/corrente.dea.ufv.br\/static\/$folder_name\/images/g"
+
+# find "$folder_name/static/js/" -name "*.js" -type f -exec sed -i "s/static\/media/static\/$folder_name\/static\/media/g" {} \;
+# find "$folder_name/static/js/" -name "*.map" -type f -exec sed -i "s/static\/media/static\/$folder_name\/static\/media/g" {} \;
