@@ -15,9 +15,10 @@ interface CardProps {
   ishidden: number;
   year: number;
   code: number;
+  name: string;
 }
 
-const CardPlot: React.FC<CardProps> = ({ year, code, ishidden }) => {
+const CardPlot: React.FC<CardProps> = ({ year, code, name, ishidden }) => {
   const { t } = useTranslation();
 
   const [hidden, setHidden] = useState(ishidden);
@@ -45,7 +46,10 @@ const CardPlot: React.FC<CardProps> = ({ year, code, ishidden }) => {
         <label>{t('stackplot_title')}</label>
         <StackPlot code={code} tableName="landuse" />
 
-        <label>{t('barplot_title')} {year}</label>
+        <label>
+          {t('barplot_title_drainage')} {name} {t('barplot_link_drainage')}{' '}
+          {year}
+        </label>
         <Barplot year={year} code={code} tableName="landuse" />
         <div className="final-space"></div>
       </Content>

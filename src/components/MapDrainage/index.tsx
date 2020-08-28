@@ -199,6 +199,7 @@ const Map: React.FC<MapProps> = ({
       <CardPlot
         year={year}
         code={codeName.code}
+        name={codeName.name}
         ishidden={window.innerWidth <= 760 ? 1 : 0}
       />
 

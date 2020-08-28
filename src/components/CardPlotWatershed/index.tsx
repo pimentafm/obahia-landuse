@@ -46,7 +46,11 @@ const CardPlot: React.FC<CardProps> = ({ year, watershed, ishidden }) => {
         <label>{t('stackplot_title')}</label>
         <StackPlot watershed={watershed} tableName="landuse" />
 
-        <label>{t('barplot_title')} {year}</label>
+        <label>
+          {t('barplot_title_watershed')}{' '}
+          {watershed.charAt(0).toUpperCase() + watershed.slice(1)}{' '}
+          {t('barplot_link_watershed')} {year}
+        </label>
         <Barplot year={year} watershed={watershed} tableName="landuse" />
         <div className="final-space"></div>
       </Content>
