@@ -43,7 +43,10 @@ const CardPlot: React.FC<CardProps> = ({ year, code, name, ishidden }) => {
         </Popover>
       </div>
       <Content>
-        <label>{t('stackplot_title')}</label>
+        <label>
+          {t('stackplot_title_drainage')} {name} {t('stackplot_link_drainage')}{' '}
+          (1990-2018)
+        </label>
         <StackPlot code={code} tableName="landuse" />
 
         <label>
