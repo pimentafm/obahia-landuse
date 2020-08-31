@@ -1,11 +1,8 @@
 import React from 'react';
 
-import {
-  GiMeshBall,
-  GiStack,
-  GiRaining,
-  GiNetworkBars,
-} from 'react-icons/gi';
+import { GiMeshBall, GiStack, GiRaining } from 'react-icons/gi';
+import { MdTrendingDown } from 'react-icons/md';
+
 import { Popover } from 'antd';
 
 import { Container } from './styles';
@@ -27,7 +24,9 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
         content={
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span>{t('toolsmenu_landuse')}</span>
-            <a href="http://corrente.dea.ufv.br/biomass">{t('toolsmenu_biomass')}</a>
+            <a href="http://corrente.dea.ufv.br/biomass">
+              {t('toolsmenu_biomass')}
+            </a>
           </div>
         }
       >
@@ -37,10 +36,7 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
         />
       </Popover>
 
-      <Popover
-        placement="right"
-        content={t('toolsmenu_onset')}
-      >
+      <Popover placement="right" content={t('toolsmenu_onset')}>
         <GiRaining
           className="text-icon"
           style={{ fontSize: 25, color: '#AAD3DF', cursor: 'pointer' }}
@@ -51,7 +47,7 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
       </Popover>
 
       <Popover placement="right" content={t('toolsmenu_hidro')}>
-        <GiNetworkBars
+        <MdTrendingDown
           className="text-icon"
           style={{ fontSize: 25, color: '#AAD3DF', cursor: 'pointer' }}
           onClick={() =>
@@ -60,10 +56,7 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
         />
       </Popover>
 
-      <Popover
-        placement="right"
-        content={t('toolsmenu_mfview')}
-      >
+      <Popover placement="right" content={t('toolsmenu_mfview')}>
         <GiMeshBall
           className="text-icon"
           style={{ fontSize: 25, color: '#AAD3DF', cursor: 'pointer' }}
