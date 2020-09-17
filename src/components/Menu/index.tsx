@@ -94,7 +94,7 @@ const Menu: React.FC<MenuProps> = ({
   ]);
 
   const [years] = useState(
-    Array.from(new Array(29), (_, index) => index + 1990),
+    Array.from(new Array(31), (_, index) => index + 1990),
   );
 
   const showTermsOfUseModal = () => {

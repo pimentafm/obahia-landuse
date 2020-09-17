@@ -35,14 +35,14 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
   const [urban, setUrban] = useState(null);
 
   const [xaxis] = useState(
-    Array.from(new Array(29), (_, index) => index + 1990),
+    Array.from(new Array(31), (_, index) => index + 1990),
   );
 
   useEffect(() => {
     oba
       .post('region/', {
         year1: 1990,
-        year2: 2018,
+        year2: 2020,
         table_name: tableName,
         headers: {
           'Content-type': 'application/json',
@@ -169,7 +169,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       autotick: false,
       ticks: 'outside',
       tick0: 1990,
-      dtick: 5,
+      dtick: 4,
       ticklen: 6,
       tickwidth: 1,
       tickcolor: '#000',
