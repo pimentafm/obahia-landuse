@@ -46,7 +46,7 @@ const CardPlot: React.FC<CardProps> = ({ year, watershed, ishidden }) => {
         <label>
           {t('stackplot_title_watershed')}{' '}
           {watershed.charAt(0).toUpperCase() + watershed.slice(1)}{' '}
-          {t('stackplot_link_watershed')} (1990-2018)
+          {t('stackplot_link_watershed')} (1990-2020)
         </label>
         <StackPlot watershed={watershed} tableName="landuse" />
 
