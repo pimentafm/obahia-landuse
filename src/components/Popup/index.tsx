@@ -11,15 +11,31 @@ import { FiXCircle } from 'react-icons/fi';
 
 import { Container } from './styles';
 
+import { useTranslation } from 'react-i18next';
+
 interface PopupProps {
   map: OlMap;
   source: TileWMS;
 }
 
 const Popup: React.FC<PopupProps> = ({ map, source }) => {
+  const { t } = useTranslation();
+
   const [popcoords, setPopCoords] = useState<string>();
   const [popclass, setPopClass] = useState<string>();
   const [popvalue, setPopValue] = useState<string>();
+
+  let luclasses = [
+    t('label_forest'),
+    t('label_savanna'),
+    t('label_grasslands'),
+    t('label_mosaic'),
+    t('label_rainfed'),
+    t('label_irrigated'),
+    t('label_pasture'),
+    t('label_water'),
+    t('label_urban'),
+  ];
 
   const closePopUp = useCallback(() => {
     const element: HTMLElement = document.getElementById(
@@ -29,29 +45,20 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
     element.style.display = 'none';
   }, []);
 
-  const getData = useCallback((url, coordinate) => {
-    const luclasses = [
-      'Formações florestais',
-      'Formações savânicas',
-      'Formações campestres',
-      'Mosaico de agricultura ou pastagem',
-      'Agricultura de sequeiro',
-      'Agricultura irrigada',
-      'Pastagem',
-      `Corpos d'água`,
-      'Área urbana/Construções rurais',
-    ];
-
-    fetch(url)
-      .then(response => {
-        return response.text();
-      })
-      .then(value => {
-        setPopCoords(coordinate);
-        setPopClass(luclasses[parseInt(value) - 1]);
-        setPopValue(value);
-      });
-  }, []);
+  const getData = useCallback(
+    (url, coordinate) => {
+      fetch(url)
+        .then(response => {
+          return response.text();
+        })
+        .then(value => {
+          setPopCoords(coordinate);
+          setPopClass(luclasses[parseInt(value) - 1]);
+          setPopValue(value);
+        });
+    },
+    [luclasses],
+  );
 
   useEffect(() => {
     map.on('pointermove', function (evt) {
@@ -69,7 +76,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
 
       map.getTargetElement().style.cursor = hit ? 'pointer' : '';
     });
-    
+
     map.on('singleclick', evt => {
       let res = map.getView().getResolution();
       let proj = map.getView().getProjection();
@@ -134,13 +141,13 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
           </th>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>Classe</td>
+          <td style={{ padding: `2px 5px` }}>{t('label_popup_class')}</td>
           <td id="popup-lulc" style={{ padding: `2px 5px` }}>
             {popclass ? popclass : 'Fora da camada'}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>Valor</td>
+          <td style={{ padding: `2px 5px` }}>{t('label_popup_code')}</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
             {popvalue ? popvalue : 'Fora da camada'}
           </td>

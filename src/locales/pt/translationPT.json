@@ -6,6 +6,8 @@
   "label_level": "Nível",
   "label_year": "Ano",
   "label_name": "Nome",
+  "label_popup_class": "Classe",
+  "label_popup_code": "Código",
   "select_region": "Regional",
   "select_watershed": "Bacia hidrográfica",
   "select_drainage": "Área de Drenagem",
@@ -63,5 +65,16 @@
   "label_irrigated": "Agricultura irrigada",
   "label_pasture": "Pastagem",
   "label_water": "Corpos d'água",
-  "label_urban": "Área urbana/Construções rurais"
+  "label_urban": "Área urbana/Construções rurais",
+  "label_landuse_classes": [
+    "Formações florestais",
+    "Formações savânicas",
+    "Formações campestres",
+    "Mosaico de agricultura ou pastagem",
+    "Agricultura de sequeiro",
+    "Agricultura irrigada",
+    "Pastagem",
+    "Corpos d'água",
+    "Área urbana/Construções rurais"
+  ]
 }

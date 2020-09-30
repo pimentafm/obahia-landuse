@@ -6,6 +6,8 @@
   "label_level": "Level",
   "label_year": "Year",
   "label_name": "Name",
+  "label_popup_class": "Class",
+  "label_popup_code": "Code",
   "select_region": "Regional",
   "select_watershed": "Watershed",
   "select_drainage": "Drainage area",
@@ -63,5 +65,16 @@
   "label_irrigated": "Irrigated crop",
   "label_pasture": "Pastureland",
   "label_water": "Water bodies",
-  "label_urban": "Urban areas/Farm building"
+  "label_urban": "Urban areas/Farm building",
+  "label_landuse_classes": [
+    "Forest formations",
+    "Savanna formations",
+    "Grasslands",
+    "Mosaic of crop and pasture",
+    "Rainfed crop",
+    "Irrigated crop",
+    "Pastureland",
+    "Water bodies",
+    "Urban areas/Farm building"
+  ]
 }
