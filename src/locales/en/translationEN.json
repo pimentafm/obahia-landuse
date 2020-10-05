@@ -25,6 +25,7 @@
   "tooltip_info": "Aditional information",
   "tooltip_terms": "Disclaimer",
   "tooltip_coords": "Coordinate system",
+  "toolsmenu_mapserver": "Web Map Server",
   "toolsmenu_maps": "Map Time Series",
   "toolsmenu_landuse": "Land Cover and Land Use Time Series",
   "toolsmenu_biomass": "Carbon Stocks Time Series",

@@ -25,6 +25,7 @@
   "tooltip_info": "Informações adicionais",
   "tooltip_terms": "Exoneração de responsobilidade",
   "tooltip_coords": "Sistema de coordenadas",
+  "toolsmenu_mapserver": "Servidor de Mapas",
   "toolsmenu_maps": "Série Temporal de Mapas",
   "toolsmenu_landuse": "Series Temporais de Cobertura e Uso do Solo",
   "toolsmenu_biomass": "Series Temporais de Estoque de Carbono",
