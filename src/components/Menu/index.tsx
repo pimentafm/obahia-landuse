@@ -28,6 +28,8 @@ import { Container, Header, Footer, Content } from './styles';
 
 import { useTranslation } from 'react-i18next';
 
+import fluxogramImage from '../../assets/images/fluxogram.png';
+
 interface CodeNameData {
   code: number;
   name: string;
@@ -467,6 +469,18 @@ const Menu: React.FC<MenuProps> = ({
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph03')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph04')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph05')}</p>
+
+        <img
+          width="100%"
+          style={{ marginBottom: '10px' }}
+          src={fluxogramImage}
+          alt="Anomalous accumulation"
+        />
+        <p style={{ textAlign: 'justify' }}>
+          <b>{t('modal_info_figure')} </b>
+          {t('modal_info_figure_legend')}
+        </p>
+
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph06')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph07')}</p>
       </Modal>
