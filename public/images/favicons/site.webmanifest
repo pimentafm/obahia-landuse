@@ -1,8 +1,7 @@
 {
   "name": "Land Use Time Series",
   "short_name": "Land Use Time Series",
-  "icons": [
-    {
+  "icons": [{
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
@@ -15,5 +14,6 @@
   ],
   "theme_color": "#1f5582",
   "background_color": "#1f5582",
+  "start_url": "http://obahia.dea.ufv.br/landuse",
   "display": "standalone"
 }
