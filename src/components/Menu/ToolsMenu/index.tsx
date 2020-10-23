@@ -65,7 +65,9 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
         <MdTrendingDown
           className="text-icon"
           style={{ fontSize: 25, color: '#AAD3DF', cursor: 'pointer' }}
-          onClick={() => window.open('http://obahia.dea.ufv.br/hidro', '_self')}
+          onClick={() =>
+            window.open('http://obahia.dea.ufv.br/stream', '_self')
+          }
         />
       </Popover>
 
