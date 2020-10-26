@@ -28,7 +28,7 @@ import { Container, Header, Footer, Content } from './styles';
 
 import { useTranslation } from 'react-i18next';
 
-import fluxogramImage from '../../assets/images/fluxogram.png';
+// import fluxogramImage from '../../assets/images/fluxogram.png';
 
 interface CodeNameData {
   code: number;
@@ -470,7 +470,7 @@ const Menu: React.FC<MenuProps> = ({
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph04')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph05')}</p>
 
-        <img
+        {/* <img
           width="100%"
           style={{ marginBottom: '10px' }}
           src={fluxogramImage}
@@ -482,7 +482,7 @@ const Menu: React.FC<MenuProps> = ({
         </p>
 
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph06')}</p>
-        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph07')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph07')}</p> */}
       </Modal>
     </Container>
   );
