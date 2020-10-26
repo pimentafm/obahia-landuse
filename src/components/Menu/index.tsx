@@ -474,7 +474,7 @@ const Menu: React.FC<MenuProps> = ({
           width="100%"
           style={{ marginBottom: '10px' }}
           src={fluxogramImage}
-          alt="Anomalous accumulation"
+          alt="Metodology"
         />
         <p style={{ textAlign: 'justify' }}>
           <b>{t('modal_info_figure')} </b>
