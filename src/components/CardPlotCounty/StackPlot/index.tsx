@@ -6,18 +6,6 @@ import { oba } from '../../../services';
 import { useTranslation } from 'react-i18next';
 
 interface StackPlotData {
-  forest: Object;
-  savanna: Object;
-  grass: Object;
-  croppast: Object;
-  raincrop: Object;
-  irrcrop: Object;
-  past: Object;
-  water: Object;
-  urban: Object;
-}
-
-interface StackPlotData {
   classname: string;
   areakm2: string;
 }

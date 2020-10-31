@@ -143,13 +143,13 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
         <tr style={{ background: '#fff' }}>
           <td style={{ padding: `2px 5px` }}>{t('label_popup_class')}</td>
           <td id="popup-lulc" style={{ padding: `2px 5px` }}>
-            {popclass ? popclass : 'Fora da camada'}
+            {popclass ? popclass : t('popup_clickout')}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
           <td style={{ padding: `2px 5px` }}>{t('label_popup_code')}</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
-            {popvalue ? popvalue : 'Fora da camada'}
+            {popvalue ? popvalue : t('popup_clickout')}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
@@ -160,7 +160,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
             id="popup-coords"
             style={{ padding: `2px 5px`, borderRadius: `0px 0px 2px 0px` }}
           >
-            {popcoords ? popcoords : 'Clique no mapa'}
+            {popcoords ? popcoords : t('popup_clickonlayer')}
           </td>
         </tr>
       </tbody>

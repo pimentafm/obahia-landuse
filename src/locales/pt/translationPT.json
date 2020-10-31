@@ -45,6 +45,7 @@
   "modal_info_figure_legend": "Metodologia aplicada na classificação de imagens para a região do Oeste da Bahia. a) A parte inicial do processamento foi feita por meio da computação em núvem utilizando a API Python da plataforma Google Earth Engine e 2) as etapas finais foram processadas utilizando diversas ferramentas de código aberto para processamento e análise de dados espaciais.",
   "modal_info_figure": "Figura 1: ",
   "popup_clickout": "Fora da camada",
+  "popup_clickonlayer": "Clique na camada",
   "label_plot_yaxis": "Cobertura e Uso do Solo (1000 km²)",
   "stackplot_title": "Cobertura e Uso do Solo (1990 -2020)",
   "stackplot_title_watershed": "Cobertura e Uso do Solo na Bacia do Rio",

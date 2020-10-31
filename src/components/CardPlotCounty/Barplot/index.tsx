@@ -19,7 +19,7 @@ interface BarplotProps {
 const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
   const { t } = useTranslation();
 
-  const [landuse, setData] = useState([]);
+  const [landuse, setData] = useState<number[]>([]);
 
   const [colors] = useState([
     '#004000',
@@ -133,27 +133,73 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
         },
       })
       .then(response => {
-        const data = response.data
-          .filter((f: BarPlotData) => f.classname)
+        const forest = response.data
+          .filter((f: BarPlotData) => f.classname === 'Forest formations')
           .map((a: BarPlotData) => a.areakm2);
 
-        setData(data);
+        const savanna = response.data
+          .filter((f: BarPlotData) => f.classname === 'Savanna formations')
+          .map((a: BarPlotData) => a.areakm2);
+
+        const grasslands = response.data
+          .filter((f: BarPlotData) => f.classname === 'Grasslands')
+          .map((a: BarPlotData) => a.areakm2);
+
+        const mosaic = response.data
+          .filter(
+            (f: BarPlotData) => f.classname === 'Mosaic of crop and pasture',
+          )
+          .map((a: BarPlotData) => a.areakm2);
+
+        const rainfed = response.data
+          .filter((f: BarPlotData) => f.classname === 'Rainfed crop')
+          .map((a: BarPlotData) => a.areakm2);
+
+        const irrigated = response.data
+          .filter((f: BarPlotData) => f.classname === 'Irrigated crop')
+          .map((a: BarPlotData) => a.areakm2);
+
+        const pasture = response.data
+          .filter((f: BarPlotData) => f.classname === 'Pasturelands')
+          .map((a: BarPlotData) => a.areakm2);
+
+        const water = response.data
+          .filter((f: BarPlotData) => f.classname === 'Water bodies')
+          .map((a: BarPlotData) => a.areakm2);
+
+        const urban = response.data
+          .filter((f: BarPlotData) => f.classname === 'Urban areas')
+          .map((a: BarPlotData) => a.areakm2);
+
+        let dataArray: number[] = [
+          forest[0],
+          savanna[0],
+          grasslands[0],
+          mosaic[0],
+          rainfed[0],
+          irrigated[0],
+          pasture[0],
+          water[0],
+          urban[0],
+        ];
+
+        setData(dataArray);
       })
       .catch(e => {
         throw new Error('Do not load Barplot data');
       });
 
-      setXAxis([
-        t('label_forest'),
-        t('label_savanna'),
-        t('label_grasslands'),
-        t('label_mosaic'),
-        t('label_rainfed'),
-        t('label_irrigated'),
-        t('label_pasture'),
-        t('label_water'),
-        t('label_urban'),
-      ]);
+    setXAxis([
+      t('label_forest'),
+      t('label_savanna'),
+      t('label_grasslands'),
+      t('label_mosaic'),
+      t('label_rainfed'),
+      t('label_irrigated'),
+      t('label_pasture'),
+      t('label_water'),
+      t('label_urban'),
+    ]);
   }, [year, code, tableName, t]);
 
   return <PlotlyChart data={data} layout={layout} config={config} />;

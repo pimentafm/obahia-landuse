@@ -45,6 +45,7 @@
   "modal_info_figure_legend": "Applied methodology to image classification for the Western Bahia region. a) The initial steps of the processing was done through cloud computing using the Python API of the Google Earth Engine platform and 2) the final steps were processed using a set of open source tools for processing and geospatial analysis.",
   "modal_info_figure": "Figure 1: ",
   "popup_clickout": "Out of layer",
+  "popup_clickonlayer": "Click on layer",
   "label_plot_yaxis": "Land Cover and Land Use (1000 km²)",
   "stackplot_title": "Land Cover and Land Use (1990 -2020)",
   "stackplot_title_watershed": "Land Cover and Land Use in",
