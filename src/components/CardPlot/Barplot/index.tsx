@@ -16,7 +16,7 @@ interface BarplotProps {
 
 const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
   const { t } = useTranslation();
-  
+
   const [landuse, setData] = useState([]);
 
   const [colors] = useState([
@@ -137,17 +137,17 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
         throw new Error('Do not load Barplot data');
       });
 
-      setXAxis([
-        t('label_forest'),
-        t('label_savanna'),
-        t('label_grasslands'),
-        t('label_mosaic'),
-        t('label_rainfed'),
-        t('label_irrigated'),
-        t('label_pasture'),
-        t('label_water'),
-        t('label_urban'),
-      ]);
+    setXAxis([
+      t('label_forest'),
+      t('label_savanna'),
+      t('label_grasslands'),
+      t('label_mosaic'),
+      t('label_rainfed'),
+      t('label_irrigated'),
+      t('label_pasture'),
+      t('label_water'),
+      t('label_urban'),
+    ]);
   }, [year, tableName, t]);
 
   return <PlotlyChart data={data} layout={layout} config={config} />;
