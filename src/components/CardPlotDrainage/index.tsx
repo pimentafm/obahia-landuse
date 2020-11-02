@@ -45,7 +45,7 @@ const CardPlot: React.FC<CardProps> = ({ year, code, name, ishidden }) => {
       <Content>
         <label>
           {t('stackplot_title_drainage')} {name} {t('stackplot_link_drainage')}{' '}
-          (1990-2020)
+          1990-2020
         </label>
         <StackPlot code={code} tableName="landuse" />
 
