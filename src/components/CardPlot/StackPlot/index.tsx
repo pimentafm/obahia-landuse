@@ -198,6 +198,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       tickcolor: '#000',
     },
     showlegend: false,
+    hovermode: 'x unified',
     margin: { l: 60, r: 10, t: 10, b: 30 },
     transition: {
       duration: 1000,
