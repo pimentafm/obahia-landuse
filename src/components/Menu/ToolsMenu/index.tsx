@@ -41,6 +41,9 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
         content={
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span>{t('toolsmenu_landuse')}</span>
+            <a href="http://obahia.dea.ufv.br/irrigation">
+              {t('toolsmenu_irrigation')}
+            </a>
             <a href="http://obahia.dea.ufv.br/biomass">
               {t('toolsmenu_biomass')}
             </a>

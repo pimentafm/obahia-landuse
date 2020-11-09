@@ -28,6 +28,7 @@
   "toolsmenu_mapserver": "Servidor de Mapas",
   "toolsmenu_maps": "Série Temporal de Mapas",
   "toolsmenu_landuse": "Series Temporais de Cobertura e Uso do Solo",
+  "toolsmenu_irrigation": "Séries Temporais das Áreas Irrigadas",
   "toolsmenu_biomass": "Series Temporais de Estoque de Carbono",
   "toolsmenu_onset": "Previsão do Início da Estação Chuvosa",
   "toolsmenu_mfview": "Visualizador do Modelo de Fluxo de Águas Subterrâneas",

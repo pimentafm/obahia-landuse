@@ -28,6 +28,7 @@
   "toolsmenu_mapserver": "Web Map Server",
   "toolsmenu_maps": "Map Time Series",
   "toolsmenu_landuse": "Land Cover and Land Use Time Series",
+  "toolsmenu_irrigation": "Irrigated Crop Time series",
   "toolsmenu_biomass": "Carbon Stocks Time Series",
   "toolsmenu_onset": "Rainy Season Onset Forecast",
   "toolsmenu_mfview": "Groundwater Model Data Viewer",
