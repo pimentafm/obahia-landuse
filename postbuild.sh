@@ -34,5 +34,5 @@ find $folder_name"/index.html" -type f | xargs sed -i "s/\/static\/css/{{ STATIC
 find $folder_name"/index.html" -type f | xargs sed -i "s/images\/favicons/{{ STATIC_URL }}$folder_name\/images\/favicons/g"
 find $folder_name"/index.html" -type f | xargs sed -i "s/http:\/\/localhost:3000\/images/http:\/\/obahia.dea.ufv.br\/static\/$folder_name\/images/g"
 
-# find "$folder_name/static/js/" -name "*.js" -type f -exec sed -i "s/static\/media/static\/$folder_name\/static\/media/g" {} \;
-# find "$folder_name/static/js/" -name "*.map" -type f -exec sed -i "s/static\/media/static\/$folder_name\/static\/media/g" {} \;
+find "$folder_name/static/js/" -name "*.js" -type f -exec sed -i "s/static\/media/static\/$folder_name\/static\/media/g" {} \;
+find "$folder_name/static/js/" -name "*.map" -type f -exec sed -i "s/static\/media/static\/$folder_name\/static\/media/g" {} \;
